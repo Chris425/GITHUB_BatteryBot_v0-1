@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 2b1659746107f104ca9dfcc2eb4a60e9
+timeCreated: 1477162748
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - BatterySpecEffect1: {fileID: 1000011276514446, guid: 194be7226adb7794f80d1413b77727d1,
+      type: 2}
+  - BatterySpecEffect2: {fileID: 1000012753374728, guid: 3d6ef981b8508f2419a49decea53ad64,
+      type: 2}
+  - BatterySpecEffect3: {fileID: 1000014224546230, guid: afc2c58420c41554c92e376bdeda976d,
+      type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

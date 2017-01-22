@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 963d26c04ff1a3c43a34c67d4c533d29
+timeCreated: 1477686351
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - blockSound: {fileID: 1000012529933086, guid: 5fbe3a4133ba9d54f92e0b8c85400fcf,
+      type: 2}
+  - sparkSE: {fileID: 1000011276514446, guid: 2a6c4b4a1f2acb6429be5bfd5cbb642b, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

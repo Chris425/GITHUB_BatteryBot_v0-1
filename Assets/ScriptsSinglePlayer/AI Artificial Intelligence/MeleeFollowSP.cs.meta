@@ -1,0 +1,29 @@
+fileFormatVersion: 2
+guid: def34e273c2b1f149a2843fe574fecf8
+timeCreated: 1483560550
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - target: {instanceID: 0}
+  - BiteSpecEffect1: {fileID: 1000013974356074, guid: 20d0db22bf09a984c8af57836cc5eb56,
+      type: 2}
+  - BiteSpecEffect2: {fileID: 1000013408731224, guid: 210e674f03555b941b185f3cfbd4f266,
+      type: 2}
+  - DeathSpecEffect: {fileID: 1000012846706402, guid: 2bd76f22374a47f48b7f2c55662b2e0d,
+      type: 2}
+  - BloodSpecEffect: {fileID: 1000010244885832, guid: e27cebc1d1e1c3940aa823b7c96360a3,
+      type: 2}
+  - AggroSpecEffect: {fileID: 1000012397342314, guid: 88a29fcf0b0b7204ebb75b12b49fbdd4,
+      type: 2}
+  - RedBattery: {fileID: 1000010581996754, guid: 211f197b74145464da35d287d5471ce1,
+      type: 2}
+  - GreenBattery: {fileID: 1000010629734422, guid: 62d688f5f029d454ba375eb87c5b9585,
+      type: 2}
+  - Gear: {fileID: 1000014195789538, guid: f166779eefec9e043b0d6bfacf6d444a, type: 2}
+  - GunDrop: {fileID: 1000010993806992, guid: 718a4c8ea578bd84bac7a8f15597bfca, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
