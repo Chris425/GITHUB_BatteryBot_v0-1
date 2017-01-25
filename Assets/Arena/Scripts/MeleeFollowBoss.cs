@@ -54,7 +54,6 @@ public class MeleeFollowBoss : MonoBehaviour
                 Destroy(this.gameObject);
 
                 //possibly spawn some loot!
-                //CDC add new special loot for boss monsters?
 
 
                 int randomNum = Random.Range(1, 11);

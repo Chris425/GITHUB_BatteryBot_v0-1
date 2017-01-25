@@ -190,7 +190,7 @@ public class HeroControllerSP : MonoBehaviour
 
         isPoisoned = false;
 
-        battery = 100;
+        battery = 98;
         speed = 15.0f;
         Ammo = 0;
         Gears = 0;

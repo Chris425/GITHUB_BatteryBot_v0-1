@@ -92,7 +92,7 @@ public class HeroController : MonoBehaviour
         cooldownTimer -= 0.04f;
 
         //after 350 miliseconds you lose 1% battery (almost as bad as my old phone battery)
-        if (batteryTimer > 0.35f) //CDC
+        if (batteryTimer > 0.35f) 
         {
             battery -= 1;
             batteryTimer = 0.0f;
