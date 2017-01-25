@@ -192,23 +192,23 @@ public class HeroControllerSP : MonoBehaviour
 
         battery = 100;
         speed = 15.0f;
-        Ammo = 999;
+        Ammo = 0;
         Gears = 0;
 
-        hasShield = true;
-        hasAxe = true;
-        hasGun = true;
-        hasGS = true;
-        hasGS_FIRE = true;
-        hasAxe_LIGHTNING = true;
-        hasGun_MULTI = true;
-        hasShield_ICE = true;
-        hasJetBooster = true;
-        hasJetBooster_ARCANE = true;
+        hasShield = false;
+        hasAxe = false;
+        hasGun = false;
+        hasGS = false;
+        hasGS_FIRE = false;
+        hasAxe_LIGHTNING = false;
+        hasGun_MULTI = false;
+        hasShield_ICE = false;
+        hasJetBooster = false;
+        hasJetBooster_ARCANE = false;
 
-        hasSkull_RED = true;
-        hasSkull_BLUE = true;
-        hasSkull_PURPLE = true;
+        hasSkull_RED = false;
+        hasSkull_BLUE = false;
+        hasSkull_PURPLE = false;
 
         batteryValText.text = "" + battery + " %";
         ammoValText.text = "" + Ammo;
@@ -379,7 +379,7 @@ public class HeroControllerSP : MonoBehaviour
     {
 
         //let's increment the timers every update call
-        cooldownTimer -= 0.02f;
+        cooldownTimer -= 0.03f;
         dashCooldownTimer -= 0.04f;
         poisonCooldownTimer -= 0.03f;
 
