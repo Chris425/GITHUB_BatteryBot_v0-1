@@ -85,10 +85,8 @@ public class BotNPCSP : MonoBehaviour {
                 anim.SetBool("isRunning", false);
                 anim.SetTrigger("isHealing");
                 //put special effect on player
-                GameObject healSpecialEffect = Instantiate(healCast, batteryBot.transform.position, batteryBot.transform.rotation);
-                
+                GameObject healSpecialEffect = Instantiate(healCast, batteryBot.transform.position, batteryBot.transform.rotation);                
                 healSpecialEffect.transform.parent = batteryBot.gameObject.transform;
-                healSpecialEffect.transform.localScale += new Vector3(0.2f, 0.2f, 0.2f);
                 HeroControllerSP.battery += 2;
                 cooldownTimer = cooldown;
             }
