@@ -75,14 +75,13 @@ public class BotNPCSP : MonoBehaviour {
 
 
 
-        if ((distanceX > -2 && distanceX < 2) && (distanceZ > -2 && distanceZ < 2) && (distanceY > -2 && distanceY < 2) && cooldownTimer < 0.01f)
+        if ((distanceX > -2 && distanceX < 2) && (distanceZ > -2 && distanceZ < 2) && (distanceY > -2 && distanceY < 2))
         {
             //we are in range
             anim.SetBool("isRunning", false);
             //only heal the player if they're hurt and you're in range
-            if (HeroControllerSP.battery < 100)
+            if (HeroControllerSP.battery < 100 && cooldownTimer < 0.01f)
             {
-                anim.SetBool("isRunning", false);
                 anim.SetTrigger("isHealing");
                 //put special effect on player
                 GameObject healSpecialEffect = Instantiate(healCast, batteryBot.transform.position, batteryBot.transform.rotation);                
