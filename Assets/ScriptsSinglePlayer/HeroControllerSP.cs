@@ -54,6 +54,7 @@ public class HeroControllerSP : MonoBehaviour
     public static bool hasAxe_LIGHTNING;
     public static bool hasShield_ICE;
     public static bool hasGun_MULTI;
+    public static bool hasNPCBot;
 
     public static bool isSlot1 = false;
     public static bool isSlot2 = false;
@@ -190,7 +191,7 @@ public class HeroControllerSP : MonoBehaviour
 
         isPoisoned = false;
 
-        battery = 98;
+        battery = 95;
         speed = 15.0f;
         Ammo = 0;
         Gears = 0;
@@ -205,6 +206,7 @@ public class HeroControllerSP : MonoBehaviour
         hasShield_ICE = false;
         hasJetBooster = false;
         hasJetBooster_ARCANE = false;
+        hasNPCBot = false;
 
         hasSkull_RED = false;
         hasSkull_BLUE = false;
@@ -372,6 +374,10 @@ public class HeroControllerSP : MonoBehaviour
         if (hasSkull_RED)
         {
             emptyInvSlots[12].texture = invSlots[12];
+        }
+        if (hasNPCBot)
+        {
+            emptyInvSlots[13].texture = invSlots[13];
         }
 
     }

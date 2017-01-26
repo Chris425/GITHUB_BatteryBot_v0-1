@@ -56,6 +56,7 @@ public class BotNPCSP : MonoBehaviour {
             if (other.gameObject.name.Contains("InteractShot"))
             {
                 isActive = true;
+                HeroControllerSP.hasNPCBot = true;
                 Instantiate(PickedUp, this.transform.position, this.transform.rotation);
             }
         }
