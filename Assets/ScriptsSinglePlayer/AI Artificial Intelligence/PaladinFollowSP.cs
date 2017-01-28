@@ -71,8 +71,8 @@ public class PaladinFollowSP : MonoBehaviour
     private void leap()
     {
         transform.position += transform.forward * Time.deltaTime * 12;
-        int shouldSpawn = Random.Range(1, 50);
-        if (shouldSpawn <= 2)
+        int shouldSpawn = Random.Range(1, 60);
+        if (shouldSpawn <= 4)
         {
             Instantiate(leapExplosion, this.transform.position, this.transform.rotation);
         }
@@ -80,7 +80,7 @@ public class PaladinFollowSP : MonoBehaviour
 
     void Update()
     {
-        cooldownTimer -= 0.01f;
+        cooldownTimer -= 0.02f;
 
         distanceX = this.transform.position.x - target.transform.position.x;
         distanceZ = this.transform.position.z - target.transform.position.z;
@@ -100,7 +100,11 @@ public class PaladinFollowSP : MonoBehaviour
                 cooldownTimer = 3.5f;
                 isLeaping = false;
                 agent.enabled = true;
-                agent.Resume();               
+                if (agent.isActiveAndEnabled)
+                {
+                    agent.Resume();
+                }
+                
             }
         }
         else
@@ -127,7 +131,18 @@ public class PaladinFollowSP : MonoBehaviour
             }
 
         }
-        //This monster doesn't give up - will chase until defeated
+        //Paladin only gives up if your vertical distance is more than 15 units
+        else if ((distanceY < -15 || distanceY > 15))
+        {
+            isAggroed = false;
+            anim.SetBool("IsAggroed", false);
+            anim.SetBool("isInRange", true);
+            if (agent.isActiveAndEnabled)
+            {
+                shouldPlayAggroEffect = true;
+                agent.Stop();
+            }
+        }
 
     }
 
@@ -199,7 +214,7 @@ public class PaladinFollowSP : MonoBehaviour
             anim.SetBool("isInRange", false);
             if (isAggroed)
             {
-                if (attackDecision < 4 && cooldownTimer < 0.01f)
+                if (attackDecision < 3 && cooldownTimer < 0.01f)
                 {
                     GameObject myPowerUp = Instantiate(PowerUp, this.transform.position, this.transform.rotation);
                     myPowerUp.transform.parent = this.gameObject.transform;
@@ -210,7 +225,7 @@ public class PaladinFollowSP : MonoBehaviour
                     currentSpeed = agent.speed;
                     cooldownTimer = cooldownPowerup;
                 }
-                else if (attackDecision >= 4 && attackDecision < 8 && cooldownTimer < 0.01f)
+                else if (attackDecision >= 3 && attackDecision < 7 && cooldownTimer < 0.01f)
                 {
                     anim.SetTrigger("isAttacking");
                     Instantiate(swordFireRangeEffect, this.transform.position, this.transform.rotation);
@@ -220,7 +235,7 @@ public class PaladinFollowSP : MonoBehaviour
                 {
                     isLeaping = true;
                     anim.SetTrigger("isLeaping");
-                    cooldownTimer = 1.6f;
+                    cooldownTimer = 2.0f;
                     agent.enabled = false;
                 }
                                 

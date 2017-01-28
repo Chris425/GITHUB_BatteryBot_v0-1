@@ -52,6 +52,9 @@
     <Reference Include="UnityEngine">
       <HintPath>Library\UnityAssemblies\UnityEngine.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.Advertisements">
+      <HintPath>Library\UnityAssemblies\UnityEngine.Advertisements.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
@@ -66,6 +69,9 @@
     </Reference>
     <Reference Include="UnityEngine.HoloLens">
       <HintPath>Library\UnityAssemblies\UnityEngine.HoloLens.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Purchasing">
+      <HintPath>Library\UnityAssemblies\UnityEngine.Purchasing.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.VR">
       <HintPath>Library\UnityAssemblies\UnityEngine.VR.dll</HintPath>
@@ -100,6 +106,15 @@
     <Compile Include="Assets\Arena\Scripts\SE_Despawn.cs" />
     <Compile Include="Assets\Arena\Scripts\SelfDestruct.cs" />
     <Compile Include="Assets\Arena\Scripts\TitleScript.cs" />
+    <Compile Include="Assets\Environment\Water (Basic)\Scripts\WaterBasic.cs" />
+    <Compile Include="Assets\Environment\Water\Water\Scripts\Displace.cs" />
+    <Compile Include="Assets\Environment\Water\Water\Scripts\GerstnerDisplace.cs" />
+    <Compile Include="Assets\Environment\Water\Water\Scripts\MeshContainer.cs" />
+    <Compile Include="Assets\Environment\Water\Water\Scripts\PlanarReflection.cs" />
+    <Compile Include="Assets\Environment\Water\Water\Scripts\SpecularLighting.cs" />
+    <Compile Include="Assets\Environment\Water\Water\Scripts\Water.cs" />
+    <Compile Include="Assets\Environment\Water\Water\Scripts\WaterBase.cs" />
+    <Compile Include="Assets\Environment\Water\Water\Scripts\WaterTile.cs" />
     <Compile Include="Assets\MaterialsSP\PREMADE ASSETS\LightningBolt\LightningBoltScript.cs" />
     <Compile Include="Assets\PrefabsSP\RainMaker\Prefab\BaseRainScript.cs" />
     <Compile Include="Assets\PrefabsSP\RainMaker\Prefab\RainCollision.cs" />
@@ -168,6 +183,11 @@
     <Compile Include="Assets\ScriptsSinglePlayer\WeaponPickups\Skull_RedPickup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Environment\Water (Basic)\Shaders\FXWaterBasic.shader" />
+    <None Include="Assets\Environment\Water\Water\Shaders\FXWaterPro.shader" />
+    <None Include="Assets\Environment\Water\Water4\Shaders\FXWater4Advanced.shader" />
+    <None Include="Assets\Environment\Water\Water4\Shaders\FXWater4Simple.shader" />
+    <None Include="Assets\Environment\Water\Water4\Shaders\WaterInclude.cginc" />
     <None Include="Assets\MaterialsSP\PREMADE ASSETS\LightningBolt\Readme.txt" />
     <None Include="Assets\PrefabsSP\RainMaker\Prefab\RainShader.shader" />
     <None Include="Assets\PrefabsSP\RainMaker\Readme.txt" />
