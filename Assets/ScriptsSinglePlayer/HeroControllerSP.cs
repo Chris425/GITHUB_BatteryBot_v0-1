@@ -191,7 +191,7 @@ public class HeroControllerSP : MonoBehaviour
 
         isPoisoned = false;
 
-        battery = 95;
+        battery = 100;
         speed = 15.0f;
         Ammo = 0;
         Gears = 0;
@@ -378,6 +378,35 @@ public class HeroControllerSP : MonoBehaviour
         if (hasNPCBot)
         {
             emptyInvSlots[13].texture = invSlots[13];
+        }
+
+        //cooldowns and debuffs
+        //cdc change the position of these boxes if you do buffs, debuffs and cooldown rows?
+        if (isPoisoned)
+        {
+            emptyInvSlots[16].texture = invSlots[16]; 
+        }
+        else
+        {
+            emptyInvSlots[16].texture = invSlots[29]; //go back to clear box
+        }
+
+        if (cooldownTimer > 0.01f)
+        {
+            emptyInvSlots[14].texture = invSlots[14];
+        }
+        else
+        {
+            emptyInvSlots[14].texture = invSlots[29];
+        }
+
+        if (dashCooldownTimer > 0.01f)
+        {
+            emptyInvSlots[15].texture = invSlots[15];
+        }
+        else
+        {
+            emptyInvSlots[15].texture = invSlots[29];
         }
 
     }
