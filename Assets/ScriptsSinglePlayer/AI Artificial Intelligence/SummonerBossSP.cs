@@ -29,8 +29,9 @@ public class SummonerBossSP : MonoBehaviour
 {
     private Animator anim;
     UnityEngine.AI.NavMeshAgent agent;
-    
-    private int bossHealth = 50;
+
+    public int bossHealth = 50;
+    public int maxBossHealth = 50;
 
     //gamestates correspond to behaviour methods. Only one can be active at a time.
     public bool gameState_OoC;
@@ -297,7 +298,7 @@ public class SummonerBossSP : MonoBehaviour
             anim.SetTrigger("isHealing");
             bossHealth += 8;
             Debug.Log("Summoner boss health is " + bossHealth);
-            cooldownTimer = cooldown;
+            cooldownTimer = 5.5f;
 
         }
         else if (bossHealth > 50)

@@ -8,6 +8,7 @@ public class WizardFireFollowSP : MonoBehaviour
     UnityEngine.AI.NavMeshAgent agent;
     
     public int bossHealth = 6; //low health due to his massive dps
+    private float shieldHeight;
 
     //gamestates correspond to behaviour methods. Only one can be active at a time.
     public bool gameState_OoC;
@@ -81,6 +82,9 @@ public class WizardFireFollowSP : MonoBehaviour
         isAggroed = false;
         shouldPlayAggroEffect = true;
         FireEffect.gameObject.SetActive(false);
+
+        var myCollider = this.gameObject.GetComponent<Collider>();
+        shieldHeight = (myCollider.bounds.size.y) / 2;
     }
 
     void Update()
@@ -150,7 +154,7 @@ public class WizardFireFollowSP : MonoBehaviour
          if (cooldownTimer < 0.01f)
         {
             anim.SetTrigger("isHealing");
-            Vector3 ShieldPos = new Vector3(this.transform.position.x, this.transform.position.y + 0.5f, this.transform.position.z);
+            Vector3 ShieldPos = new Vector3(this.transform.position.x, this.transform.position.y + shieldHeight, this.transform.position.z);
             GameObject myShield = Instantiate(FireShield, ShieldPos, this.transform.rotation) as GameObject;
             myShield.transform.parent = this.gameObject.transform;
             cooldownTimer = shieldCooldown;
@@ -186,7 +190,7 @@ public class WizardFireFollowSP : MonoBehaviour
             {
                 //fire shield on self
                 anim.SetTrigger("isHealing");
-                Vector3 ShieldPos = new Vector3(this.transform.position.x, this.transform.position.y + 0.5f, this.transform.position.z);
+                Vector3 ShieldPos = new Vector3(this.transform.position.x, this.transform.position.y + shieldHeight, this.transform.position.z);
                 GameObject myShield = Instantiate(FireShield, ShieldPos, this.transform.rotation) as GameObject;
                 myShield.transform.parent = this.gameObject.transform;
                 cooldownTimer = shieldCooldown;

@@ -7,7 +7,8 @@ public class WizardFollowSP : MonoBehaviour
     private Animator anim;
     UnityEngine.AI.NavMeshAgent agent;
     
-    private int bossHealth = 25;
+    public int bossHealth = 25;
+    private float shieldHeight;
 
     //gamestates correspond to behaviour methods. Only one can be active at a time.
     public bool gameState_OoC;
@@ -84,6 +85,10 @@ public class WizardFollowSP : MonoBehaviour
         isAggroed = false;
         shouldPlayAggroEffect = true;
         IceEffect.gameObject.SetActive(false);
+
+        var myCollider = this.gameObject.GetComponent<Collider>();
+        shieldHeight = (myCollider.bounds.size.y) / 2;
+
     }
 
     void Update()
@@ -168,7 +173,7 @@ public class WizardFollowSP : MonoBehaviour
          if (cooldownTimer < 0.01f)
         {
             anim.SetTrigger("isHealing");
-            Vector3 ShieldPos = new Vector3(this.transform.position.x, this.transform.position.y + 0.5f, this.transform.position.z);
+            Vector3 ShieldPos = new Vector3(this.transform.position.x, this.transform.position.y + shieldHeight, this.transform.position.z);
             GameObject myShield = Instantiate(IceShield, ShieldPos, this.transform.rotation) as GameObject;
             myShield.transform.parent = this.gameObject.transform;
             cooldownTimer = shieldCooldown;
@@ -204,7 +209,7 @@ public class WizardFollowSP : MonoBehaviour
             else if(randomNum > 6 && randomNum < 12 && cooldownTimer < 0.01f)
             {
                 anim.SetTrigger("isHealing");
-                Vector3 ShieldPos = new Vector3(this.transform.position.x, this.transform.position.y + 0.5f, this.transform.position.z);
+                Vector3 ShieldPos = new Vector3(this.transform.position.x, this.transform.position.y + shieldHeight, this.transform.position.z);
                 GameObject myShield = Instantiate(IceShield, ShieldPos, this.transform.rotation) as GameObject;
                 myShield.transform.parent = this.gameObject.transform;
                 cooldownTimer = shieldCooldown;
@@ -257,7 +262,7 @@ public class WizardFollowSP : MonoBehaviour
         if (cooldownTimer < 0.01f)
         {
             anim.SetTrigger("isHealing");
-            Vector3 ShieldPos = new Vector3(this.transform.position.x, this.transform.position.y + 0.5f, this.transform.position.z);
+            Vector3 ShieldPos = new Vector3(this.transform.position.x, this.transform.position.y + shieldHeight, this.transform.position.z);
             GameObject myShield = Instantiate(IceShield, ShieldPos, this.transform.rotation) as GameObject;
             myShield.transform.parent = this.gameObject.transform;
             cooldownTimer = shieldCooldown;

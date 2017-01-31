@@ -747,21 +747,21 @@ public class HeroControllerSP : MonoBehaviour
                 anim.SetTrigger("isPunching");
                 Instantiate(objToSpawn, spawnLoc.transform.position, this.transform.rotation);
                 //reset cooldown.
-                cooldownTimer = 0.5f; //cooldown
+                cooldownTimer = 0.3f; //cooldown
                 Ammo -= 1;
             }
             else if (Input.GetButton("Fire1") && cooldownTimer < 0.01f && hasGS && isSlot3)
             {
                 anim.SetTrigger("isSlashing");
                 Instantiate(GSShot, spawnLoc.transform.position, this.transform.rotation);
-                cooldownTimer = 1.4f;
+                cooldownTimer = 1.3f;
                 
             }
             else if (Input.GetButton("Fire1") && cooldownTimer < 0.01f && hasAxe && isSlot1)
             {
                 anim.SetTrigger("isAxeHacking");
                 Instantiate(AxeShot, spawnLoc.transform.position, this.transform.rotation);
-                cooldownTimer = 0.9f;
+                cooldownTimer = 0.8f;
                 
             }
 
@@ -809,7 +809,7 @@ public class HeroControllerSP : MonoBehaviour
             {
                 anim.SetTrigger("isPunching");
                 Instantiate(interactShot, spawnLoc.transform.position, this.transform.rotation);
-                cooldownTimer = 1.7f;
+                cooldownTimer = 1.0f;
             }
             if (Input.GetKey("v") && cooldownTimer < 0.01f && hasShield && isSlot4)
             {
