@@ -15,6 +15,8 @@ public class WizardFollowSP : MonoBehaviour
     public bool gameState_InRangeAttacking;
     public bool gameState_FindCover;
 
+    public bool isDroppingSkull = false;
+    public GameObject blueSkull;
 
     //get location of character!
     public GameObject target;
@@ -481,7 +483,14 @@ public class WizardFollowSP : MonoBehaviour
                     Instantiate(GreenBattery, this.transform.position, this.transform.rotation);
                     Instantiate(RedBattery, this.transform.position, this.transform.rotation);
                 }
-                
+
+                //guaranteed skull key drop if the boolean is set to true!
+                if (isDroppingSkull)
+                {
+                    Vector3 SkullPos = new Vector3(this.transform.position.x, this.transform.position.y + 0.5f, this.transform.position.z);
+                    GameObject skullDrop = Instantiate(blueSkull, SkullPos, this.transform.rotation) as GameObject;
+                }
+
                 Destroy(other.gameObject);
                 Destroy(this.gameObject);
             }

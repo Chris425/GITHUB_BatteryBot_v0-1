@@ -1,30 +1,27 @@
 fileFormatVersion: 2
 guid: 2b2134e4752f0dc4d96f2f594a8e8877
-timeCreated: 1484255364
+timeCreated: 1485885234
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
   defaultReferences:
+  - purpleSkull: {fileID: 1000013041082866, guid: a4d7237c91574f44397c0ae644f56601,
+      type: 2}
   - target: {instanceID: 0}
   - fleeDestination: {instanceID: 0}
-  - CasterSpecEffect: {fileID: 1000013706261646, guid: d10731a1eaea7c243ace525ca5ecc157,
-      type: 2}
   - CasterSpawnLoc: {fileID: 1000013743820366, guid: 2877f54211b8e6849bea81d24274444c,
       type: 2}
-  - objToSpawn: {fileID: 1000012146966126, guid: 347cf7740e837b640aa3a0a1976d0328,
-      type: 2}
-  - objToSpawnIce: {fileID: 1000012232691824, guid: ae1e5623605d2c545809538bbcb409d2,
-      type: 2}
+  - WizHeal: {instanceID: 0}
+  - objToSpawnPoison: {instanceID: 0}
   - DeathSpecEffect: {fileID: 1000012846706402, guid: 2bd76f22374a47f48b7f2c55662b2e0d,
       type: 2}
   - BloodSpecEffect: {fileID: 1000010244885832, guid: e27cebc1d1e1c3940aa823b7c96360a3,
       type: 2}
   - AggroSpecEffect: {fileID: 1000012397342314, guid: 88a29fcf0b0b7204ebb75b12b49fbdd4,
       type: 2}
-  - IceEffect: {instanceID: 0}
-  - vampireEnemy: {fileID: 1000012506140122, guid: 778ce5ce5ed9fba448344f90053accf6,
-      type: 2}
-  - SE_Heal: {fileID: 1000012129054228, guid: d8bd451a27c5f9743b7745b55046af0e, type: 2}
+  - PoisonEffect: {instanceID: 0}
+  - PoisonWell: {instanceID: 0}
+  - PoisonShield: {instanceID: 0}
   - RedBattery: {fileID: 1000010581996754, guid: 211f197b74145464da35d287d5471ce1,
       type: 2}
   - GreenBattery: {fileID: 1000010629734422, guid: 62d688f5f029d454ba375eb87c5b9585,

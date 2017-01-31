@@ -754,14 +754,14 @@ public class HeroControllerSP : MonoBehaviour
             {
                 anim.SetTrigger("isSlashing");
                 Instantiate(GSShot, spawnLoc.transform.position, this.transform.rotation);
-                cooldownTimer = 1.8f;
+                cooldownTimer = 1.4f;
                 
             }
             else if (Input.GetButton("Fire1") && cooldownTimer < 0.01f && hasAxe && isSlot1)
             {
                 anim.SetTrigger("isAxeHacking");
                 Instantiate(AxeShot, spawnLoc.transform.position, this.transform.rotation);
-                cooldownTimer = 1.2f;
+                cooldownTimer = 0.9f;
                 
             }
 
@@ -771,19 +771,19 @@ public class HeroControllerSP : MonoBehaviour
             {
                 anim.SetTrigger("isAxeHacking");
                 Instantiate(AxeShot_LIGHTNING, spawnLoc.transform.position, this.transform.rotation);
-                cooldownTimer = 2.5f;
+                cooldownTimer = 2.1f;
             }
             else if (Input.GetKey("x") && cooldownTimer < 0.01f && hasGS && hasGS_FIRE && isSlot3)
             {
                 anim.SetTrigger("isSlashing");
                 Instantiate(GSShot_FIRE, spawnLoc.transform.position, this.transform.rotation);
-                cooldownTimer = 3.5f;
+                cooldownTimer = 3.0f;
             }
             else if (Input.GetKey("x") && cooldownTimer < 0.01f && hasGun && hasGun_MULTI && isSlot2)
             {
                 anim.SetTrigger("isPunching");
                 Instantiate(GunShot_MULTI, spawnLoc.transform.position, this.transform.rotation);
-                cooldownTimer = 2.2f;
+                cooldownTimer = 2.0f;
                // Ammo -= 1;  // special uses no ammo!
             }
 
@@ -792,7 +792,7 @@ public class HeroControllerSP : MonoBehaviour
             {
                 anim.SetTrigger("isShieldBashing");
                 Instantiate(ShieldShot_ICE, spawnLoc.transform.position, this.transform.rotation);
-                cooldownTimer = 8.0f;
+                cooldownTimer = 7.0f;
             }
 
             if (Input.GetKey("c") && cooldownTimer < 0.01f && hasJetBooster && hasJetBooster_ARCANE && isSlot5)
@@ -809,7 +809,7 @@ public class HeroControllerSP : MonoBehaviour
             {
                 anim.SetTrigger("isPunching");
                 Instantiate(interactShot, spawnLoc.transform.position, this.transform.rotation);
-                cooldownTimer = 2.0f;
+                cooldownTimer = 1.7f;
             }
             if (Input.GetKey("v") && cooldownTimer < 0.01f && hasShield && isSlot4)
             {

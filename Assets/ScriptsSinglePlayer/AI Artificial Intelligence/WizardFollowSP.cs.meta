@@ -1,14 +1,14 @@
 fileFormatVersion: 2
 guid: 879d04838a3dbbf449a4827158414ab6
-timeCreated: 1484255364
+timeCreated: 1485885214
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
   defaultReferences:
+  - blueSkull: {fileID: 1000010389999434, guid: ecd11c3db8318a74b999814bf0e09a0b,
+      type: 2}
   - target: {instanceID: 0}
   - fleeDestination: {instanceID: 0}
-  - CasterSpecEffect: {fileID: 1000013706261646, guid: d10731a1eaea7c243ace525ca5ecc157,
-      type: 2}
   - CasterSpawnLoc: {fileID: 1000013743820366, guid: 2877f54211b8e6849bea81d24274444c,
       type: 2}
   - objToSpawn: {fileID: 1000012146966126, guid: 347cf7740e837b640aa3a0a1976d0328,
@@ -22,9 +22,8 @@ MonoImporter:
   - AggroSpecEffect: {fileID: 1000012397342314, guid: 88a29fcf0b0b7204ebb75b12b49fbdd4,
       type: 2}
   - IceEffect: {instanceID: 0}
-  - vampireEnemy: {fileID: 1000012506140122, guid: 778ce5ce5ed9fba448344f90053accf6,
-      type: 2}
-  - SE_Heal: {fileID: 1000012129054228, guid: d8bd451a27c5f9743b7745b55046af0e, type: 2}
+  - IceBlastMulti: {instanceID: 0}
+  - IceShield: {instanceID: 0}
   - RedBattery: {fileID: 1000010581996754, guid: 211f197b74145464da35d287d5471ce1,
       type: 2}
   - GreenBattery: {fileID: 1000010629734422, guid: 62d688f5f029d454ba375eb87c5b9585,
