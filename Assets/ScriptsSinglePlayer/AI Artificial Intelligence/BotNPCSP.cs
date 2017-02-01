@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class BotNPCSP : MonoBehaviour {
 
@@ -22,14 +23,7 @@ public class BotNPCSP : MonoBehaviour {
 
     // Use this for initialization
     void OnEnable()
-    {
-        anim = this.GetComponentInChildren<Animator>();       
-        anim.SetBool("IsRunning", false);
-
-        agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
-        target = GameObject.Find("FollowPoint");
-        batteryBot = GameObject.Find("BatteryBot");
-        anim.applyRootMotion = false;
+    {       
         isActive = false;
     }
 	
@@ -55,9 +49,20 @@ public class BotNPCSP : MonoBehaviour {
             //first time touching NPC
             if (other.gameObject.name.Contains("InteractShot"))
             {
+                gameObject.GetComponent<NavMeshAgent>().enabled = true;
+
                 isActive = true;
                 HeroControllerSP.hasNPCBot = true;
                 Instantiate(PickedUp, this.transform.position, this.transform.rotation);
+
+
+                anim = this.GetComponentInChildren<Animator>();
+                anim.SetBool("IsRunning", false);
+
+                agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
+                target = GameObject.Find("FollowPoint");
+                batteryBot = GameObject.Find("BatteryBot");
+                anim.applyRootMotion = false;
             }
         }
         else
