@@ -98,6 +98,7 @@ public class HeroControllerSP : MonoBehaviour
     //public float specialCooldown = 6.5f;
     private float dashCooldown = 14.8f;
     private float cooldownTimer;
+    private float interactTimer;
     private float dashCooldownTimer;
     
     bool isBoosting = false;
@@ -229,7 +230,7 @@ public class HeroControllerSP : MonoBehaviour
         if (other.gameObject.name.Contains("CasterShot"))
         {
             Instantiate(SE_hit, this.transform.position, this.transform.rotation);
-            battery -= 10;
+            battery -= 12;
             Destroy(other.gameObject);
         }
         if (other.gameObject.name.Contains("WizBasic"))
@@ -241,13 +242,13 @@ public class HeroControllerSP : MonoBehaviour
         if (other.gameObject.name.Contains("palaGround"))
         {
             Instantiate(SE_basic_hit, this.transform.position, this.transform.rotation); 
-            battery -= 1;
+            battery -= 2;
             Destroy(other.gameObject);
         }
         if (other.gameObject.name.Contains("SummonerShot") || other.gameObject.name.Contains("WizardShot"))
         {
             Instantiate(SE_hit_ice, this.transform.position, this.transform.rotation);
-            battery -= 2;
+            battery -= 5;
             Destroy(other.gameObject);
         }
         if (other.gameObject.name.Contains("wizardFire") )
@@ -417,6 +418,7 @@ public class HeroControllerSP : MonoBehaviour
         cooldownTimer -= 0.03f;
         dashCooldownTimer -= 0.04f;
         poisonCooldownTimer -= 0.03f;
+        interactTimer -= 0.03f;
 
 
 
@@ -805,11 +807,11 @@ public class HeroControllerSP : MonoBehaviour
 
 
             //interact button
-            if (Input.GetKey("f") && cooldownTimer < 0.01f)
+            if (Input.GetKey("f") && interactTimer < 0.01f)
             {
                 anim.SetTrigger("isPunching");
                 Instantiate(interactShot, spawnLoc.transform.position, this.transform.rotation);
-                cooldownTimer = 1.0f;
+                interactTimer = 0.7f;
             }
             if (Input.GetKey("v") && cooldownTimer < 0.01f && hasShield && isSlot4)
             {

@@ -10,8 +10,8 @@ public class MeleeFollowBossSP : MonoBehaviour
     public float distanceX;
     public float distanceZ;
     public float distanceY;
-    private float cooldown = 6.0f;
-    private float cooldownPowerup = 10.0f;
+    private float cooldown = 3.0f;
+    private float cooldownPowerup = 5.0f;
     private float cooldownTimer;
     public int bossHealth = 10;
     bool shouldPlayAggroEffect = false;

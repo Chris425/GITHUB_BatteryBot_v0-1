@@ -72,7 +72,7 @@ public class PaladinFollowSP : MonoBehaviour
     {
         transform.position += transform.forward * Time.deltaTime * 12;
         int shouldSpawn = Random.Range(1, 60);
-        if (shouldSpawn <= 4)
+        if (shouldSpawn <= 5)
         {
             Instantiate(leapExplosion, this.transform.position, this.transform.rotation);
         }
@@ -160,7 +160,7 @@ public class PaladinFollowSP : MonoBehaviour
         int attackDecision = Random.Range(1, 20);
 
         //IN MELEE RANGE
-        if ((distanceX > -2.7 && distanceX < 2.7) && (distanceZ > -2.7 && distanceZ < 2.7) && (distanceY > -3.7 && distanceY < 3.7))
+        if ((distanceX > -2.2 && distanceX < 2.2) && (distanceZ > -2.2 && distanceZ < 2.2) && (distanceY > -2.7 && distanceY < 2.7))
         {
             //make him idle if in range regardless of cooldowns
             anim.SetBool("isInRange", true);
@@ -235,7 +235,7 @@ public class PaladinFollowSP : MonoBehaviour
                 {
                     isLeaping = true;
                     anim.SetTrigger("isLeaping");
-                    cooldownTimer = 2.0f;
+                    cooldownTimer = 1.3f;
                     agent.enabled = false;
                 }
                                 
