@@ -131,6 +131,7 @@
     <Compile Include="Assets\ScriptsSinglePlayer\EnemySpawnerSP.cs" />
     <Compile Include="Assets\ScriptsSinglePlayer\ExplosionEffectSP.cs" />
     <Compile Include="Assets\ScriptsSinglePlayer\FrozenOrbSP.cs" />
+    <Compile Include="Assets\ScriptsSinglePlayer\GAMEMANAGERSP.cs" />
     <Compile Include="Assets\ScriptsSinglePlayer\GameOverSP.cs" />
     <Compile Include="Assets\ScriptsSinglePlayer\GetScoreSP.cs" />
     <Compile Include="Assets\ScriptsSinglePlayer\HeroControllerSP.cs" />
@@ -155,6 +156,10 @@
     <Compile Include="Assets\ScriptsSinglePlayer\PoisonWellSpawn.cs" />
     <Compile Include="Assets\ScriptsSinglePlayer\PowerUpRotatorSP.cs" />
     <Compile Include="Assets\ScriptsSinglePlayer\SE_DespawnSP.cs" />
+    <Compile Include="Assets\ScriptsSinglePlayer\SavePointLvl1.cs" />
+    <Compile Include="Assets\ScriptsSinglePlayer\SavePointLvl2.cs" />
+    <Compile Include="Assets\ScriptsSinglePlayer\SavePointLvl3.cs" />
+    <Compile Include="Assets\ScriptsSinglePlayer\SavePointLvlBonus.cs" />
     <Compile Include="Assets\ScriptsSinglePlayer\SelfDestructSP.cs" />
     <Compile Include="Assets\ScriptsSinglePlayer\ShieldBlock.cs" />
     <Compile Include="Assets\ScriptsSinglePlayer\TitleScriptSP.cs" />
@@ -175,6 +180,10 @@
     <Compile Include="Assets\ScriptsSinglePlayer\WeaponPickups\Skull_BluePickup.cs" />
     <Compile Include="Assets\ScriptsSinglePlayer\WeaponPickups\Skull_PurplePickup.cs" />
     <Compile Include="Assets\ScriptsSinglePlayer\WeaponPickups\Skull_RedPickup.cs" />
+    <Compile Include="Assets\ScriptsSinglePlayer\gameManagerLvl1.cs" />
+    <Compile Include="Assets\ScriptsSinglePlayer\gameManagerLvl2.cs" />
+    <Compile Include="Assets\ScriptsSinglePlayer\gameManagerLvl3.cs" />
+    <Compile Include="Assets\ScriptsSinglePlayer\gameManagerLvlBonus.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Environment\Water (Basic)\Shaders\FXWaterBasic.shader" />

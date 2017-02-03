@@ -15,7 +15,12 @@ public class OverworldSelectors : MonoBehaviour
     {
         if (other.gameObject.name.Contains("Shot"))
         {
-            if (currentSelector.gameObject.name.Equals("SelectorLvlOne"))
+            if (currentSelector.gameObject.name.Equals("SelectorOneToOverworld"))
+            {
+                GAMEMANAGERSP.hasFinishedLevelOne = true;
+                SceneManager.LoadScene("ExplorationOverworld");
+            }
+            else if (currentSelector.gameObject.name.Equals("SelectorLvlOne"))
             {
                 SceneManager.LoadScene("LevelOne");
             }
@@ -27,6 +32,7 @@ public class OverworldSelectors : MonoBehaviour
             {
                 SceneManager.LoadScene("LevelThree");
             }
+
         }
     }
 
