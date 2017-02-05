@@ -14,6 +14,7 @@ public class PaladinFollowSP : MonoBehaviour
     private float cooldownPowerup = 7.0f;
     private float cooldownTimer;
     private float cooldownTimerPowerup;
+    private float numTimesPoweredUp = 0;
     private float currentSpeed;
     
     bool shouldPlayAggroEffect = false;
@@ -216,7 +217,7 @@ public class PaladinFollowSP : MonoBehaviour
             anim.SetBool("isInRange", false);
             if (isAggroed)
             {
-                if (attackDecision < 3 && cooldownTimerPowerup < 0.01f)
+                if (attackDecision < 3 && cooldownTimerPowerup < 0.01f && numTimesPoweredUp <= 5)
                 {
                     GameObject myPowerUp = Instantiate(PowerUp, this.transform.position, this.transform.rotation);
                     myPowerUp.transform.parent = this.gameObject.transform;
@@ -226,6 +227,7 @@ public class PaladinFollowSP : MonoBehaviour
                     agent.speed += 0.5f;
                     currentSpeed = agent.speed;
                     cooldownTimerPowerup = cooldownPowerup;
+                    numTimesPoweredUp += 1;
                 }
                 else if (attackDecision >= 3 && attackDecision < 7 && cooldownTimer < 0.01f)
                 {

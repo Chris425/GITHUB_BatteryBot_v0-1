@@ -116,6 +116,7 @@
     <Compile Include="Assets\PrefabsSP\RainMaker\Prefab\RainScript2D.cs" />
     <Compile Include="Assets\ScriptsSinglePlayer\AI Artificial Intelligence\BotNPCSP.cs" />
     <Compile Include="Assets\ScriptsSinglePlayer\AI Artificial Intelligence\CasterFollowBossSP.cs" />
+    <Compile Include="Assets\ScriptsSinglePlayer\AI Artificial Intelligence\CasterTurretBossSP.cs" />
     <Compile Include="Assets\ScriptsSinglePlayer\AI Artificial Intelligence\MeleeFollowBossSP.cs" />
     <Compile Include="Assets\ScriptsSinglePlayer\AI Artificial Intelligence\MeleeFollowSP.cs" />
     <Compile Include="Assets\ScriptsSinglePlayer\AI Artificial Intelligence\PaladinFollowSP.cs" />

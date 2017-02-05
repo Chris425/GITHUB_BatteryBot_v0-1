@@ -233,6 +233,12 @@ public class HeroControllerSP : MonoBehaviour
             battery -= 12;
             Destroy(other.gameObject);
         }
+        if (other.gameObject.name.Contains("CasterTurretShot"))
+        {
+            Instantiate(SE_hit, this.transform.position, this.transform.rotation);
+            battery -= 8;
+            Destroy(other.gameObject);
+        }
         if (other.gameObject.name.Contains("WizBasic"))
         {
             Instantiate(SE_hit, this.transform.position, this.transform.rotation);

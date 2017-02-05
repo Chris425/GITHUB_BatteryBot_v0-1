@@ -88,7 +88,7 @@ public class BotNPCSP : MonoBehaviour {
             //only heal the player if they're hurt and you're in range
             if (HeroControllerSP.battery < 100 && cooldownTimer < 0.01f)
             {
-                anim.SetTrigger("isHealing");
+                anim.SetTrigger("isCasting");
                 //put special effect on player
                 GameObject healSpecialEffect = Instantiate(healCast, batteryBot.transform.position, batteryBot.transform.rotation);                
                 healSpecialEffect.transform.parent = batteryBot.gameObject.transform;
