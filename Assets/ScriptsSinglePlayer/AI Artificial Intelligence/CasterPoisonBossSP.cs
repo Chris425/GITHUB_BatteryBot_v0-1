@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CasterFollowBossSP : MonoBehaviour
+public class CasterPoisonBossSP : MonoBehaviour
 {
     private Animator anim;
     UnityEngine.AI.NavMeshAgent agent;
@@ -10,15 +10,16 @@ public class CasterFollowBossSP : MonoBehaviour
     public float distanceX;
     public float distanceZ;
     public float distanceY;
-    private float cooldown = 5.0f;
+    private float cooldown = 4.0f;
     private float cooldownTimer;
-    public int bossHealth = 5;
+    public int bossHealth = 8;
     bool shouldPlayAggroEffect = false;
     Quaternion aggroRot = new Quaternion(0.0f, 180.0f, 180.0f, 0.0f);
 
     public GameObject CasterSpecEffect;
     public GameObject CasterSpawnLoc;
     public GameObject objToSpawn;
+    public GameObject poisonWell;
     public GameObject DeathSpecEffect;
     public GameObject BloodSpecEffect;
     public GameObject AggroSpecEffect;
@@ -213,7 +214,6 @@ public class CasterFollowBossSP : MonoBehaviour
         distanceX = this.transform.position.x - target.transform.position.x;
         distanceZ = this.transform.position.z - target.transform.position.z;
         distanceY = this.transform.position.y - target.transform.position.y;
-
         checkAggro();
 
         if (isAggroed)
@@ -267,17 +267,33 @@ public class CasterFollowBossSP : MonoBehaviour
 
         //Debug.Log (distance);
 
-
+        //when in range poison caster can do a bolt or a well, much like the wizard. Lacks the explosion and ice shield though
         if ((distanceX > -8.0 && distanceX < 8.0) && (distanceZ > -8.0 && distanceZ < 8.0) && cooldownTimer < 0.01f)
         {
-            agent.SetDestination(target.transform.position);
-            anim.SetTrigger("isAttacking");
-            //we are in range. Start shooting
-            Debug.Log("Caster is readying a fireball!");
-            Instantiate(objToSpawn, CasterSpawnLoc.transform.position, CasterSpawnLoc.transform.rotation);
-            cooldownTimer = cooldown;
-            Instantiate(CasterSpecEffect, this.transform.position, this.transform.rotation);
-                  
+            int attackDecision = Random.Range(1,10);
+
+            if (attackDecision <= 7)
+            {
+                agent.SetDestination(target.transform.position);
+                anim.SetTrigger("isAttacking");
+                //we are in range. Start shooting
+                Vector3 poisonBoltLoc = new Vector3(CasterSpawnLoc.transform.position.x - 1.0f, CasterSpawnLoc.transform.position.y + 1.0f, CasterSpawnLoc.transform.position.z);
+                Instantiate(objToSpawn, poisonBoltLoc, CasterSpawnLoc.transform.rotation);
+                cooldownTimer = cooldown;
+                Instantiate(CasterSpecEffect, this.transform.position, this.transform.rotation);
+            }
+            else
+            {
+                //poison well that is like AoE damage. Ticks for damage. This functionality addressed in the prefab being instantiated.
+                //this spell will be inaccurate to prevent it from being too strong
+                int randomOffset1 = Random.Range(0, 3);
+                int randomOffset2 = Random.Range(0, 3);
+                Vector3 wellPos = new Vector3(target.transform.position.x + randomOffset1, target.transform.position.y, target.transform.position.z + randomOffset2);
+                anim.SetTrigger("isSummoning");
+                Instantiate(poisonWell, wellPos, this.transform.rotation);
+                cooldownTimer = cooldown;
+            }          
+            
         }
         // when you're in range but on cooldown
         else if ((distanceX > -8.0 && distanceX < 8.0) && (distanceZ > -8.0 && distanceZ < 8.0) && cooldownTimer > 0.01f)

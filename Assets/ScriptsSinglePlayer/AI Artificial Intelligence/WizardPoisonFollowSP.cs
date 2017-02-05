@@ -201,7 +201,7 @@ public class WizardPoisonFollowSP : MonoBehaviour
                 //bolt of poison. Applies DoT on player 
                 anim.SetTrigger("isAttacking");                
                 Instantiate(objToSpawnPoison, CasterSpawnLoc.transform.position, this.transform.rotation);
-                cooldownTimer = PoisonWellCooldown;
+                cooldownTimer = cooldown;
 
             }
             else if(randomNum > 6 && randomNum < 11 && cooldownTimer < 0.01f)

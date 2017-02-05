@@ -31,8 +31,10 @@ public class MeleeFollowSP : MonoBehaviour
     public static bool isAggroed;
 
     public int health = 2;
-    public int vampireDamage = 20;
+    public int vampireDamage = 15;
+
     public bool isSummoned = false;
+    public bool isPoisonType = false;
 
     void OnEnable()
     {
@@ -52,6 +54,7 @@ public class MeleeFollowSP : MonoBehaviour
         {
             isAggroed = false;
         }
+
         
         shouldPlayAggroEffect = true;
     }
@@ -61,6 +64,7 @@ public class MeleeFollowSP : MonoBehaviour
         //case when your player projectile hits the vampire
         if (other.gameObject.name.Contains("Shot"))
         {
+            isAggroed = true;
 
             //make a special effect on death
             if (other.gameObject.name.Contains("PlayerShot"))
@@ -164,8 +168,9 @@ public class MeleeFollowSP : MonoBehaviour
 
                     }
                 }
+                Destroy(this.gameObject);
             }
-            Destroy(this.gameObject);
+            
 
 
             Destroy(other.gameObject);
@@ -236,10 +241,22 @@ public class MeleeFollowSP : MonoBehaviour
             if (HeroControllerSP.hasShield && HeroControllerSP.isSlot4)
             {
                 HeroControllerSP.battery -= (vampireDamage - 5);
+                //no poison damage if you have a shield
             }
             else
             {
                 HeroControllerSP.battery -= vampireDamage;
+                if (isPoisonType)
+                {
+                    int poisonedChance = Random.Range(1, 10);
+                    if (poisonedChance > 5)
+                    {
+                        HeroControllerSP.isPoisoned = true;
+                        int poisonTicks = Random.Range(3, 8);
+                        HeroControllerSP.poisonTicks = poisonTicks;
+                    }
+                }
+                
             }
             
             cooldownTimer = cooldown;
