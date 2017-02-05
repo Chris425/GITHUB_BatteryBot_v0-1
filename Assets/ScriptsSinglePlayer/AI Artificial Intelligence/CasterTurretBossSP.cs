@@ -12,7 +12,7 @@ public class CasterTurretBossSP : MonoBehaviour
     public float distanceY;
     private float cooldown = 7.0f; //slightly longer cooldown than normal caster
     private float cooldownTimer;
-    public int bossHealth = 2; //greatly less life than most other enemies - meant to be a sniper whose defense comes from hiding at a distance
+    public int bossHealth = 1; //greatly less life than most other enemies - meant to be a sniper whose defense comes from hiding at a distance
     bool shouldPlayAggroEffect = false;
     Quaternion aggroRot = new Quaternion(0.0f, 180.0f, 180.0f, 0.0f);
 
@@ -49,6 +49,7 @@ public class CasterTurretBossSP : MonoBehaviour
         isAggroed = false;
         shouldPlayAggroEffect = true;
         FlameEffect.gameObject.SetActive(false);
+        bossHealth = 1;
     }
 
     public void OnCollisionEnter(Collision other)
@@ -291,7 +292,7 @@ public class CasterTurretBossSP : MonoBehaviour
         {
             if (agent.isActiveAndEnabled)
             {
-                anim.SetBool("IsNotInRange", true);
+                //anim.SetBool("IsNotInRange", true);
                 FlameEffect.gameObject.SetActive(false);
                 //agent.SetDestination(target.transform.position); 
             }
