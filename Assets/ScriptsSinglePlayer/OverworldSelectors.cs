@@ -32,6 +32,10 @@ public class OverworldSelectors : MonoBehaviour
             {
                 SceneManager.LoadScene("LevelThree");
             }
+            else if (currentSelector.gameObject.name.Equals("SelectorLvlBonus"))
+            {
+                SceneManager.LoadScene("LevelBonus");
+            }
 
         }
     }

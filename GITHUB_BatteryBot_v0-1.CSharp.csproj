@@ -156,6 +156,7 @@
     <Compile Include="Assets\ScriptsSinglePlayer\PlatformMotions\SE_Hit_Ice_Rot.cs" />
     <Compile Include="Assets\ScriptsSinglePlayer\PoisonWellSpawn.cs" />
     <Compile Include="Assets\ScriptsSinglePlayer\PowerUpRotatorSP.cs" />
+    <Compile Include="Assets\ScriptsSinglePlayer\ProjectileHitTerrain.cs" />
     <Compile Include="Assets\ScriptsSinglePlayer\SE_DespawnSP.cs" />
     <Compile Include="Assets\ScriptsSinglePlayer\SavePointLvl1.cs" />
     <Compile Include="Assets\ScriptsSinglePlayer\SavePointLvl2.cs" />
@@ -185,6 +186,7 @@
     <Compile Include="Assets\ScriptsSinglePlayer\gameManagerLvl2.cs" />
     <Compile Include="Assets\ScriptsSinglePlayer\gameManagerLvl3.cs" />
     <Compile Include="Assets\ScriptsSinglePlayer\gameManagerLvlBonus.cs" />
+    <Compile Include="Assets\ScriptsSinglePlayer\gameManagerOverworld.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Environment\Water (Basic)\Shaders\FXWaterBasic.shader" />

@@ -4,25 +4,26 @@ using UnityEngine;
 
 public class GAMEMANAGERSP : MonoBehaviour {
 
-    public static bool hasFinishedLevelOne;
-    public static bool hasLevelOneSave1;
-    public static bool hasLevelOneSave2;
+    public static bool hasFinishedLevelOne = false;
+    public static bool hasLevelOneSave1 = false;
+    public static bool hasLevelOneSave2 = false;
 
-    public static bool hasFinishedLevelTwo;
-    public static bool hasLevelTwoSave1;
-    public static bool hasLevelTwoSave2;
+    public static bool hasFinishedLevelTwo = false;
+    public static bool hasLevelTwoSave1 = false;
+    public static bool hasLevelTwoSave2 = false;
 
-    public static bool hasFinishedLevelThree;
-    public static bool hasLevelThreeSave1;
-    public static bool hasLevelThreeSave2;
+    public static bool hasFinishedLevelThree = false;
+    public static bool hasLevelThreeSave1 = false;
+    public static bool hasLevelThreeSave2 = false;
 
-    public static bool hasFinishedLevelBonus;
-    public static bool hasLevelBonusSave1;
-    public static bool hasLevelBonusSave2;
+    public static bool hasFinishedLevelBonus = false;
+    public static bool hasLevelBonusSave1 = false;
+    public static bool hasLevelBonusSave2 = false;
     
     void Start () {
         //this is a persistent game object!
-        Object.DontDestroyOnLoad(this); 
+
+    Object.DontDestroyOnLoad(this); 
 	}
 	
 	// Update is called once per frame
