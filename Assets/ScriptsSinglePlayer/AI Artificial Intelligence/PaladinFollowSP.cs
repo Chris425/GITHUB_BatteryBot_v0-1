@@ -12,7 +12,8 @@ public class PaladinFollowSP : MonoBehaviour
     public float distanceY;
     private float cooldown = 3.0f;
     private float cooldownPowerup = 7.0f;
-    private float cooldownTimer ;
+    private float cooldownTimer;
+    private float cooldownTimerPowerup;
     private float currentSpeed;
     
     bool shouldPlayAggroEffect = false;
@@ -81,6 +82,7 @@ public class PaladinFollowSP : MonoBehaviour
     void Update()
     {
         cooldownTimer -= 0.02f;
+        cooldownTimerPowerup -= 0.02f;
 
         distanceX = this.transform.position.x - target.transform.position.x;
         distanceZ = this.transform.position.z - target.transform.position.z;
@@ -97,7 +99,7 @@ public class PaladinFollowSP : MonoBehaviour
                 //instantiate leap explosion upon landing
                 Instantiate(leapExplosion, this.transform.position, this.transform.rotation);
                 Instantiate(shieldBash, this.transform.position, target.transform.rotation);
-                cooldownTimer = 3.5f;
+                cooldownTimer = 2.9f;
                 isLeaping = false;
                 agent.enabled = true;
                 if (agent.isActiveAndEnabled)
@@ -214,7 +216,7 @@ public class PaladinFollowSP : MonoBehaviour
             anim.SetBool("isInRange", false);
             if (isAggroed)
             {
-                if (attackDecision < 3 && cooldownTimer < 0.01f)
+                if (attackDecision < 3 && cooldownTimerPowerup < 0.01f)
                 {
                     GameObject myPowerUp = Instantiate(PowerUp, this.transform.position, this.transform.rotation);
                     myPowerUp.transform.parent = this.gameObject.transform;
@@ -223,7 +225,7 @@ public class PaladinFollowSP : MonoBehaviour
                     bossDamage += 3;
                     agent.speed += 0.5f;
                     currentSpeed = agent.speed;
-                    cooldownTimer = cooldownPowerup;
+                    cooldownTimerPowerup = cooldownPowerup;
                 }
                 else if (attackDecision >= 3 && attackDecision < 7 && cooldownTimer < 0.01f)
                 {
@@ -235,7 +237,7 @@ public class PaladinFollowSP : MonoBehaviour
                 {
                     isLeaping = true;
                     anim.SetTrigger("isLeaping");
-                    cooldownTimer = 1.3f;
+                    cooldownTimer = 1.0f;
                     agent.enabled = false;
                 }
                                 

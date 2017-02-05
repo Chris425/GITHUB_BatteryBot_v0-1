@@ -13,6 +13,7 @@ public class MeleeFollowBossSP : MonoBehaviour
     private float cooldown = 3.0f;
     private float cooldownPowerup = 5.0f;
     private float cooldownTimer;
+    private float cooldownTimerPowerup;
     public int bossHealth = 10;
     bool shouldPlayAggroEffect = false;
     Quaternion aggroRot = new Quaternion(0.0f, 180.0f, 180.0f, 0.0f);
@@ -266,12 +267,13 @@ public class MeleeFollowBossSP : MonoBehaviour
     void moveToPlayer()
     {
         cooldownTimer -= 0.02f;
+        cooldownTimerPowerup -= 0.02f;
 
         //Debug.Log (distance);
         int attackDecision = Random.Range(1, 10);
 
         //50% chance of doing the power up. When in range, it may do a power up or attack - but only one because it consumes the cooldown.
-        if (attackDecision < 4 && cooldownTimer < 0.01f)
+        if (attackDecision < 4 && cooldownTimerPowerup < 0.01f)
         {           
             GameObject myPowerUp = Instantiate(SkelePowerUp, this.transform.position, this.transform.rotation);
             myPowerUp.transform.parent = this.gameObject.transform;
@@ -279,7 +281,7 @@ public class MeleeFollowBossSP : MonoBehaviour
             anim.SetTrigger("isPoweringUp");
             bossDamage += 3;
             agent.speed += 1.0f;
-            cooldownTimer = cooldownPowerup;
+            cooldownTimerPowerup = cooldownPowerup;
         }
 
         if ((distanceX > -2.7 && distanceX < 2.7) && (distanceZ > -2.7 && distanceZ < 2.7) && (distanceY > -3.7 && distanceY < 3.7) && cooldownTimer < 0.01f)
