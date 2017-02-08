@@ -8,30 +8,40 @@ public class gameManagerLvl2 : MonoBehaviour {
     //when level two is loaded this script runs the start code
     // references the universal game manager script to determine where to spawn the player and under what conditions
 
+
+    //just one save point for level 2 due to non-linear nature of the maze.
     public GameObject savePoint1;
-    public GameObject savePoint2;
+    public GameObject MiniMapCamera;
+    public GameObject PlayerMapIcon;
+    public GameObject hero;
 
-    void Start () {
+    
 
-        GameObject hero = GameObject.Find("PLAYERBASE");
-        
-        
-
-        if (GAMEMANAGERSP.hasLevelTwoSave2)
-        {
-            //they would have these skulls by this point
-          
+    void onEnable () {
+        hero = GameObject.Find("PLAYERBASE");
 
 
-            //move the hero to this position
-            hero.transform.position = savePoint2.transform.position;
-        }
-
-        else if (GAMEMANAGERSP.hasLevelTwoSave1)
+        if (GAMEMANAGERSP.hasLevelTwoSave1)
         {
             HeroControllerSP.hasSkull_BLUE = true;
+            HeroControllerSP.hasSkull_PURPLE = true;
+            HeroControllerSP.hasSkull_RED = true;
             hero.transform.position = savePoint1.transform.position;
         }
 	}
+
+    void Update()
+    {
+        updateMiniMap();
+    }
+    void updateMiniMap()
+    {
+        Vector3 newCamPos = new Vector3(hero.transform.position.x, MiniMapCamera.transform.position.y, hero.transform.position.z);
+        Vector3 newPlayerIconPos = new Vector3(hero.transform.position.x, PlayerMapIcon.transform.position.y, hero.transform.position.z);
+        //move the camera over the player
+        MiniMapCamera.transform.position = newCamPos;
+        PlayerMapIcon.transform.position = newPlayerIconPos;
+
+    }
 	
 }

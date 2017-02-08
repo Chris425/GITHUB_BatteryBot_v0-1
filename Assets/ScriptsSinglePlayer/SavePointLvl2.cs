@@ -25,20 +25,10 @@ public class SavePointLvl2 : MonoBehaviour
         if (other.gameObject.name.Contains("Shot"))
         {
 
-            //assumption - only 2 save points per level
+            //assumption - one save for level 2 to avoid issues due to non-linear exploration
             if (saveNum == 1)
             {
-                if (!GAMEMANAGERSP.hasLevelTwoSave2)
-                {
-                    GAMEMANAGERSP.hasLevelTwoSave1 = true;
-                    Instantiate(SE_interact, this.transform.position, this.transform.rotation);
-                }
-
-            }
-            else if (saveNum == 2)
-            {
                 GAMEMANAGERSP.hasLevelTwoSave1 = true;
-                GAMEMANAGERSP.hasLevelTwoSave2 = true;
                 Instantiate(SE_interact, this.transform.position, this.transform.rotation);
             }
         }
