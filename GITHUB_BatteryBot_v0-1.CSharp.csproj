@@ -52,9 +52,6 @@
     <Reference Include="UnityEngine">
       <HintPath>Library\UnityAssemblies\UnityEngine.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Advertisements">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Advertisements.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
@@ -69,9 +66,6 @@
     </Reference>
     <Reference Include="UnityEngine.HoloLens">
       <HintPath>Library\UnityAssemblies\UnityEngine.HoloLens.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.Purchasing">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Purchasing.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.VR">
       <HintPath>Library\UnityAssemblies\UnityEngine.VR.dll</HintPath>
@@ -124,6 +118,7 @@
     <Compile Include="Assets\ScriptsSinglePlayer\AI Artificial Intelligence\CasterFollowBossSP.cs" />
     <Compile Include="Assets\ScriptsSinglePlayer\AI Artificial Intelligence\CasterPoisonBossSP.cs" />
     <Compile Include="Assets\ScriptsSinglePlayer\AI Artificial Intelligence\CasterTurretBossSP.cs" />
+    <Compile Include="Assets\ScriptsSinglePlayer\AI Artificial Intelligence\Level2BossSP.cs" />
     <Compile Include="Assets\ScriptsSinglePlayer\AI Artificial Intelligence\MeleeFollowBossSP.cs" />
     <Compile Include="Assets\ScriptsSinglePlayer\AI Artificial Intelligence\MeleeFollowSP.cs" />
     <Compile Include="Assets\ScriptsSinglePlayer\AI Artificial Intelligence\PaladinFollowSP.cs" />
@@ -171,6 +166,7 @@
     <Compile Include="Assets\ScriptsSinglePlayer\SavePointLvlBonus.cs" />
     <Compile Include="Assets\ScriptsSinglePlayer\SelfDestructSP.cs" />
     <Compile Include="Assets\ScriptsSinglePlayer\ShieldBlock.cs" />
+    <Compile Include="Assets\ScriptsSinglePlayer\ShieldBlockBossSP.cs" />
     <Compile Include="Assets\ScriptsSinglePlayer\TitleScriptSP.cs" />
     <Compile Include="Assets\ScriptsSinglePlayer\Torch_FlameSwell.cs" />
     <Compile Include="Assets\ScriptsSinglePlayer\VendingMachineControls.cs" />
@@ -202,6 +198,7 @@
     <None Include="Assets\Environment\Water\Water4\Shaders\FXWater4Simple.shader" />
     <None Include="Assets\Environment\Water\Water4\Shaders\WaterInclude.cginc" />
     <None Include="Assets\MaterialsSP\PREMADE ASSETS\LightningBolt\Readme.txt" />
+    <None Include="Assets\MaterialsSP\PREMADE ASSETS\Models\RunicStoneHammer\readme.txt" />
     <None Include="Assets\PrefabsSP\RainMaker\Prefab\RainShader.shader" />
     <None Include="Assets\PrefabsSP\RainMaker\Readme.txt" />
   </ItemGroup>

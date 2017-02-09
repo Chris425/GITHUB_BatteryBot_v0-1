@@ -55,9 +55,6 @@
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Advertisements">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Advertisements.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEditor.Advertisements">
       <HintPath>Library\UnityAssemblies\UnityEditor.Advertisements.dll</HintPath>
     </Reference>
@@ -100,9 +97,6 @@
     <Reference Include="UnityEngine.HoloLens">
       <HintPath>Library\UnityAssemblies\UnityEngine.HoloLens.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Purchasing">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Purchasing.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEditor.VR">
       <HintPath>Library\UnityAssemblies\UnityEditor.VR.dll</HintPath>
     </Reference>
@@ -142,6 +136,7 @@
     <None Include="Assets\Environment\Water\Water4\Shaders\FXWater4Simple.shader" />
     <None Include="Assets\Environment\Water\Water4\Shaders\WaterInclude.cginc" />
     <None Include="Assets\MaterialsSP\PREMADE ASSETS\LightningBolt\Readme.txt" />
+    <None Include="Assets\MaterialsSP\PREMADE ASSETS\Models\RunicStoneHammer\readme.txt" />
     <None Include="Assets\PrefabsSP\RainMaker\Prefab\RainShader.shader" />
     <None Include="Assets\PrefabsSP\RainMaker\Readme.txt" />
   </ItemGroup>
