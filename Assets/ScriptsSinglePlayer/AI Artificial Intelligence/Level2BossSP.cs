@@ -18,11 +18,15 @@ public class Level2BossSP : MonoBehaviour
     private float cooldownTimerPowerup;
     private float numTimesPoweredUp = 0;
     private float currentSpeed;
-    
+    private bool hasDoneFirstSound;
+    private bool hasDoneSecondSound;
+
+
     bool shouldPlayAggroEffect = false;
     Quaternion aggroRot = new Quaternion(0.0f, 180.0f, 180.0f, 0.0f);
 
-    public int bossHealth = 200;
+    public int maxBossHealth = 200;
+    public int bossHealth = 195; //195 looks better on the slider
     private int bossDamage = 5;
 
     public GameObject PowerUp;
@@ -35,6 +39,11 @@ public class Level2BossSP : MonoBehaviour
     public GameObject DeathSpecEffect;
     public GameObject BloodSpecEffect;
     public GameObject AggroSpecEffect;
+
+    //Sound effects
+    public GameObject MinotauroHurtSound1;
+    public GameObject MinotauroHurtSound2;
+    public GameObject MinotauroBigSlamAttack;
 
     public bool isLeaping = false;
 
@@ -76,6 +85,9 @@ public class Level2BossSP : MonoBehaviour
         bossHealthSlider.value = 200;
         bossHealthSlider.gameObject.SetActive(false);
 
+        hasDoneFirstSound = false;
+        hasDoneSecondSound = false;
+
     }
 
 
@@ -104,8 +116,8 @@ public class Level2BossSP : MonoBehaviour
             UpdateSlider();
         }
         
-        cooldownTimer -= 0.02f;
-        cooldownTimerPowerup -= 0.02f;
+        cooldownTimer -= 0.015f;
+        cooldownTimerPowerup -= 0.015f;
 
         distanceX = this.transform.position.x - target.transform.position.x;
         distanceZ = this.transform.position.z - target.transform.position.z;
@@ -195,7 +207,7 @@ public class Level2BossSP : MonoBehaviour
             //make him idle if in range regardless of cooldowns
             anim.SetBool("isInRange", true);
 
-            if (attackDecision < 8 && cooldownTimer < 0.01f)
+            if (attackDecision < 6 && cooldownTimerPowerup < 0.01f && numTimesPoweredUp <= 8)
             {
                 GameObject myPowerUp = Instantiate(PowerUp, this.transform.position, this.transform.rotation);
                 myPowerUp.transform.parent = this.gameObject.transform;
@@ -205,8 +217,9 @@ public class Level2BossSP : MonoBehaviour
                 agent.speed += 0.5f;
                 currentSpeed = agent.speed;
                 cooldownTimer = cooldownPowerup;
+                numTimesPoweredUp += 1;
             }
-            else if (attackDecision >= 8 && attackDecision < 15 && cooldownTimer < 0.01f)
+            else if (attackDecision >= 6 && attackDecision < 15 && cooldownTimer < 0.01f)
             {
                 anim.SetTrigger("isAttacking");
                 Instantiate(swordFireRangeEffect, spawnLoc.transform.position, spawnLoc.transform.rotation);
@@ -244,7 +257,7 @@ public class Level2BossSP : MonoBehaviour
             anim.SetBool("isInRange", false);
             if (isAggroed)
             {
-                if (attackDecision < 12 && cooldownTimerPowerup < 0.01f && numTimesPoweredUp <= 5)
+                if (attackDecision < 12 && cooldownTimerPowerup < 0.01f && numTimesPoweredUp <= 8)
                 {
                     GameObject myPowerUp = Instantiate(PowerUp, this.transform.position, this.transform.rotation);
                     myPowerUp.transform.parent = this.gameObject.transform;
@@ -266,7 +279,7 @@ public class Level2BossSP : MonoBehaviour
                 {
                     isLeaping = true;
                     anim.SetTrigger("isLeaping");
-                    cooldownTimer = 1.8f;
+                    cooldownTimer = 2.0f;
                     agent.enabled = false;
                 }
                                 
@@ -292,7 +305,8 @@ public class Level2BossSP : MonoBehaviour
     {
         //case when your player projectile hits the boss
         if (other.gameObject.name.Contains("Shot"))
-        {
+        { 
+            
             isAggroed = true;
             if (other.gameObject.name.Contains("PlayerShot"))
             {
@@ -343,7 +357,16 @@ public class Level2BossSP : MonoBehaviour
                 Instantiate(DeathSpecEffect, other.transform.position, this.transform.rotation);
             }
 
-
+            if (bossHealth < (0.66 * maxBossHealth) && !hasDoneFirstSound) 
+            {
+                Instantiate(MinotauroHurtSound1, spawnLoc.transform.position, this.transform.rotation);
+                hasDoneFirstSound = true;
+            }
+            if (bossHealth < (0.33 * maxBossHealth) && !hasDoneSecondSound)
+            {
+                Instantiate(MinotauroHurtSound2, spawnLoc.transform.position, this.transform.rotation);
+                hasDoneSecondSound = true;
+            }
             //consume playershot
             Destroy(other.gameObject);
             if (bossHealth <= 0)

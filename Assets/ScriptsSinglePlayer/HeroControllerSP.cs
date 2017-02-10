@@ -197,21 +197,21 @@ public class HeroControllerSP : MonoBehaviour
         Ammo = 990;
         //Gears = 0; //gears currency will now persist across levels and through death. CDC 02-05-2017
 
-        hasShield = false;
-        hasAxe = false;
+        hasShield = true;
+        hasAxe = true;
         hasGun = true;
-        hasGS = false;
-        hasGS_FIRE = false;
-        hasAxe_LIGHTNING = false;
-        hasGun_MULTI = false;
-        hasShield_ICE = false;
-        hasJetBooster = false;
-        hasJetBooster_ARCANE = false;
-        hasNPCBot = false;
+        hasGS = true;
+        hasGS_FIRE = true;
+        hasAxe_LIGHTNING = true;
+        hasGun_MULTI = true;
+        hasShield_ICE = true;
+        hasJetBooster = true;
+        hasJetBooster_ARCANE = true;
+        hasNPCBot = true;
 
-        hasSkull_RED = false;
-        hasSkull_BLUE = false;
-        hasSkull_PURPLE = false;
+        hasSkull_RED = true;
+        hasSkull_BLUE = true;
+        hasSkull_PURPLE = true;
 
         batteryValText.text = "" + battery + " %";
         ammoValText.text = "" + Ammo;
@@ -285,6 +285,13 @@ public class HeroControllerSP : MonoBehaviour
             poisonTicks = 5;
             
         }
+        if (other.gameObject.name.Contains("GroundSlamProjectiles"))
+        {
+            Instantiate(SE_hit, this.transform.position, this.transform.rotation);
+            battery -= 4;
+
+        }
+        
 
 
     }

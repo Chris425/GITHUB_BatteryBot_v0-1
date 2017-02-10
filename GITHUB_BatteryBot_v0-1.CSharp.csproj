@@ -167,6 +167,7 @@
     <Compile Include="Assets\ScriptsSinglePlayer\SelfDestructSP.cs" />
     <Compile Include="Assets\ScriptsSinglePlayer\ShieldBlock.cs" />
     <Compile Include="Assets\ScriptsSinglePlayer\ShieldBlockBossSP.cs" />
+    <Compile Include="Assets\ScriptsSinglePlayer\SlamAttackSpawn.cs" />
     <Compile Include="Assets\ScriptsSinglePlayer\TitleScriptSP.cs" />
     <Compile Include="Assets\ScriptsSinglePlayer\Torch_FlameSwell.cs" />
     <Compile Include="Assets\ScriptsSinglePlayer\VendingMachineControls.cs" />

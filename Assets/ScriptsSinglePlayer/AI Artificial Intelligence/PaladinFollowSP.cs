@@ -21,7 +21,7 @@ public class PaladinFollowSP : MonoBehaviour
     Quaternion aggroRot = new Quaternion(0.0f, 180.0f, 180.0f, 0.0f);
 
     public int bossHealth = 30;
-    private int bossDamage = 5;
+    private int bossDamage = 15;
 
     public GameObject PowerUp;
     public GameObject HealUp;
@@ -33,6 +33,8 @@ public class PaladinFollowSP : MonoBehaviour
     public GameObject DeathSpecEffect;
     public GameObject BloodSpecEffect;
     public GameObject AggroSpecEffect;
+
+
 
     public bool isLeaping = false;
 
@@ -168,16 +170,17 @@ public class PaladinFollowSP : MonoBehaviour
             //make him idle if in range regardless of cooldowns
             anim.SetBool("isInRange", true);
 
-            if (attackDecision < 4 && cooldownTimer < 0.01f)
+            if (attackDecision < 4 && cooldownTimerPowerup < 0.01f && numTimesPoweredUp <= 5)
             {
                 GameObject myPowerUp = Instantiate(PowerUp, this.transform.position, this.transform.rotation);
                 myPowerUp.transform.parent = this.gameObject.transform;
 
                 anim.SetTrigger("isPoweringUp");
-                bossDamage += 3;
-                agent.speed += 0.5f;
+                bossDamage += 5;
+                agent.speed += 0.3f;
                 currentSpeed = agent.speed;
                 cooldownTimer = cooldownPowerup;
+                numTimesPoweredUp += 1;
             }
             else if (attackDecision >= 4 && attackDecision < 8 && cooldownTimer < 0.01f)
             {
@@ -223,8 +226,8 @@ public class PaladinFollowSP : MonoBehaviour
                     myPowerUp.transform.parent = this.gameObject.transform;
 
                     anim.SetTrigger("isPoweringUp");
-                    bossDamage += 3;
-                    agent.speed += 0.5f;
+                    bossDamage += 5;
+                    agent.speed += 0.3f;
                     currentSpeed = agent.speed;
                     cooldownTimerPowerup = cooldownPowerup;
                     numTimesPoweredUp += 1;
