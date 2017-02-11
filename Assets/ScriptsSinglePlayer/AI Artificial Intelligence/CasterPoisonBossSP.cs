@@ -37,10 +37,12 @@ public class CasterPoisonBossSP : MonoBehaviour
     public GameObject GunDrop;
     public GameObject GreatswordDrop;
 
-    public static bool isAggroed;
+    public bool isAggroed;
+    private bool hasDied;
 
     void OnEnable()
     {
+        hasDied = false;
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         target = GameObject.Find("BatteryBot");
 
@@ -55,7 +57,7 @@ public class CasterPoisonBossSP : MonoBehaviour
     public void OnCollisionEnter(Collision other)
     {
         //case when your player projectile hits the caster
-        if (other.gameObject.name.Contains("Shot"))
+        if (other.gameObject.name.Contains("Shot") && !hasDied)
         {
             isAggroed = true;
             if (other.gameObject.name.Contains("PlayerShot"))
@@ -110,9 +112,12 @@ public class CasterPoisonBossSP : MonoBehaviour
 
             //consume playershot
             Destroy(other.gameObject);
-            if (bossHealth <= 0)
+            if (bossHealth <= 0 && !hasDied)
             {
-                
+                //fix to prevent this from occuring many times; 
+                //turns out the gameobject isn't destroyed immediately so it can register many collisions...
+                hasDied = true;
+
                 //possibly spawn some loot!
 
 
@@ -211,16 +216,18 @@ public class CasterPoisonBossSP : MonoBehaviour
 
     void Update()
     {
-        distanceX = this.transform.position.x - target.transform.position.x;
-        distanceZ = this.transform.position.z - target.transform.position.z;
-        distanceY = this.transform.position.y - target.transform.position.y;
-        checkAggro();
-
-        if (isAggroed)
+        if (!hasDied)
         {
-            moveToPlayer();
-        }
+            distanceX = this.transform.position.x - target.transform.position.x;
+            distanceZ = this.transform.position.z - target.transform.position.z;
+            distanceY = this.transform.position.y - target.transform.position.y;
+            checkAggro();
 
+            if (isAggroed)
+            {
+                moveToPlayer();
+            }
+        }
     }
 
     private void checkAggro()

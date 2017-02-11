@@ -89,11 +89,12 @@ public class SummonerBossSP : MonoBehaviour
     public GameObject shieldIce;
     public GameObject boosterArcane;
 
-    public static bool isAggroed;
+    public bool isAggroed;
+    private bool hasDied;
 
     void OnEnable()
     {
-
+        hasDied = false;
         gameState_OoC = true;
         gameState_MovingToTarget = false;
         gameState_InRangeAttacking = false;
@@ -114,44 +115,46 @@ public class SummonerBossSP : MonoBehaviour
 
     void Update()
     {
-        cooldownTimer -= 0.03f;
-        summonCooldownTimer -= 0.03f;
-
-        distanceX = this.transform.position.x - target.transform.position.x;
-        distanceZ = this.transform.position.z - target.transform.position.z;
-        distanceY = this.transform.position.y - target.transform.position.y;
-        checkAggro();
-
-        if (isAggroed)
+        if (!hasDied)
         {
+            cooldownTimer -= 0.03f;
+            summonCooldownTimer -= 0.03f;
 
-            if (bossHealth > 10 && (distanceX < -8.0 || distanceX > 8.0) && (distanceZ < -8.0 || distanceZ > 8.0) && !gameState_Fleeing && !gameState_Healing)
+            distanceX = this.transform.position.x - target.transform.position.x;
+            distanceZ = this.transform.position.z - target.transform.position.z;
+            distanceY = this.transform.position.y - target.transform.position.y;
+            checkAggro();
+
+            if (isAggroed)
             {
-                Behaviour_MovingToTarget();
-            }
-            else if (bossHealth > 10 && !gameState_Fleeing && !gameState_Healing)
-            {
-                Behaviour_InRangeAttacking();
-            }
-            else
-            {
-                gameState_Fleeing = true;
-                gameState_Healing = false; gameState_InRangeAttacking = false; gameState_MovingToTarget = false;
+
+                if (bossHealth > 10 && (distanceX < -8.0 || distanceX > 8.0) && (distanceZ < -8.0 || distanceZ > 8.0) && !gameState_Fleeing && !gameState_Healing)
+                {
+                    Behaviour_MovingToTarget();
+                }
+                else if (bossHealth > 10 && !gameState_Fleeing && !gameState_Healing)
+                {
+                    Behaviour_InRangeAttacking();
+                }
+                else
+                {
+                    gameState_Fleeing = true;
+                    gameState_Healing = false; gameState_InRangeAttacking = false; gameState_MovingToTarget = false;
+                }
+
+
+                if (gameState_Fleeing)
+                {
+                    Behaviour_Fleeing();
+                }
+
+                if (gameState_Healing)
+                {
+                    Behaviour_Healing();
+                }
             }
 
-            
-            if (gameState_Fleeing)
-            {
-                Behaviour_Fleeing();
-            }
-
-            if (gameState_Healing)
-            {
-                Behaviour_Healing();
-            }
         }
-      
-
     }
 
     private void checkAggro()
@@ -316,9 +319,8 @@ public class SummonerBossSP : MonoBehaviour
 
     public void OnCollisionEnter(Collision other)
     {
-        Debug.Log("Summoner boss health is " + bossHealth);
         //case when your player projectile hits the caster
-        if (other.gameObject.name.Contains("Shot"))
+        if (other.gameObject.name.Contains("Shot") && !hasDied)
         {
             //I'm keeping this isAggroed up here...
             //even if an enemy triggers it, well, this enemy should be aggroed too then!
@@ -375,9 +377,12 @@ public class SummonerBossSP : MonoBehaviour
 
             //consume playershot
             Destroy(other.gameObject);
-            if (bossHealth <= 0)
+            if (bossHealth <= 0 && !hasDied)
             {
-                
+                //fix to prevent this from occuring many times; 
+                //turns out the gameobject isn't destroyed immediately so it can register many collisions...
+                hasDied = true;
+
                 //possibly spawn some loot!
 
 

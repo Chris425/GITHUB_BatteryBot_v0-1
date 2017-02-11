@@ -61,8 +61,8 @@ public class Level2BossSP : MonoBehaviour
     public GameObject GreatswordDrop;
     public GameObject BoosterDrop;
 
-    public static bool isAggroed;
-
+    public bool isAggroed;
+    private bool hasDied;
 
     public Slider bossHealthSlider;
     public Image Fill;  // assign in the editor the "Fill"
@@ -71,6 +71,7 @@ public class Level2BossSP : MonoBehaviour
 
     void OnEnable()
     {
+        hasDied = false;
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         target = GameObject.Find("BatteryBot");
 
@@ -112,45 +113,48 @@ public class Level2BossSP : MonoBehaviour
 
     void Update()
     {
-        if (isAggroed)
+        if (!hasDied)
         {
-            UpdateSlider();
-        }
-        
-        cooldownTimer -= 0.015f;
-        cooldownTimerPowerup -= 0.015f;
-
-        distanceX = this.transform.position.x - target.transform.position.x;
-        distanceZ = this.transform.position.z - target.transform.position.z;
-        distanceY = this.transform.position.y - target.transform.position.y;
-
-        if (isLeaping)
-        {
-            if (cooldownTimer > 0.01f)
+            if (isAggroed)
             {
-                leap();
+                UpdateSlider();
+            }
+
+            cooldownTimer -= 0.015f;
+            cooldownTimerPowerup -= 0.015f;
+
+            distanceX = this.transform.position.x - target.transform.position.x;
+            distanceZ = this.transform.position.z - target.transform.position.z;
+            distanceY = this.transform.position.y - target.transform.position.y;
+
+            if (isLeaping)
+            {
+                if (cooldownTimer > 0.01f)
+                {
+                    leap();
+                }
+                else
+                {
+                    //instantiate leap explosion upon landing
+                    Instantiate(leapExplosion, this.transform.position, this.transform.rotation);
+                    Instantiate(shieldBash, this.transform.position, target.transform.rotation);
+                    cooldownTimer = 2.9f;
+                    isLeaping = false;
+                    agent.enabled = true;
+                    if (agent.isActiveAndEnabled)
+                    {
+                        agent.Resume();
+                    }
+
+                }
             }
             else
             {
-                //instantiate leap explosion upon landing
-                Instantiate(leapExplosion, this.transform.position, this.transform.rotation);
-                Instantiate(shieldBash, this.transform.position, target.transform.rotation);
-                cooldownTimer = 2.9f;
-                isLeaping = false;
-                agent.enabled = true;
-                if (agent.isActiveAndEnabled)
+                checkAggro();
+                if (isAggroed)
                 {
-                    agent.Resume();
+                    moveToPlayer();
                 }
-                
-            }
-        }
-        else
-        {
-            checkAggro();
-            if (isAggroed)
-            {
-                moveToPlayer();
             }
         }
     }
@@ -314,7 +318,7 @@ public class Level2BossSP : MonoBehaviour
     public void OnCollisionEnter(Collision other)
     {
         //case when your player projectile hits the boss
-        if (other.gameObject.name.Contains("Shot"))
+        if (other.gameObject.name.Contains("Shot") && !hasDied)
         { 
             
             isAggroed = true;
@@ -379,8 +383,13 @@ public class Level2BossSP : MonoBehaviour
             }
             //consume playershot
             Destroy(other.gameObject);
-            if (bossHealth <= 0)
+            if (bossHealth <= 0 && !hasDied)
             {
+                //fix to prevent this from occuring many times; 
+                //turns out the gameobject isn't destroyed immediately so it can register many collisions...
+                hasDied = true;
+
+
                 bossHealthSlider.gameObject.SetActive(false);
                 //kill the boss
                 //possibly spawn some loot!

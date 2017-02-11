@@ -40,7 +40,6 @@ public class WizardFireFollowSP : MonoBehaviour
     public GameObject DeathSpecEffect;
     public GameObject BloodSpecEffect;
     public GameObject AggroSpecEffect;
-    public ParticleSystem FireEffect; 
     public GameObject FireBlastMulti;
     public GameObject FireShield;
 
@@ -63,7 +62,8 @@ public class WizardFireFollowSP : MonoBehaviour
     public GameObject shieldIce;
     public GameObject boosterArcane;
 
-    public static bool isAggroed;
+    public bool isAggroed;
+    private bool hasDied;
 
     void OnEnable()
     {
@@ -81,38 +81,42 @@ public class WizardFireFollowSP : MonoBehaviour
         anim.SetBool("IsAggroed", false);
         isAggroed = false;
         shouldPlayAggroEffect = true;
-        FireEffect.gameObject.SetActive(false);
 
         var myCollider = this.gameObject.GetComponent<Collider>();
         shieldHeight = (myCollider.bounds.size.y) / 2;
+        hasDied = false;
     }
 
     void Update()
     {
-        cooldownTimer -= 0.03f;
-        IceBlastCooldownTimer -= 0.03f;
-
-        distanceX = this.transform.position.x - target.transform.position.x;
-        distanceZ = this.transform.position.z - target.transform.position.z;
-        distanceY = this.transform.position.y - target.transform.position.y;
-        checkAggro();
-
-        if (isAggroed)
+        if (!hasDied)
         {
 
-            if ((distanceX < -8.0 || distanceX > 8.0) && (distanceZ < -8.0 || distanceZ > 8.0))
+
+            cooldownTimer -= 0.03f;
+            IceBlastCooldownTimer -= 0.03f;
+
+            distanceX = this.transform.position.x - target.transform.position.x;
+            distanceZ = this.transform.position.z - target.transform.position.z;
+            distanceY = this.transform.position.y - target.transform.position.y;
+            checkAggro();
+
+            if (isAggroed)
             {
-                Behaviour_MovingToTarget();
-            }
-            else 
-            {
-                Behaviour_InRangeAttacking();
+
+                if ((distanceX < -8.0 || distanceX > 8.0) && (distanceZ < -8.0 || distanceZ > 8.0))
+                {
+                    Behaviour_MovingToTarget();
+                }
+                else
+                {
+                    Behaviour_InRangeAttacking();
+                }
+
+
             }
 
-            
         }
-      
-
     }
 
     private void checkAggro()
@@ -221,7 +225,6 @@ public class WizardFireFollowSP : MonoBehaviour
         // when you're in range but on cooldown
         else if ((distanceX > -8.0 && distanceX < 8.0) && (distanceZ > -8.0 && distanceZ < 8.0) && cooldownTimer > 0.01f)
         {
-            FireEffect.gameObject.SetActive(true);
             //anim.SetTrigger("isIdle");
             anim.SetBool("IsNotInRange", false);
         }
@@ -230,7 +233,6 @@ public class WizardFireFollowSP : MonoBehaviour
             if (agent.isActiveAndEnabled)
             {
                 anim.SetBool("IsNotInRange", true);
-                FireEffect.gameObject.SetActive(false);
                 agent.SetDestination(target.transform.position);
             }
 
@@ -241,9 +243,9 @@ public class WizardFireFollowSP : MonoBehaviour
 
     public void OnCollisionEnter(Collision other)
     {
-        Debug.Log("Wizard boss health is " + bossHealth);
+       
         //case when your player projectile hits the caster
-        if (other.gameObject.name.Contains("Shot"))
+        if (other.gameObject.name.Contains("Shot") && !hasDied)
         {
             
             isAggroed = true;
@@ -299,10 +301,15 @@ public class WizardFireFollowSP : MonoBehaviour
 
             //consume playershot
             Destroy(other.gameObject);
-            if (bossHealth <= 0)
+            if (bossHealth <= 0 && !hasDied)
             {
-               //possibly spawn some loot!
-               
+                //fix to prevent this from occuring many times; 
+                //turns out the gameobject isn't destroyed immediately so it can register many collisions...
+                hasDied = true;
+                agent.Stop();
+                agent.enabled = false;
+                //possibly spawn some loot!
+
                 int randomNum = Random.Range(1, 60);
 
                 if (randomNum <= 6)

@@ -28,7 +28,7 @@ public class MeleeFollowSP : MonoBehaviour
 
     public GameObject GunDrop;
 
-    public static bool isAggroed;
+    public bool isAggroed;
 
     public int health = 2;
     public int vampireDamage = 15;
@@ -36,8 +36,11 @@ public class MeleeFollowSP : MonoBehaviour
     public bool isSummoned = false;
     public bool isPoisonType = false;
 
+    private bool hasDied;
+
     void OnEnable()
     {
+        hasDied = false;
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         target = GameObject.Find("BatteryBot");
 
@@ -62,7 +65,7 @@ public class MeleeFollowSP : MonoBehaviour
     public void OnCollisionEnter(Collision other)
     {
         //case when your player projectile hits the vampire
-        if (other.gameObject.name.Contains("Shot"))
+        if (other.gameObject.name.Contains("Shot") && !hasDied)
         {
             isAggroed = true;
 
@@ -117,10 +120,13 @@ public class MeleeFollowSP : MonoBehaviour
             }
             //Only spawn loot if it is a normal vampire, not a summoned one.
 
-            if (health <= 0)
+            if (health <= 0 && !hasDied)
             {
+                //fix to prevent this from occuring many times; 
+                //turns out the gameobject isn't destroyed immediately so it can register many collisions...
+                hasDied = true;
                 //vampire is dead
-                
+
 
                 if (!isSummoned)
                 {
@@ -181,21 +187,23 @@ public class MeleeFollowSP : MonoBehaviour
 
     void Update()
     {
-        distanceX = this.transform.position.x - target.transform.position.x;
-        distanceZ = this.transform.position.z - target.transform.position.z;
-        distanceY = this.transform.position.y - target.transform.position.y;
-
-        if (!isSummoned)
+        if (!hasDied)
         {
-            checkAggro();
-        }
-        
+            distanceX = this.transform.position.x - target.transform.position.x;
+            distanceZ = this.transform.position.z - target.transform.position.z;
+            distanceY = this.transform.position.y - target.transform.position.y;
 
-        if (isAggroed)
-        {
-            moveToPlayer();
-        }
+            if (!isSummoned)
+            {
+                checkAggro();
+            }
 
+
+            if (isAggroed)
+            {
+                moveToPlayer();
+            }
+        }
         
     }
 

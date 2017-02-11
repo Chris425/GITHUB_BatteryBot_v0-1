@@ -51,12 +51,14 @@ public class PaladinFollowSP : MonoBehaviour
     public GameObject GreatswordDrop;
     public GameObject BoosterDrop;
 
-    public static bool isAggroed;
+    public bool isAggroed;
+    private bool hasDied;
 
     private int counter = 0;
 
     void OnEnable()
     {
+        hasDied = false;
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         target = GameObject.Find("BatteryBot");
 
@@ -84,40 +86,43 @@ public class PaladinFollowSP : MonoBehaviour
 
     void Update()
     {
-        cooldownTimer -= 0.02f;
-        cooldownTimerPowerup -= 0.02f;
-
-        distanceX = this.transform.position.x - target.transform.position.x;
-        distanceZ = this.transform.position.z - target.transform.position.z;
-        distanceY = this.transform.position.y - target.transform.position.y;
-
-        if (isLeaping)
+        if (!hasDied)
         {
-            if (cooldownTimer > 0.01f)
+            cooldownTimer -= 0.02f;
+            cooldownTimerPowerup -= 0.02f;
+
+            distanceX = this.transform.position.x - target.transform.position.x;
+            distanceZ = this.transform.position.z - target.transform.position.z;
+            distanceY = this.transform.position.y - target.transform.position.y;
+
+            if (isLeaping)
             {
-                leap();
+                if (cooldownTimer > 0.01f)
+                {
+                    leap();
+                }
+                else
+                {
+                    //instantiate leap explosion upon landing
+                    Instantiate(leapExplosion, this.transform.position, this.transform.rotation);
+                    Instantiate(shieldBash, this.transform.position, target.transform.rotation);
+                    cooldownTimer = 2.9f;
+                    isLeaping = false;
+                    agent.enabled = true;
+                    if (agent.isActiveAndEnabled)
+                    {
+                        agent.Resume();
+                    }
+
+                }
             }
             else
             {
-                //instantiate leap explosion upon landing
-                Instantiate(leapExplosion, this.transform.position, this.transform.rotation);
-                Instantiate(shieldBash, this.transform.position, target.transform.rotation);
-                cooldownTimer = 2.9f;
-                isLeaping = false;
-                agent.enabled = true;
-                if (agent.isActiveAndEnabled)
+                checkAggro();
+                if (isAggroed)
                 {
-                    agent.Resume();
+                    moveToPlayer();
                 }
-                
-            }
-        }
-        else
-        {
-            checkAggro();
-            if (isAggroed)
-            {
-                moveToPlayer();
             }
         }
     }
@@ -267,7 +272,7 @@ public class PaladinFollowSP : MonoBehaviour
     public void OnCollisionEnter(Collision other)
     {
         //case when your player projectile hits the boss
-        if (other.gameObject.name.Contains("Shot"))
+        if (other.gameObject.name.Contains("Shot") && !hasDied)
         {
             isAggroed = true;
             if (other.gameObject.name.Contains("PlayerShot"))
@@ -322,8 +327,11 @@ public class PaladinFollowSP : MonoBehaviour
 
             //consume playershot
             Destroy(other.gameObject);
-            if (bossHealth <= 0)
+            if (bossHealth <= 0 && !hasDied)
             {
+                //fix to prevent this from occuring many times; 
+                //turns out the gameobject isn't destroyed immediately so it can register many collisions...
+                hasDied = true;
 
                 //kill the paladin
                 //possibly spawn some loot!

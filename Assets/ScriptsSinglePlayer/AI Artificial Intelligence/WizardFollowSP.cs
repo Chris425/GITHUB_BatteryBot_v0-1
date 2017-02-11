@@ -42,7 +42,6 @@ public class WizardFollowSP : MonoBehaviour
     public GameObject DeathSpecEffect;
     public GameObject BloodSpecEffect;
     public GameObject AggroSpecEffect;
-    public ParticleSystem IceEffect; //The  shader displayed when casting!
     public GameObject IceBlastMulti;
     public GameObject IceShield;
 
@@ -65,11 +64,12 @@ public class WizardFollowSP : MonoBehaviour
     public GameObject shieldIce;
     public GameObject boosterArcane;
 
-    public static bool isAggroed;
+    public bool isAggroed;
+    private bool hasDied;
 
     void OnEnable()
     {
-
+        hasDied = false;
         gameState_OoC = true;
         gameState_MovingToTarget = false;
         gameState_InRangeAttacking = false;
@@ -84,7 +84,6 @@ public class WizardFollowSP : MonoBehaviour
         anim.SetBool("IsAggroed", false);
         isAggroed = false;
         shouldPlayAggroEffect = true;
-        IceEffect.gameObject.SetActive(false);
 
         var myCollider = this.gameObject.GetComponent<Collider>();
         shieldHeight = (myCollider.bounds.size.y) / 2;
@@ -93,40 +92,44 @@ public class WizardFollowSP : MonoBehaviour
 
     void Update()
     {
-        cooldownTimer -= 0.03f;
-        IceBlastCooldownTimer -= 0.03f;
-
-        distanceX = this.transform.position.x - target.transform.position.x;
-        distanceZ = this.transform.position.z - target.transform.position.z;
-        distanceY = this.transform.position.y - target.transform.position.y;
-        checkAggro();
-
-        if (isAggroed)
+        if (!hasDied)
         {
 
-            if (bossHealth > 6 && (distanceX < -8.0 || distanceX > 8.0) && (distanceZ < -8.0 || distanceZ > 8.0) && !gameState_FindCover)
+
+            cooldownTimer -= 0.03f;
+            IceBlastCooldownTimer -= 0.03f;
+
+            distanceX = this.transform.position.x - target.transform.position.x;
+            distanceZ = this.transform.position.z - target.transform.position.z;
+            distanceY = this.transform.position.y - target.transform.position.y;
+            checkAggro();
+
+            if (isAggroed)
             {
-                Behaviour_MovingToTarget();
-            }
-            else if (bossHealth > 6 && !gameState_FindCover )
-            {
-                Behaviour_InRangeAttacking();
-            }
-            else
-            {
-                gameState_FindCover = true;
-                gameState_InRangeAttacking = false; gameState_MovingToTarget = false;
+
+                if (bossHealth > 6 && (distanceX < -8.0 || distanceX > 8.0) && (distanceZ < -8.0 || distanceZ > 8.0) && !gameState_FindCover)
+                {
+                    Behaviour_MovingToTarget();
+                }
+                else if (bossHealth > 6 && !gameState_FindCover)
+                {
+                    Behaviour_InRangeAttacking();
+                }
+                else
+                {
+                    gameState_FindCover = true;
+                    gameState_InRangeAttacking = false; gameState_MovingToTarget = false;
+                }
+
+
+                if (gameState_FindCover)
+                {
+                    Behaviour_FindCover();
+                }
+
             }
 
-            
-            if (gameState_FindCover)
-            {
-                Behaviour_FindCover();
-            }
-            
         }
-      
-
     }
 
     private void checkAggro()
@@ -235,7 +238,6 @@ public class WizardFollowSP : MonoBehaviour
         // when you're in range but on cooldown
         else if ((distanceX > -8.0 && distanceX < 8.0) && (distanceZ > -8.0 && distanceZ < 8.0) && cooldownTimer > 0.01f)
         {
-            IceEffect.gameObject.SetActive(true);
             //anim.SetTrigger("isIdle");
             anim.SetBool("IsNotInRange", false);
         }
@@ -244,7 +246,6 @@ public class WizardFollowSP : MonoBehaviour
             if (agent.isActiveAndEnabled)
             {
                 anim.SetBool("IsNotInRange", true);
-                IceEffect.gameObject.SetActive(false);
                 agent.SetDestination(target.transform.position);
             }
 
@@ -287,9 +288,9 @@ public class WizardFollowSP : MonoBehaviour
 
     public void OnCollisionEnter(Collision other)
     {
-        Debug.Log("Wizard boss health is " + bossHealth);
+        
         //case when your player projectile hits the caster
-        if (other.gameObject.name.Contains("Shot"))
+        if (other.gameObject.name.Contains("Shot") && !hasDied)
         {
             
             isAggroed = true;
@@ -345,10 +346,15 @@ public class WizardFollowSP : MonoBehaviour
 
             //consume playershot
             Destroy(other.gameObject);
-            if (bossHealth <= 0)
+            if (bossHealth <= 0 && !hasDied)
             {
+                //fix to prevent this from occuring many times; 
+                //turns out the gameobject isn't destroyed immediately so it can register many collisions...
+                hasDied = true;
+                agent.Stop();
+                agent.enabled = false;
                 //possibly spawn some loot!
-                
+
                 int randomNum = Random.Range(1, 60);
 
                 if (randomNum <= 6)
