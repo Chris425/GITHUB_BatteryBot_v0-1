@@ -288,7 +288,7 @@ public class HeroControllerSP : MonoBehaviour
         if (other.gameObject.name.Contains("GroundSlamProjectiles"))
         {
             Instantiate(SE_hit, this.transform.position, this.transform.rotation);
-            battery -= 4;
+            battery -= 2;
 
         }
         

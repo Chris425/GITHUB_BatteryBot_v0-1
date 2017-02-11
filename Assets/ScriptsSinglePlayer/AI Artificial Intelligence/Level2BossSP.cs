@@ -44,6 +44,7 @@ public class Level2BossSP : MonoBehaviour
     public GameObject MinotauroHurtSound1;
     public GameObject MinotauroHurtSound2;
     public GameObject MinotauroBigSlamAttack;
+    public GameObject SlamAttackWell;
 
     public bool isLeaping = false;
 
@@ -161,6 +162,7 @@ public class Level2BossSP : MonoBehaviour
         {
             isAggroed = true;
             bossHealthSlider.gameObject.SetActive(true);
+
             anim.SetBool("IsAggroed", true);
             if (shouldPlayAggroEffect)
             {
@@ -169,18 +171,7 @@ public class Level2BossSP : MonoBehaviour
             }
 
         }
-        //Paladin only gives up if your vertical distance is more than 15 units
-        else if ((distanceY < -15 || distanceY > 15))
-        {
-            isAggroed = false;
-            anim.SetBool("IsAggroed", false);
-            anim.SetBool("isInRange", true);
-            if (agent.isActiveAndEnabled)
-            {
-                shouldPlayAggroEffect = true;
-                agent.Stop();
-            }
-        }
+        
 
     }
 
@@ -207,7 +198,7 @@ public class Level2BossSP : MonoBehaviour
             //make him idle if in range regardless of cooldowns
             anim.SetBool("isInRange", true);
 
-            if (attackDecision < 6 && cooldownTimerPowerup < 0.01f && numTimesPoweredUp <= 8)
+            if (attackDecision < 6 && cooldownTimerPowerup < 0.01f && numTimesPoweredUp <= 7 && bossHealth > (maxBossHealth * 0.5))
             {
                 GameObject myPowerUp = Instantiate(PowerUp, this.transform.position, this.transform.rotation);
                 myPowerUp.transform.parent = this.gameObject.transform;
@@ -257,7 +248,7 @@ public class Level2BossSP : MonoBehaviour
             anim.SetBool("isInRange", false);
             if (isAggroed)
             {
-                if (attackDecision < 12 && cooldownTimerPowerup < 0.01f && numTimesPoweredUp <= 8)
+                if (attackDecision < 12 && cooldownTimerPowerup < 0.01f && numTimesPoweredUp <= 7 && bossHealth > (maxBossHealth * 0.5))
                 {
                     GameObject myPowerUp = Instantiate(PowerUp, this.transform.position, this.transform.rotation);
                     myPowerUp.transform.parent = this.gameObject.transform;
@@ -269,18 +260,37 @@ public class Level2BossSP : MonoBehaviour
                     cooldownTimerPowerup = cooldownPowerup;
                     numTimesPoweredUp += 1;
                 }
-                else if (attackDecision >= 12 && attackDecision < 25 && cooldownTimer < 0.01f)
+                else if (attackDecision >= 12 && attackDecision < 22 && cooldownTimer < 0.01f)
                 {
                     anim.SetTrigger("isAttacking");
                     Instantiate(swordFireRangeEffect, spawnLoc.transform.position, spawnLoc.transform.rotation);
                     cooldownTimer = cooldown;
                 }
-                else if (attackDecision >= 25 && cooldownTimer < 0.01f)
+                else if (attackDecision >= 22 && attackDecision < 25 && cooldownTimer < 0.01f)
                 {
                     isLeaping = true;
                     anim.SetTrigger("isLeaping");
                     cooldownTimer = 2.0f;
                     agent.enabled = false;
+                }
+                if(bossHealth < (maxBossHealth * 0.5) && cooldownTimer < 0.01f)
+                {
+                    //agent.enabled = false;  CDC  do this next
+                    anim.SetTrigger("isRoaring");
+                    Instantiate(MinotauroBigSlamAttack, this.transform.position, this.transform.rotation);
+
+                    
+                    for (int i = 0; i < 12; i++)
+                    {
+                        int randomOffset1 = Random.Range(0, 7);
+                        int randomOffset2 = Random.Range(0, 7);
+                        Vector3 wellPos = new Vector3(this.transform.position.x + randomOffset1, this.transform.position.y, this.transform.position.z + randomOffset2);
+                        Instantiate(SlamAttackWell, wellPos, this.transform.rotation);
+                        
+                    }
+                    cooldownTimer = 15.0f;
+
+
                 }
                                 
 
