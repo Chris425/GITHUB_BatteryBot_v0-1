@@ -102,7 +102,7 @@ public class MeleeFollowSP : MonoBehaviour
             {
                 if (other.gameObject.name.Contains("LIGHTNING"))
                 {
-                    health -= 2;
+                    health -= 3;
                     Instantiate(BloodSpecEffect, other.transform.position, this.transform.rotation);
                 }
                 else
