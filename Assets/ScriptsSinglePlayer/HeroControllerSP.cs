@@ -194,20 +194,20 @@ public class HeroControllerSP : MonoBehaviour
 
         battery = 100;
         speed = 15.0f;
-        Ammo = 990;
+        Ammo = 0;
         //Gears = 0; //gears currency will now persist across levels and through death. CDC 02-05-2017
 
-        hasShield = true;
-        hasAxe = true;
+        hasShield = false;
+        hasAxe = false;
         hasGun = true;
-        hasGS = true;
-        hasGS_FIRE = true;
-        hasAxe_LIGHTNING = true;
-        hasGun_MULTI = true;
-        hasShield_ICE = true;
+        hasGS = false;
+        hasGS_FIRE = false;
+        hasAxe_LIGHTNING = false;
+        hasGun_MULTI = false;
+        hasShield_ICE = false;
         hasJetBooster = true;
-        hasJetBooster_ARCANE = true;
-        hasNPCBot = true;
+        hasJetBooster_ARCANE = false;
+        hasNPCBot = false;
 
         hasSkull_RED = false;
         hasSkull_BLUE = false;
@@ -437,7 +437,7 @@ public class HeroControllerSP : MonoBehaviour
 
         if (battery >= 200)
         {
-            speed = 15.0f;
+           // speed = 15.0f; commented out due to conflicting with booster.
             isSuperCharged = true;
             ExtraLight.intensity = 8.0f;
             GreenLight.intensity = 8.0f;
@@ -447,7 +447,7 @@ public class HeroControllerSP : MonoBehaviour
         }
         else if (battery > 100 && battery < 199)
         {
-            speed = 12.0f;
+            //speed = 12.0f;
             ExtraLight.intensity = 0.0f;
             GreenLight.intensity = 8.0f;
             YellowLight.intensity = 0.0f;

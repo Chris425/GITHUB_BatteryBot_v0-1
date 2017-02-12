@@ -56,17 +56,17 @@ public class isConsumableSP : Mixin {
         {
             case 1:
                 Instantiate(BatterySpecEffect1, this.transform.position, this.transform.rotation);
-                HeroControllerSP.Ammo += 10;
+                HeroControllerSP.Ammo += 20;
                 HeroControllerSP.battery += 1;
                 break;
             case 2:
                 Instantiate(BatterySpecEffect2, this.transform.position, this.transform.rotation);
-                HeroControllerSP.Ammo += 10;
+                HeroControllerSP.Ammo += 20;
                 HeroControllerSP.battery += 5;
                 break;
             case 3:
                 Instantiate(BatterySpecEffect3, this.transform.position, this.transform.rotation);
-                HeroControllerSP.Ammo += 10;
+                HeroControllerSP.Ammo += 20;
                 HeroControllerSP.battery += 2;
                 break;
         }
@@ -86,7 +86,7 @@ public class isConsumableSP : Mixin {
         Instantiate(BatterySpecEffect1, this.transform.position, this.transform.rotation);
         Instantiate(BatterySpecEffect1, this.transform.position, this.transform.rotation);
         Instantiate(BatterySpecEffect1, this.transform.position, this.transform.rotation);
-        HeroControllerSP.Ammo += 30;
+        HeroControllerSP.Ammo += 50;
         HeroControllerSP.battery += 50;
         
 
