@@ -21,7 +21,6 @@ public class Level2BossSP : MonoBehaviour
     private bool hasDoneFirstSound;
     private bool hasDoneSecondSound;
 
-
     bool shouldPlayAggroEffect = false;
     Quaternion aggroRot = new Quaternion(0.0f, 180.0f, 180.0f, 0.0f);
 
@@ -47,6 +46,7 @@ public class Level2BossSP : MonoBehaviour
     public GameObject SlamAttackWell;
 
     public bool isLeaping = false;
+    public bool isGroundSlamming = false;
 
     //LOOT
     public GameObject RedBattery;
@@ -103,6 +103,18 @@ public class Level2BossSP : MonoBehaviour
         }
     }
 
+    private void slam()
+    {
+        int shouldSpawn = Random.Range(1, 60);
+        if (shouldSpawn <= 5)
+        {            
+            int randomOffset1 = Random.Range(-25, 25);
+            int randomOffset2 = Random.Range(-25, 25);
+            Vector3 wellPos = new Vector3(this.transform.position.x + randomOffset1, this.transform.position.y - 0.4f, this.transform.position.z + randomOffset2);
+            Instantiate(SlamAttackWell, wellPos, this.transform.rotation);            
+        }
+    }
+
     private void UpdateSlider()
     {
         bossHealthSlider.value = bossHealth;
@@ -141,6 +153,24 @@ public class Level2BossSP : MonoBehaviour
                     cooldownTimer = 2.9f;
                     isLeaping = false;
                     agent.enabled = true;
+                    if (agent.isActiveAndEnabled)
+                    {
+                        agent.Resume();
+                    }
+
+                }
+            }
+            else if (isGroundSlamming)
+            {
+                if (cooldownTimer > 0.01f)
+                {
+                    slam();
+                }
+                else
+                {
+                    cooldownTimer = 2.9f;
+                    agent.enabled = true;
+                    isGroundSlamming = false;
                     if (agent.isActiveAndEnabled)
                     {
                         agent.Resume();
@@ -194,7 +224,7 @@ public class Level2BossSP : MonoBehaviour
         spawnLoc.transform.LookAt(targetPostition);
 
 
-        int attackDecision = Random.Range(1, 30);
+        int attackDecision = Random.Range(1, 32);
 
         //IN MELEE RANGE
         if ((distanceX > -7.5 && distanceX < 7.5) && (distanceZ > -7.5 && distanceZ < 7.5) && (distanceY > -5 && distanceY < 5))
@@ -217,7 +247,13 @@ public class Level2BossSP : MonoBehaviour
             else if (attackDecision >= 6 && attackDecision < 15 && cooldownTimer < 0.01f)
             {
                 anim.SetTrigger("isAttacking");
-                Instantiate(swordFireRangeEffect, spawnLoc.transform.position, spawnLoc.transform.rotation);
+                float offset = Random.Range(-0.03f, 0.01f);
+                Quaternion spawnRot = new Quaternion
+                    (spawnLoc.transform.rotation.x + offset,
+                    spawnLoc.transform.rotation.y + offset,
+                    spawnLoc.transform.rotation.z + offset,
+                    spawnLoc.transform.rotation.w);
+                Instantiate(swordFireRangeEffect, spawnLoc.transform.position, spawnRot);
                 cooldownTimer = cooldown;
             }
             else if (attackDecision >= 15 && attackDecision < 20 && cooldownTimer < 0.01f)
@@ -227,7 +263,7 @@ public class Level2BossSP : MonoBehaviour
                
                 cooldownTimer = cooldown;
             }
-            else if (cooldownTimer < 0.01f)
+            else if (attackDecision >= 20 && attackDecision < 25 && cooldownTimer < 0.01f)
             {
                 anim.SetTrigger("isAttacking");
                 //we are in range. Start reducing battery. Less if Player has shield!
@@ -244,6 +280,7 @@ public class Level2BossSP : MonoBehaviour
 
                 Instantiate(SwordSlashEffect, this.transform.position, this.transform.rotation);
             }
+
 
         }
         //NOT IN MELEE RANGE
@@ -274,27 +311,18 @@ public class Level2BossSP : MonoBehaviour
                 {
                     isLeaping = true;
                     anim.SetTrigger("isLeaping");
-                    cooldownTimer = 2.0f;
+                    cooldownTimer = 1.6f;
                     agent.enabled = false;
                 }
-                if(bossHealth < (maxBossHealth * 0.5) && cooldownTimer < 0.01f)
+
+                if (bossHealth < (maxBossHealth * 0.5) && cooldownTimer < 0.01f)
                 {
-                    //agent.enabled = false;  CDC  do this next
                     anim.SetTrigger("isRoaring");
-                    Instantiate(MinotauroBigSlamAttack, this.transform.position, this.transform.rotation);
-
-                    
-                    for (int i = 0; i < 12; i++)
-                    {
-                        int randomOffset1 = Random.Range(0, 7);
-                        int randomOffset2 = Random.Range(0, 7);
-                        Vector3 wellPos = new Vector3(this.transform.position.x + randomOffset1, this.transform.position.y, this.transform.position.z + randomOffset2);
-                        Instantiate(SlamAttackWell, wellPos, this.transform.rotation);
-                        
-                    }
-                    cooldownTimer = 15.0f;
-
-
+                    anim.SetBool("isInRange", true);
+                    isGroundSlamming = true;
+                    agent.enabled = false;
+                    cooldownTimer = 5.0f;
+                    Instantiate(MinotauroBigSlamAttack, this.transform.position, this.transform.rotation);                    
                 }
                                 
 
@@ -332,7 +360,7 @@ public class Level2BossSP : MonoBehaviour
                 }
                 else
                 {
-                    bossHealth -= 1;
+                    bossHealth -= 10;
                     Instantiate(DeathSpecEffect, other.transform.position, this.transform.rotation);
                 }
             }

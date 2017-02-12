@@ -284,7 +284,15 @@ public class CasterTurretBossSP : MonoBehaviour
             anim.SetTrigger("isAttacking");
             //we are in range. Start shooting
             Debug.Log("Caster is readying a fireball!");
-            Instantiate(objToSpawn, CasterSpawnLoc.transform.position, CasterSpawnLoc.transform.rotation);
+            
+            float offset = Random.Range(-0.03f, 0.01f);
+            Quaternion spawnRot = new Quaternion
+                (CasterSpawnLoc.transform.rotation.x + offset, 
+                CasterSpawnLoc.transform.rotation.y + offset,
+                CasterSpawnLoc.transform.rotation.z + offset, 
+                CasterSpawnLoc.transform.rotation.w );
+            Instantiate(objToSpawn, CasterSpawnLoc.transform.position, spawnRot);
+
             cooldownTimer = cooldown;
             Instantiate(CasterSpecEffect, this.transform.position, this.transform.rotation);
                   

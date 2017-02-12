@@ -186,7 +186,13 @@ public class WizardFireFollowSP : MonoBehaviour
             {
                 //set of 3 fireballs like the greatsword
                 anim.SetTrigger("isAttacking");
-                Instantiate(objToSpawnFire, CasterSpawnLoc.transform.position, CasterSpawnLoc.transform.rotation);
+                float offset = Random.Range(-0.03f, 0.01f);
+                Quaternion spawnRot = new Quaternion
+                    (CasterSpawnLoc.transform.rotation.x + offset,
+                    CasterSpawnLoc.transform.rotation.y + offset,
+                    CasterSpawnLoc.transform.rotation.z + offset,
+                    CasterSpawnLoc.transform.rotation.w);
+                Instantiate(objToSpawnFire, CasterSpawnLoc.transform.position, spawnRot);
                 cooldownTimer = FireBlastCooldown;
 
             }
@@ -216,7 +222,13 @@ public class WizardFireFollowSP : MonoBehaviour
                 //basic shot
                 anim.SetTrigger("isAttacking");
                 //we are in range. Start shooting
-                Instantiate(objToSpawn, CasterSpawnLoc.transform.position, CasterSpawnLoc.transform.rotation);
+                float offset = Random.Range(-0.03f, 0.01f);
+                Quaternion spawnRot = new Quaternion
+                    (CasterSpawnLoc.transform.rotation.x + offset,
+                    CasterSpawnLoc.transform.rotation.y + offset,
+                    CasterSpawnLoc.transform.rotation.z + offset,
+                    CasterSpawnLoc.transform.rotation.w);
+                Instantiate(objToSpawn, CasterSpawnLoc.transform.position, spawnRot);
                 cooldownTimer = cooldown;
             }
             

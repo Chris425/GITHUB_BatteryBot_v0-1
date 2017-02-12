@@ -284,8 +284,14 @@ public class CasterPoisonBossSP : MonoBehaviour
                 agent.SetDestination(target.transform.position);
                 anim.SetTrigger("isAttacking");
                 //we are in range. Start shooting
+                float offset = Random.Range(-0.03f, 0.01f);
+                Quaternion spawnRot = new Quaternion
+                    (CasterSpawnLoc.transform.rotation.x + offset,
+                    CasterSpawnLoc.transform.rotation.y + offset,
+                    CasterSpawnLoc.transform.rotation.z + offset,
+                    CasterSpawnLoc.transform.rotation.w);
                 Vector3 poisonBoltLoc = new Vector3(CasterSpawnLoc.transform.position.x - 1.0f, CasterSpawnLoc.transform.position.y + 1.0f, CasterSpawnLoc.transform.position.z);
-                Instantiate(objToSpawn, poisonBoltLoc, CasterSpawnLoc.transform.rotation);
+                Instantiate(objToSpawn, poisonBoltLoc, spawnRot);
                 cooldownTimer = cooldown;
                 Instantiate(CasterSpecEffect, this.transform.position, this.transform.rotation);
             }

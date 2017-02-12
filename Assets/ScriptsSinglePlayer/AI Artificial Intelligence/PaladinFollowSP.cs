@@ -190,7 +190,13 @@ public class PaladinFollowSP : MonoBehaviour
             else if (attackDecision >= 4 && attackDecision < 8 && cooldownTimer < 0.01f)
             {
                 anim.SetTrigger("isAttacking");
-                Instantiate(swordFireRangeEffect, this.transform.position, this.transform.rotation);
+                float offset = Random.Range(-0.03f, 0.01f);
+                Quaternion spawnRot = new Quaternion
+                    (this.transform.rotation.x + offset,
+                    this.transform.rotation.y + offset,
+                    this.transform.rotation.z + offset,
+                    this.transform.rotation.w);
+                Instantiate(swordFireRangeEffect, this.transform.position, spawnRot);
                 cooldownTimer = cooldown;
             }
             else if (attackDecision >= 8 && attackDecision < 19 && cooldownTimer < 0.01f)

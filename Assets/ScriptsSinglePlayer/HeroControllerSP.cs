@@ -209,9 +209,9 @@ public class HeroControllerSP : MonoBehaviour
         hasJetBooster_ARCANE = true;
         hasNPCBot = true;
 
-        hasSkull_RED = true;
-        hasSkull_BLUE = true;
-        hasSkull_PURPLE = true;
+        hasSkull_RED = false;
+        hasSkull_BLUE = false;
+        hasSkull_PURPLE = false;
 
         batteryValText.text = "" + battery + " %";
         ammoValText.text = "" + Ammo;
