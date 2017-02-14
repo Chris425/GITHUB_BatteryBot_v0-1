@@ -20,6 +20,21 @@ public class OverworldSelectors : MonoBehaviour
                 GAMEMANAGERSP.hasFinishedLevelOne = true;
                 SceneManager.LoadScene("ExplorationOverworld");
             }
+            else if (currentSelector.gameObject.name.Equals("SelectorTwoToOverworld"))
+            {
+                GAMEMANAGERSP.hasFinishedLevelTwo = true;
+                SceneManager.LoadScene("ExplorationOverworld");
+            }
+            else if (currentSelector.gameObject.name.Equals("SelectorThreeToOverworld"))
+            {
+                GAMEMANAGERSP.hasFinishedLevelThree = true;
+                SceneManager.LoadScene("ExplorationOverworld");
+            }
+            else if (currentSelector.gameObject.name.Equals("SelectorBonusToOverworld"))
+            {
+                GAMEMANAGERSP.hasFinishedLevelBonus = true;
+                SceneManager.LoadScene("ExplorationOverworld");
+            }
             else if (currentSelector.gameObject.name.Equals("SelectorLvlOne"))
             {
                 SceneManager.LoadScene("LevelOne");
@@ -46,7 +61,7 @@ public class OverworldSelectors : MonoBehaviour
     void Update()
     {
         spinPowerUp();
-        movePowerUp();
+        //movePowerUp();   //causes horizontal movement over time unfortunately due to rotation. It's not up and down as desired.
     }
 
     void spinPowerUp()
@@ -54,8 +69,9 @@ public class OverworldSelectors : MonoBehaviour
         currentSelector.transform.Rotate(new Vector3(30, 45, 60) * Time.deltaTime);
     }
 
-    void movePowerUp()
-    {
-        currentSelector.transform.Translate(new Vector3(0.03f, 0, 0) * Time.deltaTime);
-    }
+    //CDC - find out how to move it up and down relative to ground; not up relative to its current orientation.
+    //void movePowerUp()
+    //{
+    //    currentSelector.transform.Translate(new Vector3(0.03f, 0, 0) * Time.deltaTime);
+    //}
 }

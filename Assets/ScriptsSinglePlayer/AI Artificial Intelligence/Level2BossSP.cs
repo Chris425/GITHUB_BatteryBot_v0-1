@@ -45,8 +45,9 @@ public class Level2BossSP : MonoBehaviour
     public GameObject MinotauroBigSlamAttack;
     public GameObject SlamAttackWell;
 
-    public bool isLeaping = false;
-    public bool isGroundSlamming = false;
+    private bool isLeaping = false;
+    private bool isGroundSlamming = false;
+    private bool isHurt = false;
 
     //LOOT
     public GameObject RedBattery;
@@ -178,6 +179,24 @@ public class Level2BossSP : MonoBehaviour
 
                 }
             }
+            else if (isHurt)
+            {
+                if (cooldownTimer > 0.01f)
+                {
+                  //do nothing; play animation that you're hurt until you recover
+                }
+                else
+                {
+                    cooldownTimer = 2.9f;
+                    agent.enabled = true;
+                    isHurt = false;
+                    if (agent.isActiveAndEnabled)
+                    {
+                        agent.Resume();
+                    }
+
+                }
+            }
             else
             {
                 checkAggro();
@@ -224,7 +243,7 @@ public class Level2BossSP : MonoBehaviour
         spawnLoc.transform.LookAt(targetPostition);
 
 
-        int attackDecision = Random.Range(1, 32);
+        int attackDecision = Random.Range(1, 35);
 
         //IN MELEE RANGE
         if ((distanceX > -7.5 && distanceX < 7.5) && (distanceZ > -7.5 && distanceZ < 7.5) && (distanceY > -5 && distanceY < 5))
@@ -307,7 +326,7 @@ public class Level2BossSP : MonoBehaviour
                     Instantiate(swordFireRangeEffect, spawnLoc.transform.position, spawnLoc.transform.rotation);
                     cooldownTimer = cooldown;
                 }
-                else if (attackDecision >= 22 && attackDecision < 25 && cooldownTimer < 0.01f)
+                else if (attackDecision >= 22 && attackDecision < 28 && cooldownTimer < 0.01f)
                 {
                     isLeaping = true;
                     anim.SetTrigger("isLeaping");
@@ -360,7 +379,7 @@ public class Level2BossSP : MonoBehaviour
                 }
                 else
                 {
-                    bossHealth -= 10;
+                    bossHealth -= 1;
                     Instantiate(DeathSpecEffect, other.transform.position, this.transform.rotation);
                 }
             }
@@ -401,11 +420,19 @@ public class Level2BossSP : MonoBehaviour
 
             if (bossHealth < (0.66 * maxBossHealth) && !hasDoneFirstSound) 
             {
+                anim.SetTrigger("isHurt");
+                isHurt = true;
+                agent.enabled = false;
+                cooldownTimer = 2.5f;
+
                 Instantiate(MinotauroHurtSound1, spawnLoc.transform.position, this.transform.rotation);
                 hasDoneFirstSound = true;
             }
             if (bossHealth < (0.33 * maxBossHealth) && !hasDoneSecondSound)
             {
+                anim.SetTrigger("isHurt");
+                isHurt = true;
+                agent.enabled = false;
                 Instantiate(MinotauroHurtSound2, spawnLoc.transform.position, this.transform.rotation);
                 hasDoneSecondSound = true;
             }

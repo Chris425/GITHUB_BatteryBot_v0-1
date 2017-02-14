@@ -199,13 +199,13 @@ public class HeroControllerSP : MonoBehaviour
 
         hasShield = false;
         hasAxe = false;
-        hasGun = true;
+        hasGun = false;
         hasGS = false;
         hasGS_FIRE = false;
         hasAxe_LIGHTNING = false;
         hasGun_MULTI = false;
         hasShield_ICE = false;
-        hasJetBooster = true;
+        hasJetBooster = false;
         hasJetBooster_ARCANE = false;
         hasNPCBot = false;
 
@@ -437,7 +437,7 @@ public class HeroControllerSP : MonoBehaviour
 
         if (battery >= 200)
         {
-           // speed = 15.0f; commented out due to conflicting with booster.
+            speed = 15.0f; 
             isSuperCharged = true;
             ExtraLight.intensity = 8.0f;
             GreenLight.intensity = 8.0f;
@@ -447,7 +447,7 @@ public class HeroControllerSP : MonoBehaviour
         }
         else if (battery > 100 && battery < 199)
         {
-            //speed = 12.0f;
+            speed = 12.0f;
             ExtraLight.intensity = 0.0f;
             GreenLight.intensity = 8.0f;
             YellowLight.intensity = 0.0f;

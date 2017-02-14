@@ -86,6 +86,7 @@ public class isConsumableSP : Mixin {
         Instantiate(BatterySpecEffect1, this.transform.position, this.transform.rotation);
         Instantiate(BatterySpecEffect1, this.transform.position, this.transform.rotation);
         Instantiate(BatterySpecEffect1, this.transform.position, this.transform.rotation);
+        Instantiate(BatterySpecEffect3, this.transform.position, this.transform.rotation);
         HeroControllerSP.Ammo += 50;
         HeroControllerSP.battery += 50;
         
@@ -94,32 +95,52 @@ public class isConsumableSP : Mixin {
         Destroy(this.gameObject);
     }
 
- //   public void ApplyBuffs()
-	//{
-	//	// all buffs attached to the object
-	//	Data[] attachedBuffs = GetComponents<Data>();
-	//	Data[] recipientAttributes = GetRecipient().GetComponents<Data>(); //who is the recipient of this consume?
+    public void ConsumeGearUpBattery()
+    {
+        //Gear up battery makes you combat ready
+        Instantiate(BatterySpecEffect2, this.transform.position, this.transform.rotation);
+        Instantiate(BatterySpecEffect1, this.transform.position, this.transform.rotation);
+        Instantiate(BatterySpecEffect1, this.transform.position, this.transform.rotation);
+        HeroControllerSP.Ammo += 300;
+        HeroControllerSP.hasAxe = true;
+        HeroControllerSP.hasGun = true;
+        HeroControllerSP.hasShield = true;
+        HeroControllerSP.hasGS = true;
+        HeroControllerSP.hasJetBooster = true;
+        HeroControllerSP.isSlot2 = true;
+        HeroControllerSP.isSlot4 = true;
 
-	//	// now, double nested loop, check for components that match by name (and type?)
-	//	foreach (Data d in attachedBuffs)
-	//	{
-	//		// for each buff attached to us..
-	//		foreach (Data attrib in recipientAttributes)
-	//		{
-	//			// check for an attribute with same name on recipient
-	//			if (d.name == attrib.name)
-	//			{
-	//				// the names match, so apply the value from buff to attrib
-	//				IntData intd = (attrib as IntData);
-	//				if (intd != null)
-	//					intd.IncData( (d as IntData));
-	//			}
-	//		}
-	//	}
-	//}
 
-	// Use this for initialization
-	void Start () {
+        //then self destruct
+        Destroy(this.gameObject);
+    }
+
+    //   public void ApplyBuffs()
+    //{
+    //	// all buffs attached to the object
+    //	Data[] attachedBuffs = GetComponents<Data>();
+    //	Data[] recipientAttributes = GetRecipient().GetComponents<Data>(); //who is the recipient of this consume?
+
+    //	// now, double nested loop, check for components that match by name (and type?)
+    //	foreach (Data d in attachedBuffs)
+    //	{
+    //		// for each buff attached to us..
+    //		foreach (Data attrib in recipientAttributes)
+    //		{
+    //			// check for an attribute with same name on recipient
+    //			if (d.name == attrib.name)
+    //			{
+    //				// the names match, so apply the value from buff to attrib
+    //				IntData intd = (attrib as IntData);
+    //				if (intd != null)
+    //					intd.IncData( (d as IntData));
+    //			}
+    //		}
+    //	}
+    //}
+
+    // Use this for initialization
+    void Start () {
 	
 	}
 	
