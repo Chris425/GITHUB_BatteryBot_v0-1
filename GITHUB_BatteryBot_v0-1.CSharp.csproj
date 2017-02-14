@@ -118,6 +118,7 @@
     <Compile Include="Assets\ScriptsSinglePlayer\AI Artificial Intelligence\CasterFollowBossSP.cs" />
     <Compile Include="Assets\ScriptsSinglePlayer\AI Artificial Intelligence\CasterPoisonBossSP.cs" />
     <Compile Include="Assets\ScriptsSinglePlayer\AI Artificial Intelligence\CasterTurretBossSP.cs" />
+    <Compile Include="Assets\ScriptsSinglePlayer\AI Artificial Intelligence\Level2BossLightningSP.cs" />
     <Compile Include="Assets\ScriptsSinglePlayer\AI Artificial Intelligence\Level2BossSP.cs" />
     <Compile Include="Assets\ScriptsSinglePlayer\AI Artificial Intelligence\MeleeFollowBossSP.cs" />
     <Compile Include="Assets\ScriptsSinglePlayer\AI Artificial Intelligence\MeleeFollowSP.cs" />
