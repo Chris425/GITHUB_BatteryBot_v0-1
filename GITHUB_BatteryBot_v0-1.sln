@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2015
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GITHUB_BatteryBot_v0-1.CSharp.Plugins", "GITHUB_BatteryBot_v0-1.CSharp.Plugins.csproj", "{CDFB86A8-D835-28BE-49FB-8AE95902C13A}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GITHUB_BatteryBot_v0-1.CSharp", "GITHUB_BatteryBot_v0-1.CSharp.csproj", "{8E018113-001F-7576-AFD2-E3438983C2D1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GITHUB_BatteryBot_v0-1.CSharp.Editor", "GITHUB_BatteryBot_v0-1.CSharp.Editor.csproj", "{2D5B2FD0-61BB-AA7F-D423-67C9D3D554A4}"
@@ -11,6 +13,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CDFB86A8-D835-28BE-49FB-8AE95902C13A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDFB86A8-D835-28BE-49FB-8AE95902C13A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDFB86A8-D835-28BE-49FB-8AE95902C13A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDFB86A8-D835-28BE-49FB-8AE95902C13A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8E018113-001F-7576-AFD2-E3438983C2D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8E018113-001F-7576-AFD2-E3438983C2D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E018113-001F-7576-AFD2-E3438983C2D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
