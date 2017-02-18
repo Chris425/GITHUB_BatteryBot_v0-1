@@ -94,7 +94,6 @@ public class WizardPoisonFollowSP : MonoBehaviour
         if (!hasDied)
         {
 
-
             cooldownTimer -= 0.03f;
             IceBlastCooldownTimer -= 0.03f;
 
@@ -133,11 +132,11 @@ public class WizardPoisonFollowSP : MonoBehaviour
 
     private void checkAggro()
     {
-        if (!gameState_FindCover)
+        if (!gameState_FindCover && !hasDied)
         {
 
 
-            if ((distanceX > -15 && distanceX < 15) && (distanceZ > -15 && distanceZ < 15) && (distanceY > -10 && distanceY < 10))
+            if ((distanceX > -20 && distanceX < 20) && (distanceZ > -20 && distanceZ < 20) && (distanceY > -10 && distanceY < 10))
             {
                 isAggroed = true;
                 anim.SetBool("IsAggroed", true);
@@ -156,64 +155,27 @@ public class WizardPoisonFollowSP : MonoBehaviour
 
     void Behaviour_MovingToTarget()
     {
-        //make the spawnloc aim at the player - so you won't be safe up high either!
-        Vector3 targetPostition = new Vector3(target.transform.position.x,
-                                       target.transform.position.y,
-                                       target.transform.position.z);
-        CasterSpawnLoc.transform.LookAt(targetPostition);
-        this.transform.LookAt(targetPostition);
-
-        //let the caster face the player at all times
-        
-
-
-        agent.SetDestination(target.transform.position);
-
-        anim.SetBool("IsNotInRange", true);
-
-        //make an ice shield as you walk over
-         if (cooldownTimer < 0.01f)
-        {
-            anim.SetTrigger("isHealing");
-            Vector3 ShieldPos = new Vector3(this.transform.position.x, this.transform.position.y + shieldHeight, this.transform.position.z);
-            GameObject myShield = Instantiate(PoisonShield, ShieldPos, this.transform.rotation) as GameObject;
-            myShield.transform.parent = this.gameObject.transform;
-            cooldownTimer = shieldCooldown;
-        }
-
-
-    }
-
-    void Behaviour_InRangeAttacking()
-    {
-        Vector3 targetPostition = new Vector3(target.transform.position.x,
-                                       target.transform.position.y,
-                                       target.transform.position.z);
-        this.transform.LookAt(targetPostition);
-        CasterSpawnLoc.transform.LookAt(targetPostition);
-
-        if ((distanceX > -8.0 && distanceX < 8.0) && (distanceZ > -8.0 && distanceZ < 8.0) && cooldownTimer < 0.01f)
+        if (!hasDied)
         {
 
-            gameState_InRangeAttacking = true;
 
-            int randomNum = Random.Range(1, 26);
-           
-            if (randomNum <= 6 && cooldownTimer < 0.01f)
-            {
-                //bolt of poison. Applies DoT on player 
-                anim.SetTrigger("isAttacking");
-                float offset = Random.Range(-0.03f, 0.01f);
-                Quaternion spawnRot = new Quaternion
-                    (CasterSpawnLoc.transform.rotation.x + offset,
-                    CasterSpawnLoc.transform.rotation.y + offset,
-                    CasterSpawnLoc.transform.rotation.z + offset,
-                    CasterSpawnLoc.transform.rotation.w);
-                Instantiate(objToSpawnPoison, CasterSpawnLoc.transform.position, spawnRot);
-                cooldownTimer = cooldown;
+            //make the spawnloc aim at the player - so you won't be safe up high either!
+            Vector3 targetPostition = new Vector3(target.transform.position.x,
+                                           target.transform.position.y,
+                                           target.transform.position.z);
+            CasterSpawnLoc.transform.LookAt(targetPostition);
+            this.transform.LookAt(targetPostition);
 
-            }
-            else if(randomNum > 6 && randomNum < 11 && cooldownTimer < 0.01f)
+            //let the caster face the player at all times
+
+
+
+            agent.SetDestination(target.transform.position);
+
+            anim.SetBool("IsNotInRange", true);
+
+            //make an ice shield as you walk over
+            if (cooldownTimer < 0.01f)
             {
                 anim.SetTrigger("isHealing");
                 Vector3 ShieldPos = new Vector3(this.transform.position.x, this.transform.position.y + shieldHeight, this.transform.position.z);
@@ -221,74 +183,122 @@ public class WizardPoisonFollowSP : MonoBehaviour
                 myShield.transform.parent = this.gameObject.transform;
                 cooldownTimer = shieldCooldown;
             }
-            else if (randomNum >= 11 && randomNum < 23 && cooldownTimer < 0.01f)
-            {
-                //poison well that is like AoE damage. Ticks for damage. This functionality addressed in the prefab being instantiated.
-                //this spell will be inaccurate to prevent it from being too strong
-                int randomOffset1 = Random.Range(0, 3);
-                int randomOffset2 = Random.Range(0, 3);
-                Vector3 wellPos = new Vector3(target.transform.position.x + randomOffset1, target.transform.position.y, target.transform.position.z + randomOffset2);
-                anim.SetTrigger("isSummoning");
-                Instantiate(PoisonWell, wellPos, this.transform.rotation);
-                cooldownTimer = PoisonWellCooldown;
-            }
-
-            else if(cooldownTimer < 0.01f && bossHealth < 20)
-            {
-                anim.SetTrigger("isHealing");
-                Instantiate(WizHeal, this.transform.position, CasterSpawnLoc.transform.rotation);
-                bossHealth += 5;
-                Debug.Log("Poison Wizard health is " + bossHealth);
-                cooldownTimer = cooldown;
-            }
-            
 
         }
-        // when you're in range but on cooldown
-        else if ((distanceX > -8.0 && distanceX < 8.0) && (distanceZ > -8.0 && distanceZ < 8.0) && cooldownTimer > 0.01f)
-        {
-            //anim.SetTrigger("isIdle");
-            anim.SetBool("IsNotInRange", false);
-        }
-        else
-        {
-            if (agent.isActiveAndEnabled)
-            {
-                anim.SetBool("IsNotInRange", true);
-                agent.SetDestination(target.transform.position);
-            }
+    }
 
+    void Behaviour_InRangeAttacking()
+    {
+        if (!hasDied)
+        {
+
+            Vector3 targetPostition = new Vector3(target.transform.position.x,
+                                           target.transform.position.y,
+                                           target.transform.position.z);
+            this.transform.LookAt(targetPostition);
+            CasterSpawnLoc.transform.LookAt(targetPostition);
+
+            if ((distanceX > -8.0 && distanceX < 8.0) && (distanceZ > -8.0 && distanceZ < 8.0) && cooldownTimer < 0.01f)
+            {
+
+                gameState_InRangeAttacking = true;
+
+                int randomNum = Random.Range(1, 26);
+
+                if (randomNum <= 6 && cooldownTimer < 0.01f)
+                {
+                    //bolt of poison. Applies DoT on player 
+                    anim.SetTrigger("isAttacking");
+                    float offset = Random.Range(-0.03f, 0.01f);
+                    Quaternion spawnRot = new Quaternion
+                        (CasterSpawnLoc.transform.rotation.x + offset,
+                        CasterSpawnLoc.transform.rotation.y + offset,
+                        CasterSpawnLoc.transform.rotation.z + offset,
+                        CasterSpawnLoc.transform.rotation.w);
+                    Instantiate(objToSpawnPoison, CasterSpawnLoc.transform.position, spawnRot);
+                    cooldownTimer = cooldown;
+
+                }
+                else if (randomNum > 6 && randomNum < 11 && cooldownTimer < 0.01f)
+                {
+                    anim.SetTrigger("isHealing");
+                    Vector3 ShieldPos = new Vector3(this.transform.position.x, this.transform.position.y + shieldHeight, this.transform.position.z);
+                    GameObject myShield = Instantiate(PoisonShield, ShieldPos, this.transform.rotation) as GameObject;
+                    myShield.transform.parent = this.gameObject.transform;
+                    cooldownTimer = shieldCooldown;
+                }
+                else if (randomNum >= 11 && randomNum < 23 && cooldownTimer < 0.01f)
+                {
+                    //poison well that is like AoE damage. Ticks for damage. This functionality addressed in the prefab being instantiated.
+                    //this spell will be inaccurate to prevent it from being too strong
+                    int randomOffset1 = Random.Range(0, 3);
+                    int randomOffset2 = Random.Range(0, 3);
+                    Vector3 wellPos = new Vector3(target.transform.position.x + randomOffset1, target.transform.position.y, target.transform.position.z + randomOffset2);
+                    anim.SetTrigger("isSummoning");
+                    Instantiate(PoisonWell, wellPos, this.transform.rotation);
+                    cooldownTimer = PoisonWellCooldown;
+                }
+
+                else if (cooldownTimer < 0.01f && bossHealth < 20)
+                {
+                    anim.SetTrigger("isHealing");
+                    Instantiate(WizHeal, this.transform.position, CasterSpawnLoc.transform.rotation);
+                    bossHealth += 5;
+                    Debug.Log("Poison Wizard health is " + bossHealth);
+                    cooldownTimer = cooldown;
+                }
+
+
+            }
+            // when you're in range but on cooldown
+            else if ((distanceX > -8.0 && distanceX < 8.0) && (distanceZ > -8.0 && distanceZ < 8.0) && cooldownTimer > 0.01f)
+            {
+                //anim.SetTrigger("isIdle");
+                anim.SetBool("IsNotInRange", false);
+            }
+            else
+            {
+                if (agent.isActiveAndEnabled)
+                {
+                    anim.SetBool("IsNotInRange", true);
+                    agent.SetDestination(target.transform.position);
+                }
+
+            }
         }
     }
 
     void Behaviour_FindCover()
     {
-        //move away from player
-        agent.speed = 6.5f;
-        anim.SetBool("IsNotInRange", true);
-        agent.SetDestination(fleeDestination.transform.position);
-
-        //make ice shields as you run away too
-        if (cooldownTimer < 0.01f)
+        if (!hasDied)
         {
-            anim.SetTrigger("isHealing");
-            Vector3 ShieldPos = new Vector3(this.transform.position.x, this.transform.position.y + shieldHeight, this.transform.position.z);
-            GameObject myShield = Instantiate(PoisonShield, ShieldPos, this.transform.rotation) as GameObject;
-            myShield.transform.parent = this.gameObject.transform;
-            cooldownTimer = shieldCooldown;
-        }
+            //move away from player
+            agent.speed = 6.5f;
+            anim.SetBool("IsNotInRange", true);
+            agent.SetDestination(fleeDestination.transform.position);
 
-        if ((distanceX < -30.0 || distanceX > 30.0) || (distanceZ < -30.0 || distanceZ > 30.0))
-        {
-            agent.speed = 4.0f;
-            anim.SetBool("IsNotInRange", false);
-            anim.SetBool("IsAggroed", false);
+            //make ice shields as you run away too
+            if (cooldownTimer < 0.01f)
+            {
+                anim.SetTrigger("isHealing");
+                Vector3 ShieldPos = new Vector3(this.transform.position.x, this.transform.position.y + shieldHeight, this.transform.position.z);
+                GameObject myShield = Instantiate(PoisonShield, ShieldPos, this.transform.rotation) as GameObject;
+                myShield.transform.parent = this.gameObject.transform;
+                cooldownTimer = shieldCooldown;
+            }
 
-            agent.ResetPath();
-            //when far away enough, give up and lose aggro until player comes back again 
-            gameState_FindCover = false; gameState_InRangeAttacking = false; gameState_MovingToTarget = false;
-            isAggroed = false;
-            gameState_OoC = true;
+            if ((distanceX < -30.0 || distanceX > 30.0) || (distanceZ < -30.0 || distanceZ > 30.0))
+            {
+                agent.speed = 4.0f;
+                anim.SetBool("IsNotInRange", false);
+                anim.SetBool("IsAggroed", false);
+
+                agent.ResetPath();
+                //when far away enough, give up and lose aggro until player comes back again 
+                gameState_FindCover = false; gameState_InRangeAttacking = false; gameState_MovingToTarget = false;
+                isAggroed = false;
+                gameState_OoC = true;
+            }
         }
     }
 

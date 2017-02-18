@@ -121,133 +121,144 @@ public class WizardFireFollowSP : MonoBehaviour
 
     private void checkAggro()
     {
-        
-        if ((distanceX > -15 && distanceX < 15) && (distanceZ > -15 && distanceZ < 15) && (distanceY > -10 && distanceY < 10))
+        if (!hasDied)
         {
-            isAggroed = true;
-            anim.SetBool("IsAggroed", true);
-            //agent.Resume();
-            if (shouldPlayAggroEffect)
+            
+            if ((distanceX > -20 && distanceX < 20) && (distanceZ > -20 && distanceZ < 20) && (distanceY > -10 && distanceY < 10))
             {
-                Instantiate(AggroSpecEffect, this.transform.position, aggroRot);
-                shouldPlayAggroEffect = false;
+                isAggroed = true;
+                anim.SetBool("IsAggroed", true);
+                //agent.Resume();
+                if (shouldPlayAggroEffect)
+                {
+                    Instantiate(AggroSpecEffect, this.transform.position, aggroRot);
+                    shouldPlayAggroEffect = false;
+                }
             }
         }
-        
     }
 
 
     void Behaviour_MovingToTarget()
     {
-        //make the spawnloc aim at the player - so you won't be safe up high either!
-        Vector3 targetPostition = new Vector3(target.transform.position.x,
-                                       target.transform.position.y,
-                                       target.transform.position.z);
-        CasterSpawnLoc.transform.LookAt(targetPostition);
-        this.transform.LookAt(targetPostition);
-
-        //let the caster face the player at all times
-        
-
-
-        agent.SetDestination(target.transform.position);
-
-        anim.SetBool("IsNotInRange", true);
-
-        //make an ice shield as you walk over
-         if (cooldownTimer < 0.01f)
-        {
-            anim.SetTrigger("isHealing");
-            Vector3 ShieldPos = new Vector3(this.transform.position.x, this.transform.position.y + shieldHeight, this.transform.position.z);
-            GameObject myShield = Instantiate(FireShield, ShieldPos, this.transform.rotation) as GameObject;
-            myShield.transform.parent = this.gameObject.transform;
-            cooldownTimer = shieldCooldown;
-        }
-
-
-    }
-
-    void Behaviour_InRangeAttacking()
-    {
-        Vector3 targetPostition = new Vector3(target.transform.position.x,
-                                       target.transform.position.y,
-                                       target.transform.position.z);
-        this.transform.LookAt(targetPostition);
-        CasterSpawnLoc.transform.LookAt(targetPostition);
-
-        if ((distanceX > -8.0 && distanceX < 8.0) && (distanceZ > -8.0 && distanceZ < 8.0) && cooldownTimer < 0.01f)
+        if (!hasDied)
         {
 
-            gameState_InRangeAttacking = true;
 
-            int randomNum = Random.Range(1, 21);
-           
-            if (randomNum <= 8 && cooldownTimer < 0.01f)
-            {
-                //set of 3 fireballs like the greatsword
-                anim.SetTrigger("isAttacking");
-                float offset = Random.Range(-0.03f, 0.01f);
-                Quaternion spawnRot = new Quaternion
-                    (CasterSpawnLoc.transform.rotation.x + offset,
-                    CasterSpawnLoc.transform.rotation.y + offset,
-                    CasterSpawnLoc.transform.rotation.z + offset,
-                    CasterSpawnLoc.transform.rotation.w);
-                Instantiate(objToSpawnFire, CasterSpawnLoc.transform.position, spawnRot);
-                cooldownTimer = FireBlastCooldown;
+            //make the spawnloc aim at the player - so you won't be safe up high either!
+            Vector3 targetPostition = new Vector3(target.transform.position.x,
+                                           target.transform.position.y,
+                                           target.transform.position.z);
+            CasterSpawnLoc.transform.LookAt(targetPostition);
+            this.transform.LookAt(targetPostition);
 
-            }
-            else if(randomNum > 8 && randomNum < 14 && cooldownTimer < 0.01f)
+            //let the caster face the player at all times
+
+
+
+            agent.SetDestination(target.transform.position);
+
+            anim.SetBool("IsNotInRange", true);
+
+            //make an ice shield as you walk over
+            if (cooldownTimer < 0.01f)
             {
-                //fire shield on self
                 anim.SetTrigger("isHealing");
                 Vector3 ShieldPos = new Vector3(this.transform.position.x, this.transform.position.y + shieldHeight, this.transform.position.z);
                 GameObject myShield = Instantiate(FireShield, ShieldPos, this.transform.rotation) as GameObject;
                 myShield.transform.parent = this.gameObject.transform;
                 cooldownTimer = shieldCooldown;
             }
-            else if (randomNum >= 14 && randomNum < 19 && cooldownTimer < 0.01f)
-            {
-                //fire blast, many projectiles
-                //slightly inaccurate
-                int randomOffset1 = Random.Range(0, 2);
-                int randomOffset2 = Random.Range(0, 2);
-                Vector3 blastPos = new Vector3(target.transform.position.x + randomOffset1, target.transform.position.y, target.transform.position.z + randomOffset2);
-                anim.SetTrigger("isSummoning");
-                Instantiate(FireBlastMulti, blastPos, this.transform.rotation);
-                cooldownTimer = FireBlastCooldown;
-            }
-
-            else if(cooldownTimer < 0.01f)
-            {
-                //basic shot
-                anim.SetTrigger("isAttacking");
-                //we are in range. Start shooting
-                float offset = Random.Range(-0.03f, 0.01f);
-                Quaternion spawnRot = new Quaternion
-                    (CasterSpawnLoc.transform.rotation.x + offset,
-                    CasterSpawnLoc.transform.rotation.y + offset,
-                    CasterSpawnLoc.transform.rotation.z + offset,
-                    CasterSpawnLoc.transform.rotation.w);
-                Instantiate(objToSpawn, CasterSpawnLoc.transform.position, spawnRot);
-                cooldownTimer = cooldown;
-            }
-            
-
         }
-        // when you're in range but on cooldown
-        else if ((distanceX > -8.0 && distanceX < 8.0) && (distanceZ > -8.0 && distanceZ < 8.0) && cooldownTimer > 0.01f)
-        {
-            //anim.SetTrigger("isIdle");
-            anim.SetBool("IsNotInRange", false);
-        }
-        else
-        {
-            if (agent.isActiveAndEnabled)
-            {
-                anim.SetBool("IsNotInRange", true);
-                agent.SetDestination(target.transform.position);
-            }
 
+    }
+
+    void Behaviour_InRangeAttacking()
+    {
+        if (!hasDied)
+        {
+
+
+            Vector3 targetPostition = new Vector3(target.transform.position.x,
+                                           target.transform.position.y,
+                                           target.transform.position.z);
+            this.transform.LookAt(targetPostition);
+            CasterSpawnLoc.transform.LookAt(targetPostition);
+
+            if ((distanceX > -8.0 && distanceX < 8.0) && (distanceZ > -8.0 && distanceZ < 8.0) && cooldownTimer < 0.01f)
+            {
+
+                gameState_InRangeAttacking = true;
+
+                int randomNum = Random.Range(1, 21);
+
+                if (randomNum <= 8 && cooldownTimer < 0.01f)
+                {
+                    //set of 3 fireballs like the greatsword
+                    anim.SetTrigger("isAttacking");
+                    float offset = Random.Range(-0.03f, 0.01f);
+                    Quaternion spawnRot = new Quaternion
+                        (CasterSpawnLoc.transform.rotation.x + offset,
+                        CasterSpawnLoc.transform.rotation.y + offset,
+                        CasterSpawnLoc.transform.rotation.z + offset,
+                        CasterSpawnLoc.transform.rotation.w);
+                    Instantiate(objToSpawnFire, CasterSpawnLoc.transform.position, spawnRot);
+                    cooldownTimer = FireBlastCooldown;
+
+                }
+                else if (randomNum > 8 && randomNum < 14 && cooldownTimer < 0.01f)
+                {
+                    //fire shield on self
+                    anim.SetTrigger("isHealing");
+                    Vector3 ShieldPos = new Vector3(this.transform.position.x, this.transform.position.y + shieldHeight, this.transform.position.z);
+                    GameObject myShield = Instantiate(FireShield, ShieldPos, this.transform.rotation) as GameObject;
+                    myShield.transform.parent = this.gameObject.transform;
+                    cooldownTimer = shieldCooldown;
+                }
+                else if (randomNum >= 14 && randomNum < 19 && cooldownTimer < 0.01f)
+                {
+                    //fire blast, many projectiles
+                    //slightly inaccurate
+                    int randomOffset1 = Random.Range(0, 2);
+                    int randomOffset2 = Random.Range(0, 2);
+                    Vector3 blastPos = new Vector3(target.transform.position.x + randomOffset1, target.transform.position.y, target.transform.position.z + randomOffset2);
+                    anim.SetTrigger("isSummoning");
+                    Instantiate(FireBlastMulti, blastPos, this.transform.rotation);
+                    cooldownTimer = FireBlastCooldown;
+                }
+
+                else if (cooldownTimer < 0.01f)
+                {
+                    //basic shot
+                    anim.SetTrigger("isAttacking");
+                    //we are in range. Start shooting
+                    float offset = Random.Range(-0.03f, 0.01f);
+                    Quaternion spawnRot = new Quaternion
+                        (CasterSpawnLoc.transform.rotation.x + offset,
+                        CasterSpawnLoc.transform.rotation.y + offset,
+                        CasterSpawnLoc.transform.rotation.z + offset,
+                        CasterSpawnLoc.transform.rotation.w);
+                    Instantiate(objToSpawn, CasterSpawnLoc.transform.position, spawnRot);
+                    cooldownTimer = cooldown;
+                }
+
+
+            }
+            // when you're in range but on cooldown
+            else if ((distanceX > -8.0 && distanceX < 8.0) && (distanceZ > -8.0 && distanceZ < 8.0) && cooldownTimer > 0.01f)
+            {
+                //anim.SetTrigger("isIdle");
+                anim.SetBool("IsNotInRange", false);
+            }
+            else
+            {
+                if (agent.isActiveAndEnabled)
+                {
+                    anim.SetBool("IsNotInRange", true);
+                    agent.SetDestination(target.transform.position);
+                }
+
+            }
         }
     }
 
