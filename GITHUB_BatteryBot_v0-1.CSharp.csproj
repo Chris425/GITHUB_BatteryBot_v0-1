@@ -184,10 +184,12 @@
     <Compile Include="Assets\ScriptsSinglePlayer\ShieldBlock.cs" />
     <Compile Include="Assets\ScriptsSinglePlayer\ShieldBlockBossSP.cs" />
     <Compile Include="Assets\ScriptsSinglePlayer\SlamAttackSpawn.cs" />
+    <Compile Include="Assets\ScriptsSinglePlayer\ThorHelmScript.cs" />
     <Compile Include="Assets\ScriptsSinglePlayer\TitleScriptSP.cs" />
     <Compile Include="Assets\ScriptsSinglePlayer\Torch_FlameSwell.cs" />
     <Compile Include="Assets\ScriptsSinglePlayer\VendingMachineControls.cs" />
     <Compile Include="Assets\ScriptsSinglePlayer\VerticalDoorControls.cs" />
+    <Compile Include="Assets\ScriptsSinglePlayer\WeaponPickups\ArmourPickUp.cs" />
     <Compile Include="Assets\ScriptsSinglePlayer\WeaponPickups\AxePickUp.cs" />
     <Compile Include="Assets\ScriptsSinglePlayer\WeaponPickups\Axe_LightningPickUp.cs" />
     <Compile Include="Assets\ScriptsSinglePlayer\WeaponPickups\GSPickUp.cs" />
@@ -195,6 +197,7 @@
     <Compile Include="Assets\ScriptsSinglePlayer\WeaponPickups\GearPickup.cs" />
     <Compile Include="Assets\ScriptsSinglePlayer\WeaponPickups\GunPickUp.cs" />
     <Compile Include="Assets\ScriptsSinglePlayer\WeaponPickups\Gun_MultiPickUp.cs" />
+    <Compile Include="Assets\ScriptsSinglePlayer\WeaponPickups\HelmPickup.cs" />
     <Compile Include="Assets\ScriptsSinglePlayer\WeaponPickups\JetBoosterPickUp.cs" />
     <Compile Include="Assets\ScriptsSinglePlayer\WeaponPickups\JetBooster_ArcanePickUp.cs" />
     <Compile Include="Assets\ScriptsSinglePlayer\WeaponPickups\ShieldPickUp.cs" />

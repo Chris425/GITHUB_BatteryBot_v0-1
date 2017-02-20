@@ -286,13 +286,34 @@ public class Level2BossLightningSP : MonoBehaviour
             {
                 anim.SetTrigger("isAttacking");
                 //we are in range. Start reducing battery. Less if Player has shield!
-                if (HeroControllerSP.hasShield && HeroControllerSP.isSlot4)
+                int damageDealt = 0;
+                if (HeroControllerSP.hasArmour)
                 {
-                    HeroControllerSP.battery -= (bossDamage - 5);
+                    //armour and shield
+                    if (HeroControllerSP.hasShield && HeroControllerSP.isSlot4)
+                    {
+                        damageDealt = (bossDamage - 8);
+                    }
+                    else
+                    {
+                        //only armour
+                        damageDealt = (bossDamage - 5);
+                    }
                 }
                 else
                 {
-                    HeroControllerSP.battery -= bossDamage;
+                    //no armour no shield
+                    damageDealt = bossDamage;
+                }
+
+                //ensure player is not healed by "negative damage"...
+                if (damageDealt <= 0)
+                {
+                    HeroControllerSP.battery -= 1;
+                }
+                else
+                {
+                    HeroControllerSP.battery -= damageDealt;
                 }
 
                 cooldownTimer = cooldown;

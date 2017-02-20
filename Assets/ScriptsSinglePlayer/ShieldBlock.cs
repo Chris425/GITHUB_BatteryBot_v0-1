@@ -19,8 +19,16 @@ public class ShieldBlock : MonoBehaviour {
     {
         //quite simply, if a shot hits the shield it will be destroyed. Therefore it won't hit the player.
         // casterShot may change in the future - or make all enemy projectiles named with this convention -CDC
-
-        int blockChance = Random.Range(1, 30);
+        int blockChance = 0;
+        if (HeroControllerSP.hasHelm)
+        {
+             blockChance = Random.Range(1, 20);
+        }
+        else
+        {
+             blockChance = Random.Range(1, 40);
+        }
+        
 
         if (other.gameObject.name.Contains("CasterShot"))
         {            

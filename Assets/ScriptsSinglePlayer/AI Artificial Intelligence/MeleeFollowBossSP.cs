@@ -298,17 +298,37 @@ public class MeleeFollowBossSP : MonoBehaviour
         if ((distanceX > -2.7 && distanceX < 2.7) && (distanceZ > -2.7 && distanceZ < 2.7) && (distanceY > -3.7 && distanceY < 3.7) && cooldownTimer < 0.01f)
         {
             anim.SetTrigger("isAttacking");
-            //we are in range. Start draining battery. Less if Player has shield!
-            Debug.Log("Skeleton Attacks!");
-            if (HeroControllerSP.hasShield && HeroControllerSP.isSlot4)
+            //we are in range. Start reducing battery. Less if Player has shield!
+            int damageDealt = 0;
+            if (HeroControllerSP.hasArmour)
             {
-                HeroControllerSP.battery -= (bossDamage - 15);
+                //armour and shield
+                if (HeroControllerSP.hasShield && HeroControllerSP.isSlot4)
+                {
+                    damageDealt = (bossDamage - 8);
+                }
+                else
+                {
+                    //only armour
+                    damageDealt = (bossDamage - 5);
+                }
             }
             else
             {
-                HeroControllerSP.battery -= bossDamage;
+                //no armour no shield
+                damageDealt = bossDamage;
             }
-            
+
+            //ensure player is not healed by "negative damage"...
+            if (damageDealt <= 0)
+            {
+                HeroControllerSP.battery -= 1;
+            }
+            else
+            {
+                HeroControllerSP.battery -= damageDealt;
+            }
+
             cooldownTimer = cooldown;
 
             int randomNum = Random.Range(1, 3);

@@ -246,14 +246,26 @@ public class MeleeFollowSP : MonoBehaviour
             anim.SetTrigger("isAttacking");
             //we are in range. Start draining battery
             Debug.Log("Energy vampire is draining your battery!!!");
-            if (HeroControllerSP.hasShield && HeroControllerSP.isSlot4)
+            //we are in range. Start reducing battery. Less if Player has shield!
+            int damageDealt = 0;
+            if (HeroControllerSP.hasArmour)
             {
-                HeroControllerSP.battery -= (vampireDamage - 5);
-                //no poison damage if you have a shield
+                //armour and shield
+                if (HeroControllerSP.hasShield && HeroControllerSP.isSlot4)
+                {
+                    damageDealt = (vampireDamage - 8);
+                }
+                else
+                {
+                    //only armour
+                    damageDealt = (vampireDamage - 5);
+                }
+                
             }
             else
             {
-                HeroControllerSP.battery -= vampireDamage;
+                //no armour no shield
+                damageDealt = vampireDamage;
                 if (isPoisonType)
                 {
                     int poisonedChance = Random.Range(1, 10);
@@ -264,8 +276,21 @@ public class MeleeFollowSP : MonoBehaviour
                         HeroControllerSP.poisonTicks = poisonTicks;
                     }
                 }
-                
             }
+
+            //ensure player is not healed by "negative damage"...
+            if (damageDealt <= 0)
+            {
+                HeroControllerSP.battery -= 1;
+            }
+            else
+            {
+                HeroControllerSP.battery -= damageDealt;
+            }
+
+
+
+
             
             cooldownTimer = cooldown;
 

@@ -1,0 +1,537 @@
+fileFormatVersion: 2
+guid: 6c051dc728b10bd40b03bb02b9f7eeb2
+timeCreated: 1487516779
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Thor H0000
+    100002: Thor H0001
+    100004: Thor H0002
+    100006: Thor H0003
+    100008: Thor H0004
+    100010: Thor H0005
+    100012: Thor H0006
+    100014: Thor H0007
+    100016: Thor H0008
+    100018: Thor H0009
+    100020: Thor H0010
+    100022: Thor H0011
+    100024: Thor H0012
+    100026: Thor H0013
+    100028: Thor H0014
+    100030: Thor H0015
+    100032: Thor H0016
+    100034: Thor H0017
+    100036: Thor H0018
+    100038: Thor H0019
+    100040: Thor H0020
+    100042: Thor H0021
+    100044: Thor H0022
+    100046: Thor H0023
+    100048: Thor H0024
+    100050: Thor H0025
+    100052: Thor H0026
+    100054: Thor H0027
+    100056: Thor H0028
+    100058: Thor H0029
+    100060: Thor H0030
+    100062: Thor H0031
+    100064: Thor H0032
+    100066: Thor H0033
+    100068: Thor H0034
+    100070: Thor H0035
+    100072: Thor H0036
+    100074: Thor H0037
+    100076: Thor H0038
+    100078: Thor H0039
+    100080: Thor H0040
+    100082: Thor H0041
+    100084: Thor H0042
+    100086: Thor H0043
+    100088: Thor H0044
+    100090: Thor H0045
+    100092: Thor H0046
+    100094: Thor H0047
+    100096: Thor H0048
+    100098: Thor H0049
+    100100: Thor H0050
+    100102: Thor H0051
+    100104: Thor H0052
+    100106: Thor H0053
+    100108: Thor H0054
+    100110: Thor H0055
+    100112: Thor H0056
+    100114: Thor H0057
+    100116: Thor H0058
+    100118: Thor H0059
+    100120: Thor H0060
+    100122: Thor H0061
+    100124: Thor H0062
+    100126: Thor H0063
+    100128: Thor H0064
+    100130: Thor H0065
+    100132: Thor H0066
+    100134: Thor H0067
+    100136: Thor H0068
+    100138: Thor H0069
+    100140: Thor H0070
+    100142: Thor H0071
+    100144: Thor H0072
+    100146: Thor H0073
+    100148: Thor H0074
+    100150: Thor H0075
+    100152: Thor H0076
+    100154: Thor H0077
+    100156: Thor H0078
+    100158: Thor H0079
+    100160: Thor H0080
+    100162: Thor H0081
+    100164: Thor H0082
+    100166: Thor H0083
+    100168: Thor H0084
+    100170: Thor H0085
+    100172: Thor H0086
+    100174: Thor H0087
+    100176: Thor H0088
+    100178: Thor H0089
+    100180: Thor H0090
+    100182: Thor H0091
+    100184: //RootNode
+    400000: Thor H0000
+    400002: Thor H0001
+    400004: Thor H0002
+    400006: Thor H0003
+    400008: Thor H0004
+    400010: Thor H0005
+    400012: Thor H0006
+    400014: Thor H0007
+    400016: Thor H0008
+    400018: Thor H0009
+    400020: Thor H0010
+    400022: Thor H0011
+    400024: Thor H0012
+    400026: Thor H0013
+    400028: Thor H0014
+    400030: Thor H0015
+    400032: Thor H0016
+    400034: Thor H0017
+    400036: Thor H0018
+    400038: Thor H0019
+    400040: Thor H0020
+    400042: Thor H0021
+    400044: Thor H0022
+    400046: Thor H0023
+    400048: Thor H0024
+    400050: Thor H0025
+    400052: Thor H0026
+    400054: Thor H0027
+    400056: Thor H0028
+    400058: Thor H0029
+    400060: Thor H0030
+    400062: Thor H0031
+    400064: Thor H0032
+    400066: Thor H0033
+    400068: Thor H0034
+    400070: Thor H0035
+    400072: Thor H0036
+    400074: Thor H0037
+    400076: Thor H0038
+    400078: Thor H0039
+    400080: Thor H0040
+    400082: Thor H0041
+    400084: Thor H0042
+    400086: Thor H0043
+    400088: Thor H0044
+    400090: Thor H0045
+    400092: Thor H0046
+    400094: Thor H0047
+    400096: Thor H0048
+    400098: Thor H0049
+    400100: Thor H0050
+    400102: Thor H0051
+    400104: Thor H0052
+    400106: Thor H0053
+    400108: Thor H0054
+    400110: Thor H0055
+    400112: Thor H0056
+    400114: Thor H0057
+    400116: Thor H0058
+    400118: Thor H0059
+    400120: Thor H0060
+    400122: Thor H0061
+    400124: Thor H0062
+    400126: Thor H0063
+    400128: Thor H0064
+    400130: Thor H0065
+    400132: Thor H0066
+    400134: Thor H0067
+    400136: Thor H0068
+    400138: Thor H0069
+    400140: Thor H0070
+    400142: Thor H0071
+    400144: Thor H0072
+    400146: Thor H0073
+    400148: Thor H0074
+    400150: Thor H0075
+    400152: Thor H0076
+    400154: Thor H0077
+    400156: Thor H0078
+    400158: Thor H0079
+    400160: Thor H0080
+    400162: Thor H0081
+    400164: Thor H0082
+    400166: Thor H0083
+    400168: Thor H0084
+    400170: Thor H0085
+    400172: Thor H0086
+    400174: Thor H0087
+    400176: Thor H0088
+    400178: Thor H0089
+    400180: Thor H0090
+    400182: Thor H0091
+    400184: //RootNode
+    2300000: Thor H0000
+    2300002: Thor H0001
+    2300004: Thor H0002
+    2300006: Thor H0003
+    2300008: Thor H0004
+    2300010: Thor H0005
+    2300012: Thor H0006
+    2300014: Thor H0007
+    2300016: Thor H0008
+    2300018: Thor H0009
+    2300020: Thor H0010
+    2300022: Thor H0011
+    2300024: Thor H0012
+    2300026: Thor H0013
+    2300028: Thor H0014
+    2300030: Thor H0015
+    2300032: Thor H0016
+    2300034: Thor H0017
+    2300036: Thor H0018
+    2300038: Thor H0019
+    2300040: Thor H0020
+    2300042: Thor H0021
+    2300044: Thor H0022
+    2300046: Thor H0023
+    2300048: Thor H0024
+    2300050: Thor H0025
+    2300052: Thor H0026
+    2300054: Thor H0027
+    2300056: Thor H0028
+    2300058: Thor H0029
+    2300060: Thor H0030
+    2300062: Thor H0031
+    2300064: Thor H0032
+    2300066: Thor H0033
+    2300068: Thor H0034
+    2300070: Thor H0035
+    2300072: Thor H0036
+    2300074: Thor H0037
+    2300076: Thor H0038
+    2300078: Thor H0039
+    2300080: Thor H0040
+    2300082: Thor H0041
+    2300084: Thor H0042
+    2300086: Thor H0043
+    2300088: Thor H0044
+    2300090: Thor H0045
+    2300092: Thor H0046
+    2300094: Thor H0047
+    2300096: Thor H0048
+    2300098: Thor H0049
+    2300100: Thor H0050
+    2300102: Thor H0051
+    2300104: Thor H0052
+    2300106: Thor H0053
+    2300108: Thor H0054
+    2300110: Thor H0055
+    2300112: Thor H0056
+    2300114: Thor H0057
+    2300116: Thor H0058
+    2300118: Thor H0059
+    2300120: Thor H0060
+    2300122: Thor H0061
+    2300124: Thor H0062
+    2300126: Thor H0063
+    2300128: Thor H0064
+    2300130: Thor H0065
+    2300132: Thor H0066
+    2300134: Thor H0067
+    2300136: Thor H0068
+    2300138: Thor H0069
+    2300140: Thor H0070
+    2300142: Thor H0071
+    2300144: Thor H0072
+    2300146: Thor H0073
+    2300148: Thor H0074
+    2300150: Thor H0075
+    2300152: Thor H0076
+    2300154: Thor H0077
+    2300156: Thor H0078
+    2300158: Thor H0079
+    2300160: Thor H0080
+    2300162: Thor H0081
+    2300164: Thor H0082
+    2300166: Thor H0083
+    2300168: Thor H0084
+    2300170: Thor H0085
+    2300172: Thor H0086
+    2300174: Thor H0087
+    2300176: Thor H0088
+    2300178: Thor H0089
+    2300180: Thor H0090
+    2300182: Thor H0091
+    3300000: Thor H0000
+    3300002: Thor H0001
+    3300004: Thor H0002
+    3300006: Thor H0003
+    3300008: Thor H0004
+    3300010: Thor H0005
+    3300012: Thor H0006
+    3300014: Thor H0007
+    3300016: Thor H0008
+    3300018: Thor H0009
+    3300020: Thor H0010
+    3300022: Thor H0011
+    3300024: Thor H0012
+    3300026: Thor H0013
+    3300028: Thor H0014
+    3300030: Thor H0015
+    3300032: Thor H0016
+    3300034: Thor H0017
+    3300036: Thor H0018
+    3300038: Thor H0019
+    3300040: Thor H0020
+    3300042: Thor H0021
+    3300044: Thor H0022
+    3300046: Thor H0023
+    3300048: Thor H0024
+    3300050: Thor H0025
+    3300052: Thor H0026
+    3300054: Thor H0027
+    3300056: Thor H0028
+    3300058: Thor H0029
+    3300060: Thor H0030
+    3300062: Thor H0031
+    3300064: Thor H0032
+    3300066: Thor H0033
+    3300068: Thor H0034
+    3300070: Thor H0035
+    3300072: Thor H0036
+    3300074: Thor H0037
+    3300076: Thor H0038
+    3300078: Thor H0039
+    3300080: Thor H0040
+    3300082: Thor H0041
+    3300084: Thor H0042
+    3300086: Thor H0043
+    3300088: Thor H0044
+    3300090: Thor H0045
+    3300092: Thor H0046
+    3300094: Thor H0047
+    3300096: Thor H0048
+    3300098: Thor H0049
+    3300100: Thor H0050
+    3300102: Thor H0051
+    3300104: Thor H0052
+    3300106: Thor H0053
+    3300108: Thor H0054
+    3300110: Thor H0055
+    3300112: Thor H0056
+    3300114: Thor H0057
+    3300116: Thor H0058
+    3300118: Thor H0059
+    3300120: Thor H0060
+    3300122: Thor H0061
+    3300124: Thor H0062
+    3300126: Thor H0063
+    3300128: Thor H0064
+    3300130: Thor H0065
+    3300132: Thor H0066
+    3300134: Thor H0067
+    3300136: Thor H0068
+    3300138: Thor H0069
+    3300140: Thor H0070
+    3300142: Thor H0071
+    3300144: Thor H0072
+    3300146: Thor H0073
+    3300148: Thor H0074
+    3300150: Thor H0075
+    3300152: Thor H0076
+    3300154: Thor H0077
+    3300156: Thor H0078
+    3300158: Thor H0079
+    3300160: Thor H0080
+    3300162: Thor H0081
+    3300164: Thor H0082
+    3300166: Thor H0083
+    3300168: Thor H0084
+    3300170: Thor H0085
+    3300172: Thor H0086
+    3300174: Thor H0087
+    3300176: Thor H0088
+    3300178: Thor H0089
+    3300180: Thor H0090
+    3300182: Thor H0091
+    4300000: Thor H0000
+    4300002: Thor H0001
+    4300004: Thor H0002
+    4300006: Thor H0003
+    4300008: Thor H0004
+    4300010: Thor H0005
+    4300012: Thor H0006
+    4300014: Thor H0007
+    4300016: Thor H0008
+    4300018: Thor H0009
+    4300020: Thor H0010
+    4300022: Thor H0011
+    4300024: Thor H0012
+    4300026: Thor H0013
+    4300028: Thor H0014
+    4300030: Thor H0015
+    4300032: Thor H0016
+    4300034: Thor H0017
+    4300036: Thor H0018
+    4300038: Thor H0019
+    4300040: Thor H0020
+    4300042: Thor H0021
+    4300044: Thor H0022
+    4300046: Thor H0023
+    4300048: Thor H0024
+    4300050: Thor H0025
+    4300052: Thor H0026
+    4300054: Thor H0027
+    4300056: Thor H0028
+    4300058: Thor H0029
+    4300060: Thor H0030
+    4300062: Thor H0031
+    4300064: Thor H0032
+    4300066: Thor H0033
+    4300068: Thor H0034
+    4300070: Thor H0035
+    4300072: Thor H0036
+    4300074: Thor H0037
+    4300076: Thor H0038
+    4300078: Thor H0039
+    4300080: Thor H0040
+    4300082: Thor H0041
+    4300084: Thor H0042
+    4300086: Thor H0043
+    4300088: Thor H0044
+    4300090: Thor H0045
+    4300092: Thor H0046
+    4300094: Thor H0047
+    4300096: Thor H0048
+    4300098: Thor H0049
+    4300100: Thor H0050
+    4300102: Thor H0051
+    4300104: Thor H0052
+    4300106: Thor H0053
+    4300108: Thor H0054
+    4300110: Thor H0055
+    4300112: Thor H0056
+    4300114: Thor H0057
+    4300116: Thor H0058
+    4300118: Thor H0059
+    4300120: Thor H0060
+    4300122: Thor H0061
+    4300124: Thor H0062
+    4300126: Thor H0063
+    4300128: Thor H0064
+    4300130: Thor H0065
+    4300132: Thor H0066
+    4300134: Thor H0067
+    4300136: Thor H0068
+    4300138: Thor H0069
+    4300140: Thor H0070
+    4300142: Thor H0071
+    4300144: Thor H0072
+    4300146: Thor H0073
+    4300148: Thor H0074
+    4300150: Thor H0075
+    4300152: Thor H0076
+    4300154: Thor H0077
+    4300156: Thor H0078
+    4300158: Thor H0079
+    4300160: Thor H0080
+    4300162: Thor H0081
+    4300164: Thor H0082
+    4300166: Thor H0083
+    4300168: Thor H0084
+    4300170: Thor H0085
+    4300172: Thor H0086
+    4300174: Thor H0087
+    4300176: Thor H0088
+    4300178: Thor H0089
+    4300180: Thor H0090
+    4300182: Thor H0091
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

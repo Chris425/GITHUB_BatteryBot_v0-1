@@ -32,6 +32,8 @@ public class HeroControllerSP : MonoBehaviour
     public static int poisonTicks = 10;
 
     //inventory
+    public GameObject Helm;
+    public GameObject Armour;
     public GameObject shield;
     public GameObject axe;
     public GameObject gun;
@@ -44,6 +46,8 @@ public class HeroControllerSP : MonoBehaviour
     public GameObject AxeShot_LIGHTNING;
     public GameObject ShieldShot_ICE;
     public GameObject BoosterSE;
+    public static bool hasHelm;
+    public static bool hasArmour;
     public static bool hasShield;
     public static bool hasJetBooster;
     public static bool hasJetBooster_ARCANE;
@@ -184,11 +188,14 @@ public class HeroControllerSP : MonoBehaviour
         GreatswordFire.SetActive(false);
         AxeLightning.SetActive(false);
 
+        Helm.SetActive(false);
+        Armour.SetActive(false);
         gun.SetActive(false);
         shield.SetActive(false);
         GS.SetActive(false);
         axe.SetActive(false);
         jetBooster.SetActive(false);
+        
 
         isPoisoned = false;
 
@@ -197,6 +204,8 @@ public class HeroControllerSP : MonoBehaviour
         Ammo = 990;
         //Gears = 0; //gears currency will now persist across levels and through death. CDC 02-05-2017
 
+        hasHelm = false;
+        hasArmour = false;
         hasShield = false;
         hasAxe = false;
         hasGun = true;
@@ -230,37 +239,80 @@ public class HeroControllerSP : MonoBehaviour
         if (other.gameObject.name.Contains("CasterShot"))
         {
             Instantiate(SE_hit, this.transform.position, this.transform.rotation);
-            battery -= 12;
+            if (!hasArmour)
+            {
+                battery -= 8;
+            }
+            else
+            {
+                battery -= 12;
+            }
+            
             Destroy(other.gameObject);
         }
         if (other.gameObject.name.Contains("CasterTurretShot"))
         {
             Instantiate(SE_hit, this.transform.position, this.transform.rotation);
-            battery -= 6;
+            if (!hasArmour)
+            {
+                battery -= 6;
+            }
+            else
+            {
+                battery -= 2;
+            }
             Destroy(other.gameObject);
         }
         if (other.gameObject.name.Contains("WizBasic"))
         {
             Instantiate(SE_hit, this.transform.position, this.transform.rotation);
-            battery -= 5;
+            if (!hasArmour)
+            {
+                battery -= 5;
+            }
+            else
+            {
+                battery -= 2;
+            }
             Destroy(other.gameObject);
         }
         if (other.gameObject.name.Contains("palaGround"))
         {
-            Instantiate(SE_basic_hit, this.transform.position, this.transform.rotation); 
-            battery -= 2;
+            Instantiate(SE_basic_hit, this.transform.position, this.transform.rotation);
+            if (!hasArmour)
+            {
+                battery -= 3;
+            }
+            else
+            {
+                battery -= 1;
+            }
             Destroy(other.gameObject);
         }
         if (other.gameObject.name.Contains("SummonerShot") || other.gameObject.name.Contains("WizardShot"))
         {
             Instantiate(SE_hit_ice, this.transform.position, this.transform.rotation);
-            battery -= 5;
+            if (!hasArmour)
+            {
+                battery -= 5;
+            }
+            else
+            {
+                battery -= 2;
+            }
             Destroy(other.gameObject);
         }
         if (other.gameObject.name.Contains("wizardFire") )
         {
             Instantiate(SE_hit, this.transform.position, this.transform.rotation);
-            battery -= 15;
+            if (!hasArmour)
+            {
+                battery -= 15;
+            }
+            else
+            {
+                battery -= 10;
+            }
             Destroy(other.gameObject);
         }
         if (other.gameObject.name.Contains("wizardPoison"))
@@ -278,7 +330,14 @@ public class HeroControllerSP : MonoBehaviour
         if (other.gameObject.name.Contains("PoisonWellProjectiles"))
         {
             Instantiate(SE_hit_poison, this.transform.position, this.transform.rotation);
-            battery -= 3;
+            if (!hasArmour)
+            {
+                battery -= 3;
+            }
+            else
+            {
+                battery -= 1;
+            }
             //status effect of poison
             isPoisoned = true;
             //refresh number of ticks
@@ -329,6 +388,18 @@ public class HeroControllerSP : MonoBehaviour
             shield.SetActive(false);
             jetBooster.SetActive(true);
             IdleGasStream.gameObject.SetActive(true);
+        }
+
+        if (hasArmour)
+        {
+            //armour will reduce damage
+            Armour.SetActive(true);
+        }
+        if (hasHelm)
+        {
+            //Helm wings increases jump speed
+            Helm.SetActive(true);
+            jumpSpeed = 18.0f;
         }
 
         //CHANGE INVENTORY UI ICONS
