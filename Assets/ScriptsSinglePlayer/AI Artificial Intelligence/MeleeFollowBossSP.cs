@@ -273,6 +273,44 @@ public class MeleeFollowBossSP : MonoBehaviour
         
     }
 
+    private void DamageReduction()
+    {
+        int damageDealt = 0;
+
+        //has armour and has shield
+        if (HeroControllerSP.hasArmour && (HeroControllerSP.hasShield && HeroControllerSP.isSlot4))
+        {
+            damageDealt = (bossDamage - 10);
+        }
+        //has armour no shield
+        else if (HeroControllerSP.hasArmour && (!HeroControllerSP.hasShield || !HeroControllerSP.isSlot4))
+        {
+            damageDealt = (bossDamage - 7);
+        }
+        //no armour has shield
+        else if (!HeroControllerSP.hasArmour && (HeroControllerSP.hasShield && HeroControllerSP.isSlot4))
+        {
+            damageDealt = (bossDamage - 3);
+        }
+        //no armour no shield
+        else
+        {
+            damageDealt = bossDamage;
+        }
+
+        //ensure player is not healed by "negative damage"...
+        if (damageDealt <= 0)
+        {
+            HeroControllerSP.battery -= 1;
+        }
+        else
+        {
+            HeroControllerSP.battery -= damageDealt;
+        }
+
+
+    }
+
     void moveToPlayer()
     {
         cooldownTimer -= 0.02f;
@@ -299,35 +337,8 @@ public class MeleeFollowBossSP : MonoBehaviour
         {
             anim.SetTrigger("isAttacking");
             //we are in range. Start reducing battery. Less if Player has shield!
-            int damageDealt = 0;
-            if (HeroControllerSP.hasArmour)
-            {
-                //armour and shield
-                if (HeroControllerSP.hasShield && HeroControllerSP.isSlot4)
-                {
-                    damageDealt = (bossDamage - 8);
-                }
-                else
-                {
-                    //only armour
-                    damageDealt = (bossDamage - 5);
-                }
-            }
-            else
-            {
-                //no armour no shield
-                damageDealt = bossDamage;
-            }
 
-            //ensure player is not healed by "negative damage"...
-            if (damageDealt <= 0)
-            {
-                HeroControllerSP.battery -= 1;
-            }
-            else
-            {
-                HeroControllerSP.battery -= damageDealt;
-            }
+            DamageReduction();
 
             cooldownTimer = cooldown;
 
@@ -353,5 +364,8 @@ public class MeleeFollowBossSP : MonoBehaviour
         }
 
     }
+
+
+
 
 }

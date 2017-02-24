@@ -247,48 +247,7 @@ public class MeleeFollowSP : MonoBehaviour
             //we are in range. Start draining battery
             Debug.Log("Energy vampire is draining your battery!!!");
             //we are in range. Start reducing battery. Less if Player has shield!
-            int damageDealt = 0;
-            if (HeroControllerSP.hasArmour)
-            {
-                //armour and shield
-                if (HeroControllerSP.hasShield && HeroControllerSP.isSlot4)
-                {
-                    damageDealt = (vampireDamage - 8);
-                }
-                else
-                {
-                    //only armour
-                    damageDealt = (vampireDamage - 5);
-                }
-                
-            }
-            else
-            {
-                //no armour no shield
-                damageDealt = vampireDamage;
-                if (isPoisonType)
-                {
-                    int poisonedChance = Random.Range(1, 10);
-                    if (poisonedChance > 5)
-                    {
-                        HeroControllerSP.isPoisoned = true;
-                        int poisonTicks = Random.Range(3, 8);
-                        HeroControllerSP.poisonTicks = poisonTicks;
-                    }
-                }
-            }
-
-            //ensure player is not healed by "negative damage"...
-            if (damageDealt <= 0)
-            {
-                HeroControllerSP.battery -= 1;
-            }
-            else
-            {
-                HeroControllerSP.battery -= damageDealt;
-            }
-
-
+            DamageReduction();
 
 
             
@@ -314,6 +273,44 @@ public class MeleeFollowSP : MonoBehaviour
             }
             
         }
+
+    }
+
+    private void DamageReduction()
+    {
+        int damageDealt = 0;
+
+        //has armour and has shield
+        if (HeroControllerSP.hasArmour && (HeroControllerSP.hasShield && HeroControllerSP.isSlot4))
+        {
+            damageDealt = (vampireDamage - 10);
+        }
+        //has armour no shield
+        else if (HeroControllerSP.hasArmour && (!HeroControllerSP.hasShield || !HeroControllerSP.isSlot4))
+        {
+            damageDealt = (vampireDamage - 7);
+        }
+        //no armour has shield
+        else if (!HeroControllerSP.hasArmour && (HeroControllerSP.hasShield && HeroControllerSP.isSlot4))
+        {
+            damageDealt = (vampireDamage - 3);
+        }
+        //no armour no shield
+        else
+        {
+            damageDealt = vampireDamage;
+        }
+
+        //ensure player is not healed by "negative damage"...
+        if (damageDealt <= 0)
+        {
+            HeroControllerSP.battery -= 1;
+        }
+        else
+        {
+            HeroControllerSP.battery -= damageDealt;
+        }
+
 
     }
 
