@@ -50,7 +50,7 @@ public class SummonerBossSP : MonoBehaviour
     public float distanceY;
     private float cooldown = 4.0f;
     private float summonCooldown = 6.5f; // different from attack cd
-    private int maxNumEnemies = 10;
+    private int maxNumEnemies = 15;
     private int currNumEnemies = 0;
 
     private float cooldownTimer;
@@ -157,6 +157,25 @@ public class SummonerBossSP : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// This method ensures there will be no more than the max number of summons in existence.
+    /// Ownership doesn't matter; one summoner boss can have all or less. This is for performance
+    /// it also doesn't matter due to the fact that more than 1 summoner boss engaged simulatenously is not realistic in gameplay
+    /// </summary>
+    private int checkNumSummonedVampiresInExistence()
+    {
+        int numVampiresInExistence = 0;
+        //get array of gameobjects(vampires that were summoned and still in existence)
+        foreach (GameObject vampire in GameObject.FindObjectsOfType<GameObject>())
+        {
+            if (vampire.name.Contains("VampireSummoned"))
+            {
+                numVampiresInExistence += 1;
+            }
+        }
+        return numVampiresInExistence;
+    }
+
     private void checkAggro()
     {
         if (!gameState_Fleeing && !gameState_Healing)
@@ -197,12 +216,17 @@ public class SummonerBossSP : MonoBehaviour
 
         anim.SetBool("IsNotInRange", true);
 
-         if (currNumEnemies < maxNumEnemies && cooldownTimer < 0.01f)
+        if (cooldownTimer < 0.01f)
         {
-            //summon as she walks
-            anim.SetTrigger("isSummoning");
-            Instantiate(vampireEnemy, CasterSpawnLoc.transform.position, CasterSpawnLoc.transform.rotation);
-            cooldownTimer = summonCooldown;
+            currNumEnemies = checkNumSummonedVampiresInExistence();
+            if (currNumEnemies < maxNumEnemies)
+            {
+                //summon as she walks
+                anim.SetTrigger("isSummoning");
+                Instantiate(vampireEnemy, CasterSpawnLoc.transform.position, CasterSpawnLoc.transform.rotation);
+                cooldownTimer = summonCooldown;
+            }           
+            
         }
 
 
@@ -236,12 +260,17 @@ public class SummonerBossSP : MonoBehaviour
                 cooldownTimer = 0.3f;
 
             }
-            else if (randomNum > 12 && randomNum < 15 && currNumEnemies < maxNumEnemies && cooldownTimer < 0.01f)
+            else if (randomNum > 12 && randomNum < 15 && cooldownTimer < 0.01f)
             {
-                //summon
-                anim.SetTrigger("isSummoning");
-                Instantiate(vampireEnemy, CasterSpawnLoc.transform.position, CasterSpawnLoc.transform.rotation);
-                cooldownTimer = summonCooldown;
+                currNumEnemies = checkNumSummonedVampiresInExistence();
+                if (currNumEnemies < maxNumEnemies)
+                {
+                    //summon
+                    anim.SetTrigger("isSummoning");
+                    Instantiate(vampireEnemy, CasterSpawnLoc.transform.position, CasterSpawnLoc.transform.rotation);
+                    cooldownTimer = summonCooldown;
+                }
+               
             }
 
             else if(cooldownTimer < 0.01f)
