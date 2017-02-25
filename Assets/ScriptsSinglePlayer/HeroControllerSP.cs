@@ -24,7 +24,6 @@ public class HeroControllerSP : MonoBehaviour
     public ParticleSystem IdleGasStream;
     public ParticleSystem WorkingGasStream;
     public GameObject GreatswordFire;
-    public GameObject AxeLightning;
 
     //status effects
     public static bool isPoisoned;
@@ -186,7 +185,6 @@ public class HeroControllerSP : MonoBehaviour
         anim = this.GetComponentInChildren<Animator>();
         anim.applyRootMotion = false;
         GreatswordFire.SetActive(false);
-        AxeLightning.SetActive(false);
 
         Helm.SetActive(false);
         Armour.SetActive(false);
@@ -425,7 +423,6 @@ public class HeroControllerSP : MonoBehaviour
         }
         if (hasAxe_LIGHTNING)
         {
-            AxeLightning.SetActive(true);
             emptyInvSlots[5].texture = invSlots[5];
         }
         if (hasGun_MULTI)
