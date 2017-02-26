@@ -248,7 +248,7 @@ public class HeroControllerSP : MonoBehaviour
             
             Destroy(other.gameObject);
         }
-        if (other.gameObject.name.Contains("CasterTurretShot"))
+        else if (other.gameObject.name.Contains("CasterTurretShot"))
         {
             Instantiate(SE_hit, this.transform.position, this.transform.rotation);
             if (!hasArmour)
@@ -261,7 +261,7 @@ public class HeroControllerSP : MonoBehaviour
             }
             Destroy(other.gameObject);
         }
-        if (other.gameObject.name.Contains("WizBasic"))
+        else if (other.gameObject.name.Contains("WizBasic"))
         {
             Instantiate(SE_hit, this.transform.position, this.transform.rotation);
             if (!hasArmour)
@@ -274,7 +274,7 @@ public class HeroControllerSP : MonoBehaviour
             }
             Destroy(other.gameObject);
         }
-        if (other.gameObject.name.Contains("palaGround"))
+        else if (other.gameObject.name.Contains("palaGround"))
         {
             Instantiate(SE_basic_hit, this.transform.position, this.transform.rotation);
             if (!hasArmour)
@@ -287,7 +287,7 @@ public class HeroControllerSP : MonoBehaviour
             }
             Destroy(other.gameObject);
         }
-        if (other.gameObject.name.Contains("SummonerShot") || other.gameObject.name.Contains("WizardShot"))
+        else if (other.gameObject.name.Contains("SummonerShot") || other.gameObject.name.Contains("WizardShot"))
         {
             Instantiate(SE_hit_ice, this.transform.position, this.transform.rotation);
             if (!hasArmour)
@@ -300,7 +300,7 @@ public class HeroControllerSP : MonoBehaviour
             }
             Destroy(other.gameObject);
         }
-        if (other.gameObject.name.Contains("wizardFire") )
+        else if (other.gameObject.name.Contains("wizardFire") )
         {
             Instantiate(SE_hit, this.transform.position, this.transform.rotation);
             if (!hasArmour)
@@ -313,7 +313,7 @@ public class HeroControllerSP : MonoBehaviour
             }
             Destroy(other.gameObject);
         }
-        if (other.gameObject.name.Contains("wizardPoison"))
+        else if (other.gameObject.name.Contains("wizardPoison"))
         {
             //make new SE
             Instantiate(SE_hit, this.transform.position, this.transform.rotation);
@@ -325,7 +325,7 @@ public class HeroControllerSP : MonoBehaviour
 
             Destroy(other.gameObject);
         }
-        if (other.gameObject.name.Contains("PoisonWellProjectiles"))
+        else if (other.gameObject.name.Contains("PoisonWellProjectiles"))
         {
             Instantiate(SE_hit_poison, this.transform.position, this.transform.rotation);
             if (!hasArmour)
@@ -342,13 +342,26 @@ public class HeroControllerSP : MonoBehaviour
             poisonTicks = 5;
             
         }
-        if (other.gameObject.name.Contains("GroundSlamProjectiles"))
+        else if (other.gameObject.name.Contains("GroundSlamProjectiles"))
         {
             Instantiate(SE_hit, this.transform.position, this.transform.rotation);
             battery -= 2;
 
         }
-        
+       else if (other.gameObject.name.Contains("SafetyDance"))
+        {
+            Instantiate(SE_hit, this.transform.position, this.transform.rotation);
+            if (!hasArmour)
+            {
+                battery -= 25;
+            }
+            else
+            {
+                battery -= 15;
+            }
+            Destroy(other.gameObject);
+        }
+
 
 
     }
