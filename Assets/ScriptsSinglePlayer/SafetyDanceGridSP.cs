@@ -12,8 +12,8 @@ public class SafetyDanceGridSP : MonoBehaviour {
     private AudioSource source;
     public List<GameObject> spawnLocs = new List<GameObject>();
 
-    public static bool isActive = true;
-    public static bool isTransitionPhase = true;
+    public static bool isActive = false;
+    public static bool isTransition = false;
     private float cooldownTimer = 0.0f;
     private int counter = 0;
     private int patternChoice;
@@ -51,7 +51,7 @@ public class SafetyDanceGridSP : MonoBehaviour {
 
                     ChoosePatternWarning(patternChoice);
 
-                    cooldownTimer = 2.0f; 
+                    if (isTransition) { cooldownTimer = 0.85f; } else { cooldownTimer = 2.4f; } 
                     counter += 1;
                 }
                 else
@@ -59,7 +59,7 @@ public class SafetyDanceGridSP : MonoBehaviour {
 
                     ChoosePatternExplosion(patternChoice);
 
-                    cooldownTimer = 2.0f; 
+                    if (isTransition) { cooldownTimer = 0.85f; } else { cooldownTimer = 2.4f; }
                     counter += 1;
                 }
             }
@@ -162,17 +162,25 @@ public class SafetyDanceGridSP : MonoBehaviour {
                 }
                 source.PlayOneShot(warningSound, 0.5f);
                 break;
-            //Checkered Lines
+            //Checkered 
             default:
                 for (int i = 0; i < spawnLocs.Count; i++)
                 {
                     if (i % 2 == 0)
                     {
-                        Instantiate(warning, spawnLocs[i].transform.position, spawnLocs[i].transform.rotation);
+                        if ((i >= 8 && i <= 15) || (i >= 24 && i <= 31) || (i >= 40))
+                        {
+                            Instantiate(warning, spawnLocs[i - 1].transform.position, spawnLocs[i - 1].transform.rotation);
+                        }
+                        else
+                        {
+                            Instantiate(warning, spawnLocs[i].transform.position, spawnLocs[i].transform.rotation);
+                        }
                     }
+                    
                 }
                 source.PlayOneShot(warningSound, 0.5f);
-                break;
+                break;            
         }
     }
 
@@ -261,16 +269,25 @@ public class SafetyDanceGridSP : MonoBehaviour {
                         source.PlayOneShot(explosionSound, 0.1f);
                     }
                 }
-                break;
+                break;            
             default:
                 for (int i = 0; i < spawnLocs.Count; i++)
                 {
                     if (i % 2 == 0)
                     {
-                        Instantiate(explosion, spawnLocs[i].transform.position, spawnLocs[i].transform.rotation);
-                        source.PlayOneShot(explosionSound, 0.1f);
+                        if ((i >= 8 && i <= 15) || (i >= 24 && i <= 31) || (i >= 40))
+                        {
+                            Instantiate(explosion, spawnLocs[i - 1].transform.position, spawnLocs[i - 1].transform.rotation);
+                            source.PlayOneShot(explosionSound, 0.1f);
+                        }
+                        else
+                        {
+                            Instantiate(explosion, spawnLocs[i].transform.position, spawnLocs[i].transform.rotation);
+                            source.PlayOneShot(explosionSound, 0.1f);
+                        }
                     }
                 }
+                
                 break;
         }
     }
