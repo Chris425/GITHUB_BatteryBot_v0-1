@@ -12,14 +12,14 @@ public class SafetyDanceGridSP : MonoBehaviour {
     private AudioSource source;
     public List<GameObject> spawnLocs = new List<GameObject>();
 
-    public static bool isActive = false;
-    public static bool isTransition = false;
+    public static bool isActive ;
+    public static bool isTransition;
     private float cooldownTimer = 0.0f;
     private int counter = 0;
     private int patternChoice;
    
     // Use this for initialization
-    void Start () {
+    void OnEnable() {
         //CDC - this doesn't work because it adds it an undefined order. Doing it manually.
 
         //foreach (GameObject spawnLoc in GameObject.FindObjectsOfType<GameObject>())
@@ -30,6 +30,8 @@ public class SafetyDanceGridSP : MonoBehaviour {
         //    }
         //}
 
+        isActive = false;
+        isTransition = false;
         source = GetComponent<AudioSource>();
         patternChoice = 1;
     }
@@ -83,7 +85,7 @@ public class SafetyDanceGridSP : MonoBehaviour {
                         Instantiate(warning, spawnLocs[i].transform.position, spawnLocs[i].transform.rotation);
                     }
                 }
-                source.PlayOneShot(warningSound, 0.5f);
+                source.PlayOneShot(warningSound, 0.3f);
                 break;
            //Wide Horizontal Lines
             case 2:
@@ -94,7 +96,7 @@ public class SafetyDanceGridSP : MonoBehaviour {
                         Instantiate(warning, spawnLocs[i].transform.position, spawnLocs[i].transform.rotation);
                     }
                 }
-                source.PlayOneShot(warningSound, 0.5f);
+                source.PlayOneShot(warningSound, 0.3f);
                 break;
             //Wide Horizontal, middle only
             case 3:
@@ -105,7 +107,7 @@ public class SafetyDanceGridSP : MonoBehaviour {
                         Instantiate(warning, spawnLocs[i].transform.position, spawnLocs[i].transform.rotation);
                     }
                 }
-                source.PlayOneShot(warningSound, 0.5f);
+                source.PlayOneShot(warningSound, 0.3f);
                 break;
             //Vertical Lines
             case 4:
@@ -116,7 +118,7 @@ public class SafetyDanceGridSP : MonoBehaviour {
                         Instantiate(warning, spawnLocs[i].transform.position, spawnLocs[i].transform.rotation);
                     }
                 }
-                source.PlayOneShot(warningSound, 0.5f);
+                source.PlayOneShot(warningSound, 0.3f);
                 break;
             //Wide Vertical Lines
             case 5:
@@ -127,7 +129,7 @@ public class SafetyDanceGridSP : MonoBehaviour {
                         Instantiate(warning, spawnLocs[i].transform.position, spawnLocs[i].transform.rotation);
                     }
                 }
-                source.PlayOneShot(warningSound, 0.5f);
+                source.PlayOneShot(warningSound, 0.3f);
                 break;
              //Wide Vertical Line, Middle
             case 6:
@@ -138,7 +140,7 @@ public class SafetyDanceGridSP : MonoBehaviour {
                         Instantiate(warning, spawnLocs[i].transform.position, spawnLocs[i].transform.rotation);
                     }
                 }
-                source.PlayOneShot(warningSound, 0.5f);
+                source.PlayOneShot(warningSound, 0.3f);
                 break;
             //Outer Ring
             case 7:
@@ -149,7 +151,7 @@ public class SafetyDanceGridSP : MonoBehaviour {
                         Instantiate(warning, spawnLocs[i].transform.position, spawnLocs[i].transform.rotation);
                     }
                 }
-                source.PlayOneShot(warningSound, 0.5f);
+                source.PlayOneShot(warningSound, 0.3f);
                 break;
             //Inner Ring
             case 8:
@@ -160,7 +162,7 @@ public class SafetyDanceGridSP : MonoBehaviour {
                         Instantiate(warning, spawnLocs[i].transform.position, spawnLocs[i].transform.rotation);
                     }
                 }
-                source.PlayOneShot(warningSound, 0.5f);
+                source.PlayOneShot(warningSound, 0.3f);
                 break;
             //Checkered 
             default:
@@ -179,7 +181,7 @@ public class SafetyDanceGridSP : MonoBehaviour {
                     }
                     
                 }
-                source.PlayOneShot(warningSound, 0.5f);
+                source.PlayOneShot(warningSound, 0.3f);
                 break;            
         }
     }

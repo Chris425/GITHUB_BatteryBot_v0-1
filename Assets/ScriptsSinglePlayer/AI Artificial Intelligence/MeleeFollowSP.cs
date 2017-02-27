@@ -174,6 +174,16 @@ public class MeleeFollowSP : MonoBehaviour
 
                     }
                 }
+                //summoned ones will (usually) drop red batteries to ensure ammo during boss fights
+                else
+                {
+                    int randomNum = Random.Range(1, 8);
+                    if (randomNum <= 5)
+                    {
+                        Instantiate(RedBattery, this.transform.position, this.transform.rotation);
+                    }
+                    
+                }
                 Destroy(this.gameObject);
             }
             
