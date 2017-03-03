@@ -1,0 +1,14 @@
+LEVEL 3 FINAL BOSS
+
+-starts on grid. Melee attacks, very weak, behaves as usual. Fire is coming up in a pattern but SLOWLY.
+-So on aggro grid becomes active. public static variables are set - isNormal, isPhaseTransition
+
+at 66% life and 33% life he teleports up for phase transition - do set position like a save point. Set the bool to isPhaseTransition = true. Same patterns occur but faster
+
+-on death grid gameobject disabled
+
+
+
+-how fire works: for selected pieces have a warning - instantiating prefab is easiest (of particle system shooting up lightly?)
+
+do patterns! for(int i =......) do play warning special effect, cooldown, then instantiate fire well for big damage on that spot.

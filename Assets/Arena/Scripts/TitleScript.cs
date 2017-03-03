@@ -94,7 +94,7 @@ public class TitleScript : MonoBehaviour
             }
             
         }
-        if (Input.GetKeyDown(KeyCode.Escape))
+        else if (Input.GetKeyDown(KeyCode.Escape))
         {
             int currScene = SceneManager.GetActiveScene().buildIndex;
             if (currScene == 2)
@@ -108,7 +108,7 @@ public class TitleScript : MonoBehaviour
             
         }
         //change selectors
-        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
+        else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
         {
             source.PlayOneShot(boop, 0.7f);
             if (selectorChoice > 0)
@@ -117,7 +117,7 @@ public class TitleScript : MonoBehaviour
             }
             
         }
-        if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+        else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
         {
             selectorChoice += 1;
             source.PlayOneShot(boop, 0.7f);
