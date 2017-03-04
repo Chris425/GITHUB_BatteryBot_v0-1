@@ -18,6 +18,7 @@ public class Level3BossSP : MonoBehaviour {
     private int bossHealth = 340;
     private int maxBossHealth = 340;
 
+    public GameObject levelWellSelector;
     public GameObject teleSpot1;
     public GameObject teleSpot2;
     private GameObject boss;
@@ -28,6 +29,7 @@ public class Level3BossSP : MonoBehaviour {
     public GameObject TeleportExplosion;
     public GameObject SummonedVampire;
     public AudioClip TeleSound;
+    public AudioClip OnDeathSound;
 
     public int bossDamage = 8;
 
@@ -61,7 +63,7 @@ public class Level3BossSP : MonoBehaviour {
 
         bossHealthSlider.value = 10;
         bossHealthSlider.gameObject.SetActive(false);
-
+        levelWellSelector.SetActive(false);
     }
 
     private void UpdateSlider()
@@ -283,6 +285,8 @@ public class Level3BossSP : MonoBehaviour {
             Destroy(other.gameObject);
             if (bossHealth <= 0 && !hasDied)
             {
+                levelWellSelector.SetActive(true);
+                source.PlayOneShot(OnDeathSound, 1.0f);
                 //fix to prevent this from occuring many times; 
                 //turns out the gameobject isn't destroyed immediately so it can register many collisions...
                 hasDied = true;
