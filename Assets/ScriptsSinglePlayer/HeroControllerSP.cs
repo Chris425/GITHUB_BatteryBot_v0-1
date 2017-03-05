@@ -82,7 +82,6 @@ public class HeroControllerSP : MonoBehaviour
 
     public GameObject warning;
     public GameObject warningCritical;
-    private bool isPlayingSound = false; //I goofed. Here's a hack to fix it
 
     //gears
     public static int Gears;
@@ -94,6 +93,7 @@ public class HeroControllerSP : MonoBehaviour
     public static int Ammo;
     public Text ammoValText;
     public GameObject objToSpawn;
+    public GameObject objToSpawnBlue;
     public GameObject GunShot_MULTI;
     public GameObject interactShot;
     public GameObject spawnLoc;
@@ -126,6 +126,7 @@ public class HeroControllerSP : MonoBehaviour
         HeroMoveUpdate();
         TimerUpdate();
         UpdateSlider();
+        batteryEffects();
         checkEquipment();
         checkStatusEffects();
     }
@@ -185,7 +186,7 @@ public class HeroControllerSP : MonoBehaviour
         anim = this.GetComponentInChildren<Animator>();
         anim.applyRootMotion = false;
         GreatswordFire.SetActive(false);
-
+        
         Helm.SetActive(false);
         Armour.SetActive(false);
         gun.SetActive(false);
@@ -199,7 +200,7 @@ public class HeroControllerSP : MonoBehaviour
 
         battery = 100;
         speed = 15.0f;
-        Ammo = 990;
+        Ammo = 91;
         //Gears = 0; //gears currency will now persist across levels and through death. CDC 02-05-2017
 
         hasHelm = false;
@@ -233,6 +234,8 @@ public class HeroControllerSP : MonoBehaviour
 
     public void OnCollisionEnter(Collision other)
     {
+        //only call this when you're hit
+        batteryEffects();
         //case when the player is hit by the caster
         if (other.gameObject.name.Contains("CasterShot"))
         {
@@ -524,7 +527,6 @@ public class HeroControllerSP : MonoBehaviour
             GreenLight.intensity = 8.0f;
             YellowLight.intensity = 0.0f;
             RedLight.intensity = 0.0f;
-            isPlayingSound = false;
         }
         else if (battery > 100 && battery < 199)
         {
@@ -536,13 +538,6 @@ public class HeroControllerSP : MonoBehaviour
             isSuperCharged = false;
         }
         
-
-        //as the battery decreases we'll make subtle changes to the way the bot moves and looks
-        if (battery % 5 == 0)
-        {
-            batteryEffects();
-        }
-
         //GAME OVER if battery is empty (0)
         //or less than 0 (vampire bites may bring it below 0!)
         if (battery <= 0)
@@ -554,211 +549,110 @@ public class HeroControllerSP : MonoBehaviour
 
     //Every 10% battery loss, lose 10% speed
     //There are 3 lights - green, yellow, and red. The intensity will be increased/decreased depending on your battery life!
-    void batteryEffects()
+    public void batteryEffects()
     {
-       
-        switch (battery)
+
+        if (battery >= 90 && battery <= 100)
         {
+            speed = 11.0f;
+
+            ExtraLight.intensity = 0.0f;
+            GreenLight.intensity = 8.0f; // 8 is max light intensity
+            YellowLight.intensity = 0.0f;
+            RedLight.intensity = 0.0f;
             
-            case 100:
-                speed = 11.0f;
-
-                ExtraLight.intensity = 0.0f;
-                GreenLight.intensity = 8.0f; // 8 is max light intensity
-                YellowLight.intensity = 0.0f;
-                RedLight.intensity = 0.0f;
-                isPlayingSound = false;
-
-                break;
-
-            case 95:
-                speed = 11.0f;
-
-
-                GreenLight.intensity = 7.0f;
-                YellowLight.intensity = 0.0f;
-                RedLight.intensity = 0.0f;
-                isPlayingSound = false;
-                break;
-
-            case 90:
-                speed = 10.5f;
-
-
-                GreenLight.intensity = 4.5f; 
-                YellowLight.intensity = 0.0f;
-                RedLight.intensity = 0.0f;
-                isPlayingSound = false;
-                break;
-
-            case 85:
-                speed = 10.5f;
-
-                GreenLight.intensity = 3.0f;
-                YellowLight.intensity = 0.0f;
-                RedLight.intensity = 0.0f;
-                isPlayingSound = false;
-                break;
-
-            case 80:
-                speed = 10.0f;
-
-                GreenLight.intensity = 2.0f;
-                YellowLight.intensity = 0.0f;
-                RedLight.intensity = 0.0f;
-                isPlayingSound = false;
-                break;
-
-            case 75:
-                speed = 10.0f;
-                GreenLight.intensity = 0.0f;
-                YellowLight.intensity = 8.0f;
-                RedLight.intensity = 0.0f;
-                //sound the first warning alarm!
-                if (!isPlayingSound)
-                {
-                    Instantiate(warning, this.transform.position, this.transform.rotation);
-                    isPlayingSound = true;
-                }
-
-
-                break;
-
-            case 70:
-                speed = 9.5f;
-                GreenLight.intensity = 0.0f;
-                YellowLight.intensity = 7.0f;
-                RedLight.intensity = 0.0f;
-                isPlayingSound = false;
-                break;
-
-            case 65:
-                speed = 9.5f;
-
-                GreenLight.intensity = 0.0f;
-                YellowLight.intensity = 4.5f;
-                RedLight.intensity = 0.0f;
-                isPlayingSound = false;
-                break;
-
-            case 60:
-                speed = 9f;
-
-                GreenLight.intensity = 0.0f;
-                YellowLight.intensity = 3.0f;
-                RedLight.intensity = 0.0f;
-                isPlayingSound = false;
-                break;
-
-            case 55:
-                speed = 9.0f;
-
-                GreenLight.intensity = 0.0f;
-                YellowLight.intensity = 2.5f;
-                RedLight.intensity = 0.0f;
-                isPlayingSound = false;
-                break;
-
-            case 50:
-                speed = 8.5f;
-
-                GreenLight.intensity = 0.0f;
-                YellowLight.intensity = 2.0f;
-                RedLight.intensity = 0.0f;
-                isPlayingSound = false;
-                break;
-
-            case 45:
-                speed = 8.5f;
-
-                GreenLight.intensity = 0.0f;
-                YellowLight.intensity = 0.0f;
-                RedLight.intensity = 8.0f;
-                //Red light, turn on warning again
-                if (!isPlayingSound)
-                {
-                    Instantiate(warning, this.transform.position, this.transform.rotation);
-                    isPlayingSound = true;
-                }
-                break;
-
-            case 40:
-                speed = 8.0f;
-
-                GreenLight.intensity = 0.0f;
-                YellowLight.intensity = 0.0f;
-                RedLight.intensity = 7.0f;
-                isPlayingSound = false;
-                break;
-
-            case 35:
-                speed = 8.0f;
-
-                GreenLight.intensity = 0.0f;
-                YellowLight.intensity = 0.0f;
-                RedLight.intensity = 4.5f;
-                isPlayingSound = false;
-                break;
-
-            case 30:
-                speed = 7.5f;
-
-                GreenLight.intensity = 0.0f;
-                YellowLight.intensity = 0.0f;
-                RedLight.intensity = 3.0f;
-                isPlayingSound = false;
-                break;
-
-            case 25:
-                speed = 7.0f;
-
-                GreenLight.intensity = 0.0f;
-                YellowLight.intensity = 0.0f;
-                RedLight.intensity = 2.5f;
-                isPlayingSound = false;
-                break;
-
-            case 20:
-                speed = 6.5f;
-
-                GreenLight.intensity = 0.0f;
-                YellowLight.intensity = 0.0f;
-                RedLight.intensity = 2.0f;
-                isPlayingSound = false;
-                break;
-
-            case 15:
-                speed = 5.5f;
-
-                GreenLight.intensity = 0.0f;
-                YellowLight.intensity = 0.0f;
-                RedLight.intensity = 1.0f;
-                isPlayingSound = false;
-                break;
-            case 10:
-                speed = 4.5f;
-
-                GreenLight.intensity = 0.0f;
-                YellowLight.intensity = 0.0f;
-                RedLight.intensity = 0.5f;
-
-                //It's not looking too good
-                if (!isPlayingSound)
-                {
-                    Instantiate(warningCritical, this.transform.position, this.transform.rotation);
-                    isPlayingSound = true;
-                }
-
-                break;
-            case 5:
-                speed = 2.5f;
-
-                GreenLight.intensity = 0.0f;
-                YellowLight.intensity = 0.0f;
-                RedLight.intensity = 0.0f;
-                isPlayingSound = false;
-                break;
         }
+        else if (battery >= 80 && battery <= 90)
+        {
+            speed = 10.5f;
+
+
+            GreenLight.intensity = 4.5f;
+            YellowLight.intensity = 0.0f;
+            RedLight.intensity = 0.0f;
+            
+        }
+        else if (battery > 70 && battery <= 80)
+        {
+            speed = 10.0f;
+
+            GreenLight.intensity = 2.0f;
+            YellowLight.intensity = 0.0f;
+            RedLight.intensity = 0.0f;
+
+        }
+        else if (battery >= 60 && battery <= 70)
+        {
+            speed = 9f;
+
+            GreenLight.intensity = 0.0f;
+            YellowLight.intensity = 3.0f;
+            RedLight.intensity = 0.0f;
+           
+
+        }
+        else if (battery >= 50 && battery <= 60)
+        {
+            speed = 8.5f;
+
+            GreenLight.intensity = 0.0f;
+            YellowLight.intensity = 2.0f;
+            RedLight.intensity = 0.0f;
+          
+        }
+        else if (battery > 40 && battery <= 50)
+        {
+            speed = 8.0f;
+
+            GreenLight.intensity = 0.0f;
+            YellowLight.intensity = 0.0f;
+            RedLight.intensity = 7.0f;
+           
+
+        }
+        else if (battery >= 30 && battery <= 40)
+        {
+            speed = 7.5f;
+
+            GreenLight.intensity = 0.0f;
+            YellowLight.intensity = 0.0f;
+            RedLight.intensity = 3.0f;
+         
+
+
+        }
+        else if (battery > 20 && battery <= 30)
+        {
+            speed = 6.5f;
+
+            GreenLight.intensity = 0.0f;
+            YellowLight.intensity = 0.0f;
+            RedLight.intensity = 2.0f;
+
+            
+        }
+        else if (battery >= 10 && battery <= 20)
+        {
+            speed = 4.5f;
+
+            GreenLight.intensity = 0.0f;
+            YellowLight.intensity = 0.0f;
+            RedLight.intensity = 0.5f;
+
+            
+        }
+        else if (battery > 0 && battery <= 10)
+        {
+            speed = 2.5f;
+
+            GreenLight.intensity = 0.0f;
+            YellowLight.intensity = 0.0f;
+            RedLight.intensity = 0.0f;
+            
+        }
+
+       
+
         if (isBoosting)
         {
             speed = speed += 20.0f;
@@ -857,9 +751,18 @@ public class HeroControllerSP : MonoBehaviour
             {
                 anim.SetTrigger("isAxeHacking");
                 Instantiate(AxeShot, spawnLoc.transform.position, this.transform.rotation);
-                cooldownTimer = 0.8f;
-                
+                cooldownTimer = 0.8f;   
             }
+
+            if (Input.GetKey(KeyCode.LeftShift) && Ammo > 3 && cooldownTimer < 0.01f && hasGun && isSlot2 && hasGun_MULTI)
+            {
+                anim.SetTrigger("isPunching");
+                Instantiate(objToSpawnBlue, spawnLoc.transform.position, this.transform.rotation);
+                
+                cooldownTimer = 0.3f;
+                Ammo -= 4;
+            }
+            
 
 
             //SPECIAL ATTACKS - X

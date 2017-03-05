@@ -30,7 +30,7 @@ public class MeleeFollowSP : MonoBehaviour
 
     public bool isAggroed;
 
-    public int health = 2;
+    public int bossHealth = 2;
     public int vampireDamage = 15;
 
     public bool isSummoned = false;
@@ -72,28 +72,29 @@ public class MeleeFollowSP : MonoBehaviour
             //make a special effect on death
             if (other.gameObject.name.Contains("PlayerShot"))
             {
-                //Note that multishot has the same damage - you just shoot a bunch at the same time
-                if (HeroControllerSP.isSuperCharged == true)
+                if (other.gameObject.name.Contains("PlayerShotBlue"))
                 {
-                    health -= 2;
-                    Instantiate(DeathSpecEffect, other.transform.position, this.transform.rotation);
+                    if (HeroControllerSP.isSuperCharged == true)
+                    { bossHealth -= 5; Instantiate(DeathSpecEffect, other.transform.position, this.transform.rotation); }
+                    else { bossHealth -= 3; Instantiate(DeathSpecEffect, other.transform.position, this.transform.rotation); }
                 }
                 else
                 {
-                    health -= 1;
-                    Instantiate(DeathSpecEffect, other.transform.position, this.transform.rotation);
+                    if (HeroControllerSP.isSuperCharged == true)
+                    { bossHealth -= 3; Instantiate(DeathSpecEffect, other.transform.position, this.transform.rotation); }
+                    else { bossHealth -= 1; Instantiate(DeathSpecEffect, other.transform.position, this.transform.rotation); }
                 }
             }
             else if (other.gameObject.name.Contains("GS_Shot"))
             {
                 if (other.gameObject.name.Contains("FIRE"))
                 {
-                    health -= 4;
+                    bossHealth -= 6;
                     Instantiate(BloodSpecEffect, other.transform.position, this.transform.rotation);
                 }
                 else
                 {
-                    health -= 2;
+                    bossHealth -= 4;
                     Instantiate(BloodSpecEffect, other.transform.position, this.transform.rotation);
                 }
 
@@ -102,12 +103,12 @@ public class MeleeFollowSP : MonoBehaviour
             {
                 if (other.gameObject.name.Contains("LIGHTNING"))
                 {
-                    health -= 3;
+                    bossHealth -= 2;
                     Instantiate(BloodSpecEffect, other.transform.position, this.transform.rotation);
                 }
                 else
                 {
-                    health -= 1;
+                    bossHealth -= 3;
                     Instantiate(BloodSpecEffect, other.transform.position, this.transform.rotation);
                 }
 
@@ -115,12 +116,12 @@ public class MeleeFollowSP : MonoBehaviour
             //note that shield shot IS the ice special... shield normally shoots an axe shot (because reasons)
             else if (other.gameObject.name.Contains("Shield_Shot"))
             {
-                health -= 2;
+                bossHealth -= 3;
                 Instantiate(DeathSpecEffect, other.transform.position, this.transform.rotation);
             }
             //Only spawn loot if it is a normal vampire, not a summoned one.
 
-            if (health <= 0 && !hasDied)
+            if (bossHealth <= 0 && !hasDied)
             {
                 //fix to prevent this from occuring many times; 
                 //turns out the gameobject isn't destroyed immediately so it can register many collisions...

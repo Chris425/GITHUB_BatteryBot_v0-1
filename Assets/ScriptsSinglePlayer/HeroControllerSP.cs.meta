@@ -1,19 +1,31 @@
 fileFormatVersion: 2
 guid: 2d126e7284cf93d4a90b03a1711034d2
-timeCreated: 1480894619
+timeCreated: 1488726816
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
   defaultReferences:
   - SE_hit: {fileID: 1000012846706402, guid: 2bd76f22374a47f48b7f2c55662b2e0d, type: 2}
+  - SE_basic_hit: {instanceID: 0}
+  - SE_hit_ice: {instanceID: 0}
+  - SE_hit_poison: {instanceID: 0}
   - IdleGasStream: {instanceID: 0}
   - WorkingGasStream: {instanceID: 0}
+  - GreatswordFire: {instanceID: 0}
+  - Helm: {instanceID: 0}
+  - Armour: {instanceID: 0}
   - shield: {instanceID: 0}
   - axe: {instanceID: 0}
   - gun: {instanceID: 0}
   - GS: {instanceID: 0}
+  - jetBooster: {instanceID: 0}
+  - JetBooster_ARCANE: {instanceID: 0}
   - GSShot: {instanceID: 0}
+  - GSShot_FIRE: {instanceID: 0}
   - AxeShot: {instanceID: 0}
+  - AxeShot_LIGHTNING: {instanceID: 0}
+  - ShieldShot_ICE: {instanceID: 0}
+  - BoosterSE: {instanceID: 0}
   - HeroBeingControlled: {instanceID: 0}
   - ExtraLight: {instanceID: 0}
   - GreenLight: {instanceID: 0}
@@ -21,12 +33,17 @@ MonoImporter:
   - RedLight: {instanceID: 0}
   - warning: {instanceID: 0}
   - warningCritical: {instanceID: 0}
+  - gearsValText: {instanceID: 0}
   - ammoValText: {instanceID: 0}
   - objToSpawn: {instanceID: 0}
+  - objToSpawnBlue: {fileID: 1025112337075360, guid: bfa0aa7d38afe5e48b835d977096a8af,
+      type: 2}
+  - GunShot_MULTI: {instanceID: 0}
   - interactShot: {instanceID: 0}
   - spawnLoc: {instanceID: 0}
   - batteryValText: {instanceID: 0}
   - batterySlider: {instanceID: 0}
+  - Fill: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

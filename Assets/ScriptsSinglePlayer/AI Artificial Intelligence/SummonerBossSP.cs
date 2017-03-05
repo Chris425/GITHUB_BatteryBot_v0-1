@@ -362,28 +362,29 @@ public class SummonerBossSP : MonoBehaviour
             isAggroed = true;
             if (other.gameObject.name.Contains("PlayerShot"))
             {
-                //Note that multishot has the same damage - you just shoot a bunch at the same time
-                if (HeroControllerSP.isSuperCharged == true)
+                if (other.gameObject.name.Contains("PlayerShotBlue"))
                 {
-                    bossHealth -= 3;
-                    Instantiate(DeathSpecEffect, other.transform.position, this.transform.rotation);
+                    if (HeroControllerSP.isSuperCharged == true)
+                    { bossHealth -= 5; Instantiate(DeathSpecEffect, other.transform.position, this.transform.rotation); }
+                    else { bossHealth -= 3; Instantiate(DeathSpecEffect, other.transform.position, this.transform.rotation); }
                 }
                 else
                 {
-                    bossHealth -= 1;
-                    Instantiate(DeathSpecEffect, other.transform.position, this.transform.rotation);
+                    if (HeroControllerSP.isSuperCharged == true)
+                    { bossHealth -= 3; Instantiate(DeathSpecEffect, other.transform.position, this.transform.rotation); }
+                    else { bossHealth -= 1; Instantiate(DeathSpecEffect, other.transform.position, this.transform.rotation); }
                 }
             }
             else if (other.gameObject.name.Contains("GS_Shot"))
             {
                 if (other.gameObject.name.Contains("FIRE"))
                 {
-                    bossHealth -= 4;
+                    bossHealth -= 6;
                     Instantiate(BloodSpecEffect, other.transform.position, this.transform.rotation);
                 }
                 else
                 {
-                    bossHealth -= 2;
+                    bossHealth -= 4;
                     Instantiate(BloodSpecEffect, other.transform.position, this.transform.rotation);
                 }
 
@@ -392,12 +393,12 @@ public class SummonerBossSP : MonoBehaviour
             {
                 if (other.gameObject.name.Contains("LIGHTNING"))
                 {
-                    bossHealth -= 3;
+                    bossHealth -= 2;
                     Instantiate(BloodSpecEffect, other.transform.position, this.transform.rotation);
                 }
                 else
                 {
-                    bossHealth -= 1;
+                    bossHealth -= 3;
                     Instantiate(BloodSpecEffect, other.transform.position, this.transform.rotation);
                 }
 
@@ -405,7 +406,7 @@ public class SummonerBossSP : MonoBehaviour
             //note that shield shot IS the ice special... shield normally shoots an axe shot (because reasons)
             else if (other.gameObject.name.Contains("Shield_Shot"))
             {
-                bossHealth -= 2;
+                bossHealth -= 3;
                 Instantiate(DeathSpecEffect, other.transform.position, this.transform.rotation);
             }
 

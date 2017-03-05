@@ -101,7 +101,9 @@ public class isConsumableSP : Mixin {
         Instantiate(BatterySpecEffect2, this.transform.position, this.transform.rotation);
         Instantiate(BatterySpecEffect1, this.transform.position, this.transform.rotation);
         Instantiate(BatterySpecEffect1, this.transform.position, this.transform.rotation);
-        HeroControllerSP.Ammo += 300;
+        if (HeroControllerSP.Ammo < 300)
+        { HeroControllerSP.Ammo = 300;}
+
         HeroControllerSP.hasAxe = true;
         HeroControllerSP.hasGun = true;
         HeroControllerSP.hasShield = true;
@@ -109,6 +111,12 @@ public class isConsumableSP : Mixin {
         HeroControllerSP.hasJetBooster = true;
         HeroControllerSP.isSlot2 = true;
         HeroControllerSP.isSlot4 = true;
+
+        //if player health is greater than 100 don't reduce it; only bring them up to 100 if they're lower.
+        if (HeroControllerSP.battery < 100)
+        {
+            HeroControllerSP.battery = 100;
+        }
 
 
         //then self destruct
