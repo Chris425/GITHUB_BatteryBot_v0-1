@@ -370,6 +370,13 @@ public class WizardFollowSP : MonoBehaviour
                 //fix to prevent this from occuring many times; 
                 //turns out the gameobject isn't destroyed immediately so it can register many collisions...
                 hasDied = true;
+                foreach (GameObject wizShield in GameObject.FindObjectsOfType<GameObject>())
+                {
+                    if (wizShield.name.Contains("SE_WizShield"))
+                    {
+                        Destroy(wizShield);
+                    }
+                }
                 agent.Stop();
                 agent.enabled = false;
                 //possibly spawn some loot!
@@ -522,7 +529,7 @@ public class WizardFollowSP : MonoBehaviour
                 }
 
                 Destroy(other.gameObject);
-                Destroy(this.gameObject);
+                Destroy(gameObject);
             }
 
         }

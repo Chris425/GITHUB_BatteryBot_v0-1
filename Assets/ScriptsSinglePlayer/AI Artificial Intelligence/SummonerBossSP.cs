@@ -50,7 +50,7 @@ public class SummonerBossSP : MonoBehaviour
     public float distanceY;
     private float cooldown = 4.0f;
     private float summonCooldown = 6.5f; // different from attack cd
-    private int maxNumEnemies = 15;
+    private int maxNumEnemies = 10;
     private int currNumEnemies = 0;
 
     private float cooldownTimer;
@@ -312,7 +312,7 @@ public class SummonerBossSP : MonoBehaviour
     void Behaviour_Fleeing()
     {
         //move away from player
-        agent.speed = 8.0f;
+        agent.speed = 6.5f;
         anim.SetBool("IsNotInRange", true);
         agent.SetDestination(fleeDestination.transform.position);      
         
@@ -326,7 +326,7 @@ public class SummonerBossSP : MonoBehaviour
 
     void Behaviour_Healing()
     {
-        agent.speed = 4.0f;
+        agent.speed = 3.0f;
         anim.SetBool("IsNotInRange", false);
         
         agent.ResetPath();
