@@ -16,6 +16,11 @@ public class HeroControllerSP : MonoBehaviour
     private Vector3 moveDirection = Vector3.zero;
     public static int currScene;
 
+    public Camera normalCam;
+    public Camera farCam;
+    public Camera firstPersCam;
+    private int cameraCounter = 0;
+
     public GameObject SE_hit;
     public GameObject SE_basic_hit;
     public GameObject SE_hit_ice;
@@ -187,6 +192,10 @@ public class HeroControllerSP : MonoBehaviour
         anim.applyRootMotion = false;
         GreatswordFire.SetActive(false);
         
+        normalCam.gameObject.SetActive(true);
+        farCam.gameObject.SetActive(false);
+        firstPersCam.gameObject.SetActive(false);
+        
         Helm.SetActive(false);
         Armour.SetActive(false);
         gun.SetActive(false);
@@ -205,10 +214,10 @@ public class HeroControllerSP : MonoBehaviour
 
         hasHelm = false;
         hasArmour = false;
-        hasShield = false;
+        hasShield = true;
         hasAxe = false;
         hasGun = true;
-        hasGS = false;
+        hasGS = true;
         hasGS_FIRE = false;
         hasAxe_LIGHTNING = false;
         hasGun_MULTI = false;
@@ -231,6 +240,27 @@ public class HeroControllerSP : MonoBehaviour
         //emptyInvSlots = myCanvas.GetComponentsInChildren<RawImage>();
     }
 
+    public void handleCameras()
+    {
+        if (cameraCounter % 3 == 0)
+        {
+            normalCam.gameObject.SetActive(true);
+            farCam.gameObject.SetActive(false);
+            firstPersCam.gameObject.SetActive(false);
+        }
+        else if (cameraCounter % 3 == 1)
+        {
+            normalCam.gameObject.SetActive(false);
+            farCam.gameObject.SetActive(true);
+            firstPersCam.gameObject.SetActive(false);
+        }
+        else
+        {
+            normalCam.gameObject.SetActive(false);
+            farCam.gameObject.SetActive(false);
+            firstPersCam.gameObject.SetActive(true);
+        }
+    }
 
     public void OnCollisionEnter(Collision other)
     {
@@ -731,6 +761,15 @@ public class HeroControllerSP : MonoBehaviour
                 isSlot5 = true;
                 /*isSlot1 = false; isSlot2 = false; isSlot3 = false;*/ isSlot4 = false;
             }
+
+
+            //Camera
+             if (Input.GetKeyDown("-") )
+            {
+                cameraCounter += 1;
+                handleCameras();
+            }
+
 
             if (Input.GetButton("Fire1") && Ammo > 0 && cooldownTimer < 0.01f  && hasGun && isSlot2)
             {
