@@ -15,6 +15,7 @@ public class HeroControllerSP : MonoBehaviour
     public float gravity = 27.0F;
     private Vector3 moveDirection = Vector3.zero;
     public static int currScene;
+    public static bool isPaused;
 
     public Camera normalCam;
     public Camera farCam;
@@ -195,7 +196,8 @@ public class HeroControllerSP : MonoBehaviour
         normalCam.gameObject.SetActive(true);
         farCam.gameObject.SetActive(false);
         firstPersCam.gameObject.SetActive(false);
-        
+
+        isPaused = false;
         Helm.SetActive(false);
         Armour.SetActive(false);
         gun.SetActive(false);
@@ -209,15 +211,15 @@ public class HeroControllerSP : MonoBehaviour
 
         battery = 100;
         speed = 15.0f;
-        Ammo = 91;
+        Ammo = 0;
         //Gears = 0; //gears currency will now persist across levels and through death. CDC 02-05-2017
 
         hasHelm = false;
         hasArmour = false;
-        hasShield = true;
+        hasShield = false;
         hasAxe = false;
-        hasGun = true;
-        hasGS = true;
+        hasGun = false;
+        hasGS = false;
         hasGS_FIRE = false;
         hasAxe_LIGHTNING = false;
         hasGun_MULTI = false;
@@ -698,6 +700,16 @@ public class HeroControllerSP : MonoBehaviour
         ammoValText.text = "" + Ammo;
         gearsValText.text = "" + Gears;
 
+        if (Input.GetKeyDown("p")  && !isPaused)
+        {
+            Time.timeScale = 0.0f;
+            isPaused = true;
+        }
+        else if (Input.GetKeyDown("p") && isPaused)
+        {
+            Time.timeScale = 1.0f;
+            isPaused = false;
+        }
 
         CharacterController controller = GetComponent<CharacterController>();
         // is the controller on the ground?
@@ -709,7 +721,7 @@ public class HeroControllerSP : MonoBehaviour
             moveDirection = transform.TransformDirection(moveDirection);
             //Multiply it by speed.
             moveDirection *= speed;
-            
+
 
 
             //Jumping set to A is actually fire1
@@ -724,10 +736,11 @@ public class HeroControllerSP : MonoBehaviour
             {
                 anim.SetTrigger("isRunning");
             }
-            else if(Input.GetKey("w") && speed <= 7.5f)
+            else if (Input.GetKey("w") && speed <= 7.5f)
             {
                 anim.SetTrigger("isWalking");
             }
+        }
 
             //CDC this will change when new weps are added
             if (Input.GetKey("1"))
@@ -876,7 +889,7 @@ public class HeroControllerSP : MonoBehaviour
             }
             
 
-        }
+        
         //Applying gravity to the controller
         moveDirection.y -= gravity * Time.deltaTime;
         //Making the character move

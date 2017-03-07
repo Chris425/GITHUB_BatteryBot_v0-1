@@ -48,3 +48,7 @@ Temporary Items
 
 Library/
 ProjectSettings/
+Library\metadata\
+Library\ShaderCache\
+Library/metadata/
+Library/ShaderCache/
