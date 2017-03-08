@@ -31,7 +31,7 @@ public class Level3BossSP : MonoBehaviour {
     public AudioClip TeleSound;
     public AudioClip OnDeathSound;
 
-    public int bossDamage = 8;
+    public int bossDamage = 18;
 
 
     private bool isTransition;

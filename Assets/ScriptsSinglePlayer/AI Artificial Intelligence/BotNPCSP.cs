@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -57,7 +58,7 @@ public class BotNPCSP : MonoBehaviour {
 
 
                 anim = this.GetComponentInChildren<Animator>();
-                anim.SetBool("IsRunning", false);
+                anim.SetBool("isRunning", false);
 
                 agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
                 target = GameObject.Find("FollowPoint");
@@ -106,6 +107,21 @@ public class BotNPCSP : MonoBehaviour {
                 anim.SetBool("isRunning", true);
             }
 
+        }
+
+        if ((distanceX < -15 || distanceX > 15) && (distanceZ < -15 || distanceZ > 15) || (distanceY < -7 || distanceY > 7))
+        {
+            //Player is waaay too far away
+            Vector3 telePoint = new Vector3(target.transform.position.x, batteryBot.transform.position.y, target.transform.position.z);
+            agent.enabled = false;
+            //teleport
+            this.transform.position = telePoint;
+            agent.enabled = true;
+            agent.Resume();
+            
+            //CDC BUG - this introduces a bug if you are wall climbing. Can't snap to nav mesh when it teleports.
+            //however it should not present itself during normal gameplay and during a build it doesn't stop running so it won't crash.
+            
         }
     }
 }

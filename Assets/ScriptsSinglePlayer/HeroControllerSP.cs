@@ -211,7 +211,7 @@ public class HeroControllerSP : MonoBehaviour
 
         battery = 100;
         speed = 15.0f;
-        Ammo = 0;
+        Ammo = 990;
         //Gears = 0; //gears currency will now persist across levels and through death. CDC 02-05-2017
 
         hasHelm = false;
