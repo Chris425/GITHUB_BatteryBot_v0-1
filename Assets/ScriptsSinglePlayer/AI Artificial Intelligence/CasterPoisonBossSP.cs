@@ -290,8 +290,8 @@ public class CasterPoisonBossSP : MonoBehaviour
                     CasterSpawnLoc.transform.rotation.y + offset,
                     CasterSpawnLoc.transform.rotation.z + offset,
                     CasterSpawnLoc.transform.rotation.w);
-                Vector3 poisonBoltLoc = new Vector3(CasterSpawnLoc.transform.position.x - 1.0f, CasterSpawnLoc.transform.position.y + 1.0f, CasterSpawnLoc.transform.position.z);
-                Instantiate(objToSpawn, poisonBoltLoc, spawnRot);
+                
+                Instantiate(objToSpawn, CasterSpawnLoc.transform.position, spawnRot);
                 cooldownTimer = cooldown;
                 Instantiate(CasterSpecEffect, this.transform.position, this.transform.rotation);
             }

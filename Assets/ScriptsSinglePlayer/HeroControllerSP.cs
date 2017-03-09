@@ -23,6 +23,7 @@ public class HeroControllerSP : MonoBehaviour
     private int cameraCounter = 0;
 
     public GameObject SE_hit;
+    public GameObject SE_Heal;
     public GameObject SE_basic_hit;
     public GameObject SE_hit_ice;
     public GameObject SE_hit_poison;
@@ -211,7 +212,7 @@ public class HeroControllerSP : MonoBehaviour
 
         battery = 100;
         speed = 15.0f;
-        Ammo = 990;
+        Ammo = 0;
         //Gears = 0; //gears currency will now persist across levels and through death. CDC 02-05-2017
 
         hasHelm = false;
@@ -853,7 +854,16 @@ public class HeroControllerSP : MonoBehaviour
                 cooldownTimer = 3.0f;
             }
 
-
+        //heal ability
+        if (Input.GetKeyDown("h") && cooldownTimer < 0.01f && Ammo >= 100 && battery < 100)
+        {
+            anim.SetTrigger("isHealing");
+            Ammo -= 100;
+            cooldownTimer = 4.2f;
+            if (battery > 74){ battery = 100; }
+            else { battery += 25; }
+            Instantiate(SE_Heal, this.transform.position, this.transform.rotation);            
+        }
 
             //interact button
             if (Input.GetKey("f") && interactTimer < 0.01f)

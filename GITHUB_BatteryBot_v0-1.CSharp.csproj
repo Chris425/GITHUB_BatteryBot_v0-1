@@ -170,6 +170,7 @@
     <Compile Include="Assets\ScriptsSinglePlayer\PoisonWellSpawn.cs" />
     <Compile Include="Assets\ScriptsSinglePlayer\PowerUpRotatorSP.cs" />
     <Compile Include="Assets\ScriptsSinglePlayer\ProjectileHitTerrain.cs" />
+    <Compile Include="Assets\ScriptsSinglePlayer\RareScript.cs" />
     <Compile Include="Assets\ScriptsSinglePlayer\SE_DespawnSP.cs" />
     <Compile Include="Assets\ScriptsSinglePlayer\SafetyDanceGridSP.cs" />
     <Compile Include="Assets\ScriptsSinglePlayer\SavePointLvl1.cs" />

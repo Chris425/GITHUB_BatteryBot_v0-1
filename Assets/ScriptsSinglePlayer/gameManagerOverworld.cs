@@ -25,11 +25,14 @@ public class gameManagerOverworld : MonoBehaviour {
         {
             checkmarkLevelOne.gameObject.SetActive(true);
             xmarkLevelOne.gameObject.SetActive(false);
+            HeroControllerSP.hasSkull_PURPLE = true;
         }
         else
         {
             checkmarkLevelOne.gameObject.SetActive(false);
             xmarkLevelOne.gameObject.SetActive(true);
+            HeroControllerSP.hasSkull_PURPLE = false;
+
         }
 
         //lvl2
@@ -37,11 +40,13 @@ public class gameManagerOverworld : MonoBehaviour {
         {
             checkmarkLevelTwo.gameObject.SetActive(true);
             xmarkLevelTwo.gameObject.SetActive(false);
+            HeroControllerSP.hasSkull_RED = true;
         }
         else
         {
             checkmarkLevelTwo.gameObject.SetActive(false);
             xmarkLevelTwo.gameObject.SetActive(true);
+            HeroControllerSP.hasSkull_RED = false;
         }
 
         //lvl3
@@ -49,11 +54,13 @@ public class gameManagerOverworld : MonoBehaviour {
         {
             checkmarkLevelThree.gameObject.SetActive(true);
             xmarkLevelThree.gameObject.SetActive(false);
+            HeroControllerSP.hasSkull_BLUE = true;
         }
         else
         {
             checkmarkLevelThree.gameObject.SetActive(false);
             xmarkLevelThree.gameObject.SetActive(true);
+            HeroControllerSP.hasSkull_BLUE = false;
         }
 
         //bonus lvl
