@@ -31,7 +31,7 @@ public class Level3BossSP : MonoBehaviour {
     public AudioClip TeleSound;
     public AudioClip OnDeathSound;
 
-    public int bossDamage = 18;
+    private int bossDamage = 18;
 
 
     private bool isTransition;
@@ -213,6 +213,11 @@ public class Level3BossSP : MonoBehaviour {
         //case when your player projectile hits the boss
         if (other.gameObject.name.Contains("Shot") && !hasDied)
         {
+            //During transition, if the boss is hit by any weapon he takes an additional one damage.
+            if (isTransition)
+            {
+                bossHealth -= 1;
+            }
 
             if (other.gameObject.name.Contains("PlayerShot"))
             {

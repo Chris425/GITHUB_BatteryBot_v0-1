@@ -30,6 +30,7 @@ public class gameManagerLvl3 : MonoBehaviour {
         {
 
             hero.transform.position = savePoint1.transform.position;
+            hero.transform.rotation = savePoint1.transform.rotation;
         }
 	}
 	
