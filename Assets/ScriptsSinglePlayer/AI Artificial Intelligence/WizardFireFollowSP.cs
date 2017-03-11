@@ -7,7 +7,7 @@ public class WizardFireFollowSP : MonoBehaviour
     private Animator anim;
     UnityEngine.AI.NavMeshAgent agent;
     
-    public int bossHealth = 6; //low health due to his massive dps
+    public int bossHealth = 12; //low health due to his massive dps
     private float shieldHeight;
 
     //gamestates correspond to behaviour methods. Only one can be active at a time.
@@ -89,10 +89,9 @@ public class WizardFireFollowSP : MonoBehaviour
 
     void Update()
     {
-        if (!hasDied)
+        if (!hasDied && !HeroControllerSP.isPaused)
         {
-
-
+            
             cooldownTimer -= 0.03f;
             IceBlastCooldownTimer -= 0.03f;
 

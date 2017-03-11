@@ -51,7 +51,6 @@ public class CasterTurretBossSP : MonoBehaviour
         isAggroed = false;
         shouldPlayAggroEffect = true;
         FlameEffect.gameObject.SetActive(false);
-        bossHealth = 1;
     }
 
     public void OnCollisionEnter(Collision other)
@@ -62,28 +61,29 @@ public class CasterTurretBossSP : MonoBehaviour
             isAggroed = true;
             if (other.gameObject.name.Contains("PlayerShot"))
             {
-                //Note that multishot has the same damage - you just shoot a bunch at the same time
-                if (HeroControllerSP.isSuperCharged == true)
+                if (other.gameObject.name.Contains("PlayerShotBlue"))
                 {
-                    bossHealth -= 3;
-                    Instantiate(DeathSpecEffect, other.transform.position, this.transform.rotation);
+                    if (HeroControllerSP.isSuperCharged == true)
+                    { bossHealth -= 5; Instantiate(DeathSpecEffect, other.transform.position, this.transform.rotation); }
+                    else { bossHealth -= 3; Instantiate(DeathSpecEffect, other.transform.position, this.transform.rotation); }
                 }
                 else
                 {
-                    bossHealth -= 1;
-                    Instantiate(DeathSpecEffect, other.transform.position, this.transform.rotation);
+                    if (HeroControllerSP.isSuperCharged == true)
+                    { bossHealth -= 3; Instantiate(DeathSpecEffect, other.transform.position, this.transform.rotation); }
+                    else { bossHealth -= 1; Instantiate(DeathSpecEffect, other.transform.position, this.transform.rotation); }
                 }
             }
             else if (other.gameObject.name.Contains("GS_Shot"))
             {
                 if (other.gameObject.name.Contains("FIRE"))
                 {
-                    bossHealth -= 4;
+                    bossHealth -= 5;
                     Instantiate(BloodSpecEffect, other.transform.position, this.transform.rotation);
                 }
                 else
                 {
-                    bossHealth -= 2;
+                    bossHealth -= 4;
                     Instantiate(BloodSpecEffect, other.transform.position, this.transform.rotation);
                 }
 
@@ -92,12 +92,13 @@ public class CasterTurretBossSP : MonoBehaviour
             {
                 if (other.gameObject.name.Contains("LIGHTNING"))
                 {
-                    bossHealth -= 3;
+                    int lightningVariance = Random.Range(1, 2);
+                    bossHealth -= lightningVariance;
                     Instantiate(BloodSpecEffect, other.transform.position, this.transform.rotation);
                 }
                 else
                 {
-                    bossHealth -= 1;
+                    bossHealth -= 3;
                     Instantiate(BloodSpecEffect, other.transform.position, this.transform.rotation);
                 }
 
@@ -105,7 +106,7 @@ public class CasterTurretBossSP : MonoBehaviour
             //note that shield shot IS the ice special... shield normally shoots an axe shot (because reasons)
             else if (other.gameObject.name.Contains("Shield_Shot"))
             {
-                bossHealth -= 2;
+                bossHealth -= 4;
                 Instantiate(DeathSpecEffect, other.transform.position, this.transform.rotation);
             }
 
@@ -216,7 +217,7 @@ public class CasterTurretBossSP : MonoBehaviour
 
     void Update()
     {
-        if (!hasDied)
+        if (!hasDied && !HeroControllerSP.isPaused)
         {
             distanceX = this.transform.position.x - target.transform.position.x;
             distanceZ = this.transform.position.z - target.transform.position.z;

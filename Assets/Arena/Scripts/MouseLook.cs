@@ -29,39 +29,40 @@ public class MouseLook : MonoBehaviour
 
     void Update()
     {
-
-
-
-        if (axes == RotationAxes.MouseXAndY)
+        if (!HeroControllerSP.isPaused)
         {
-            //MOUSE --CDC     
-            float rotationX = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * sensitivityX;
-            //JOYPAD -CDC
-            //float rotationX = transform.localEulerAngles.y + Input.GetAxis("JMouse X") * sensitivityX;
-
-            //MOUSE --CDC 
-            rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
             
-            //JOYPAD -CDC
-            //rotationY += Input.GetAxis("JMouse Y") * sensitivityY;
-            rotationY = Mathf.Clamp(rotationY, minimumY, maximumY);
+            if (axes == RotationAxes.MouseXAndY)
+            {
+                //MOUSE --CDC     
+                float rotationX = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * sensitivityX;
+                //JOYPAD -CDC
+                //float rotationX = transform.localEulerAngles.y + Input.GetAxis("JMouse X") * sensitivityX;
 
-            transform.localEulerAngles = new Vector3(-rotationY, rotationX, 0);
-        }
-        else if (axes == RotationAxes.MouseX)
-        {
-            //MOUSE --CDC 
-            transform.Rotate(0, Input.GetAxis("Mouse X") * sensitivityX, 0);
-            //JOYPAD -CDC
-            //transform.Rotate(0, Input.GetAxis("JMouse X") * sensitivityX, 0);
-        }
-        else
-        {
-            rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
-            rotationY += Input.GetAxis("JMouse Y") * sensitivityY;
-            rotationY = Mathf.Clamp(rotationY, minimumY, maximumY);
+                //MOUSE --CDC 
+                rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
 
-            transform.localEulerAngles = new Vector3(-rotationY, transform.localEulerAngles.y, 0);
+                //JOYPAD -CDC
+                //rotationY += Input.GetAxis("JMouse Y") * sensitivityY;
+                rotationY = Mathf.Clamp(rotationY, minimumY, maximumY);
+
+                transform.localEulerAngles = new Vector3(-rotationY, rotationX, 0);
+            }
+            else if (axes == RotationAxes.MouseX)
+            {
+                //MOUSE --CDC 
+                transform.Rotate(0, Input.GetAxis("Mouse X") * sensitivityX, 0);
+                //JOYPAD -CDC
+                //transform.Rotate(0, Input.GetAxis("JMouse X") * sensitivityX, 0);
+            }
+            else
+            {
+                rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
+                rotationY += Input.GetAxis("JMouse Y") * sensitivityY;
+                rotationY = Mathf.Clamp(rotationY, minimumY, maximumY);
+
+                transform.localEulerAngles = new Vector3(-rotationY, transform.localEulerAngles.y, 0);
+            }
         }
     }
 

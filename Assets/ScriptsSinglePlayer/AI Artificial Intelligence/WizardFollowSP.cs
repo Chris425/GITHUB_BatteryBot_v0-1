@@ -7,7 +7,7 @@ public class WizardFollowSP : MonoBehaviour
     private Animator anim;
     UnityEngine.AI.NavMeshAgent agent;
     
-    public int bossHealth = 25;
+    public int bossHealth = 40;
     private float shieldHeight;
 
     //gamestates correspond to behaviour methods. Only one can be active at a time.
@@ -92,10 +92,9 @@ public class WizardFollowSP : MonoBehaviour
 
     void Update()
     {
-        if (!hasDied)
+        if (!hasDied && !HeroControllerSP.isPaused)
         {
-
-
+            
             cooldownTimer -= 0.03f;
             IceBlastCooldownTimer -= 0.03f;
 

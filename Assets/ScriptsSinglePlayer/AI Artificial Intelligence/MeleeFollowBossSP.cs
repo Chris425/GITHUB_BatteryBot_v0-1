@@ -56,7 +56,7 @@ public class MeleeFollowBossSP : MonoBehaviour
         isAggroed = false;
         shouldPlayAggroEffect = true;
         Quaternion aggroRot = new Quaternion(0.0f, 180.0f, 180.0f, 0.0f);
-    }
+}
 
     public void OnCollisionEnter(Collision other)
     {
@@ -83,7 +83,7 @@ public class MeleeFollowBossSP : MonoBehaviour
             {
                 if (other.gameObject.name.Contains("FIRE"))
                 {
-                    bossHealth -= 6;
+                    bossHealth -= 5;
                     Instantiate(BloodSpecEffect, other.transform.position, this.transform.rotation);
                 }
                 else
@@ -97,7 +97,8 @@ public class MeleeFollowBossSP : MonoBehaviour
             {
                 if (other.gameObject.name.Contains("LIGHTNING"))
                 {
-                    bossHealth -= 2;
+                    int lightningVariance = Random.Range(1, 2);
+                    bossHealth -= lightningVariance;
                     Instantiate(BloodSpecEffect, other.transform.position, this.transform.rotation);
                 }
                 else
@@ -110,7 +111,7 @@ public class MeleeFollowBossSP : MonoBehaviour
             //note that shield shot IS the ice special... shield normally shoots an axe shot (because reasons)
             else if (other.gameObject.name.Contains("Shield_Shot"))
             {
-                bossHealth -= 3;
+                bossHealth -= 4;
                 Instantiate(DeathSpecEffect, other.transform.position, this.transform.rotation);
             }
 
@@ -240,7 +241,7 @@ public class MeleeFollowBossSP : MonoBehaviour
 
     void Update()
     {
-        if (!hasDied)
+        if (!hasDied && !HeroControllerSP.isPaused)
         {
             distanceX = this.transform.position.x - target.transform.position.x;
             distanceZ = this.transform.position.z - target.transform.position.z;

@@ -119,23 +119,42 @@ public class HeroControllerSP : MonoBehaviour
 
     public Slider batterySlider;
     public Image Fill;  // assign in the editor the "Fill"
-    
+
+    public RawImage pauseScreen;
 
     //UI Inventory Elements
     public List<Texture> invSlots = new List<Texture>();
     public List<RawImage> emptyInvSlots = new List<RawImage>();
 
+    
 
-
+    
 
     void Update()
     {
-        HeroMoveUpdate();
-        TimerUpdate();
-        UpdateSlider();
-        batteryEffects();
-        checkEquipment();
-        checkStatusEffects();
+        //need to move this here so that it is decoupled from other code. Hopefully won't affect performance too much
+        if (Input.GetKeyDown("p") && !isPaused)
+        {
+            Time.timeScale = 0.0f;
+            isPaused = true;
+            pauseScreen.enabled = true;
+        }
+        else if (Input.GetKeyDown("p") && isPaused)
+        {
+            Time.timeScale = 1.0f;
+            isPaused = false;
+            pauseScreen.enabled = false;
+        }
+
+        if (!isPaused)
+        {
+            HeroMoveUpdate();
+            TimerUpdate();
+            UpdateSlider();
+            batteryEffects();
+            checkEquipment();
+            checkStatusEffects();
+        }
     }
 
     private void checkStatusEffects()
@@ -190,6 +209,8 @@ public class HeroControllerSP : MonoBehaviour
 
     public void OnEnable()
     {
+        pauseScreen.enabled = false;
+
         anim = this.GetComponentInChildren<Animator>();
         anim.applyRootMotion = false;
         GreatswordFire.SetActive(false);
@@ -701,17 +722,7 @@ public class HeroControllerSP : MonoBehaviour
         ammoValText.text = "" + Ammo;
         gearsValText.text = "" + Gears;
 
-        if (Input.GetKeyDown("p")  && !isPaused)
-        {
-            Time.timeScale = 0.0f;
-            isPaused = true;
-        }
-        else if (Input.GetKeyDown("p") && isPaused)
-        {
-            Time.timeScale = 1.0f;
-            isPaused = false;
-        }
-
+       
         CharacterController controller = GetComponent<CharacterController>();
         // is the controller on the ground?
         if (controller.isGrounded)
@@ -914,9 +925,16 @@ public class HeroControllerSP : MonoBehaviour
             SceneManager.LoadScene(currScene);
 
         }
-        if (Input.GetKey(KeyCode.Semicolon) == true && Input.GetKey(KeyCode.R) == true)
+        //DEV OPTIONS
+        // ; + r resets back to intro
+        // ; + n brings you to level n
+        if (Input.GetKey(KeyCode.Semicolon) == true )
         {
-            SceneManager.LoadScene("Intro");
+            if (Input.GetKey(KeyCode.R)) { SceneManager.LoadScene("Intro"); }
+            if (Input.GetKey(KeyCode.Alpha1)) { SceneManager.LoadScene("LevelOne"); }
+            if (Input.GetKey(KeyCode.Alpha2)) { SceneManager.LoadScene("LevelTwo"); }
+            if (Input.GetKey(KeyCode.Alpha3)) { SceneManager.LoadScene("LevelThree"); }
+            if (Input.GetKey(KeyCode.B)) { SceneManager.LoadScene("LevelBonus"); }
 
         }
 

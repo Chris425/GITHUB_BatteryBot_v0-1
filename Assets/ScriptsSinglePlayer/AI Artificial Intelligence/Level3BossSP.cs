@@ -74,8 +74,9 @@ public class Level3BossSP : MonoBehaviour {
 
     }
     // Update is called once per frame
-    void Update () {
-        if (!hasDied)
+    void Update ()
+    {
+        if (!hasDied && !HeroControllerSP.isPaused)
         {
             transitionCDTimer -= 0.01f;
             CDTimer -= 0.01f;
@@ -238,7 +239,7 @@ public class Level3BossSP : MonoBehaviour {
             {
                 if (other.gameObject.name.Contains("FIRE"))
                 {
-                    bossHealth -= 6;
+                    bossHealth -= 5;
                     Instantiate(BloodSpecEffect, other.transform.position, this.transform.rotation);
                 }
                 else
@@ -252,7 +253,8 @@ public class Level3BossSP : MonoBehaviour {
             {
                 if (other.gameObject.name.Contains("LIGHTNING"))
                 {
-                    bossHealth -= 2;
+                    int lightningVariance = Random.Range(1, 2);
+                    bossHealth -= lightningVariance;
                     Instantiate(BloodSpecEffect, other.transform.position, this.transform.rotation);
                 }
                 else
@@ -265,7 +267,7 @@ public class Level3BossSP : MonoBehaviour {
             //note that shield shot IS the ice special... shield normally shoots an axe shot (because reasons)
             else if (other.gameObject.name.Contains("Shield_Shot"))
             {
-                bossHealth -= 3;
+                bossHealth -= 4;
                 Instantiate(HurtSpecEffect, other.transform.position, this.transform.rotation);
             }
 

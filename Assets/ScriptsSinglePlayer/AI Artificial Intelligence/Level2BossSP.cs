@@ -126,7 +126,7 @@ public class Level2BossSP : MonoBehaviour
 
     void Update()
     {
-        if (!hasDied)
+        if (!hasDied && !HeroControllerSP.isPaused)
         {
             if (isAggroed)
             {
@@ -399,8 +399,8 @@ public class Level2BossSP : MonoBehaviour
     {
         //case when your player projectile hits the boss
         if (other.gameObject.name.Contains("Shot") && !hasDied)
-        { 
-            
+        {
+
             isAggroed = true;
             if (other.gameObject.name.Contains("PlayerShot"))
             {
@@ -421,7 +421,7 @@ public class Level2BossSP : MonoBehaviour
             {
                 if (other.gameObject.name.Contains("FIRE"))
                 {
-                    bossHealth -= 6;
+                    bossHealth -= 5;
                     Instantiate(BloodSpecEffect, other.transform.position, this.transform.rotation);
                 }
                 else
@@ -435,7 +435,8 @@ public class Level2BossSP : MonoBehaviour
             {
                 if (other.gameObject.name.Contains("LIGHTNING"))
                 {
-                    bossHealth -= 2;
+                    int lightningVariance = Random.Range(1, 2);
+                    bossHealth -= lightningVariance;
                     Instantiate(BloodSpecEffect, other.transform.position, this.transform.rotation);
                 }
                 else
@@ -448,7 +449,7 @@ public class Level2BossSP : MonoBehaviour
             //note that shield shot IS the ice special... shield normally shoots an axe shot (because reasons)
             else if (other.gameObject.name.Contains("Shield_Shot"))
             {
-                bossHealth -= 3;
+                bossHealth -= 4;
                 Instantiate(DeathSpecEffect, other.transform.position, this.transform.rotation);
             }
 

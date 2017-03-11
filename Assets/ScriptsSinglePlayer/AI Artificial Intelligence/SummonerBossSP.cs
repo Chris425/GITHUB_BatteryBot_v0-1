@@ -30,8 +30,8 @@ public class SummonerBossSP : MonoBehaviour
     private Animator anim;
     UnityEngine.AI.NavMeshAgent agent;
 
-    public int bossHealth = 50;
-    public int maxBossHealth = 50;
+    public int bossHealth = 60;
+    public int maxBossHealth = 60;
 
     //gamestates correspond to behaviour methods. Only one can be active at a time.
     public bool gameState_OoC;
@@ -115,7 +115,7 @@ public class SummonerBossSP : MonoBehaviour
 
     void Update()
     {
-        if (!hasDied)
+        if (!hasDied && !HeroControllerSP.isPaused)
         {
             cooldownTimer -= 0.03f;
             summonCooldownTimer -= 0.03f;
@@ -330,6 +330,7 @@ public class SummonerBossSP : MonoBehaviour
         anim.SetBool("IsNotInRange", false);
         
         agent.ResetPath();
+        //boss health is higher than 50 at the start but she just heals to 50.
         if (bossHealth <= 50 && cooldownTimer < 0.01f)
         {
             Instantiate(SE_Heal, this.transform.position, this.transform.rotation);

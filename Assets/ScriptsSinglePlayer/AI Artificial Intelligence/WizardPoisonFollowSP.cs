@@ -7,7 +7,7 @@ public class WizardPoisonFollowSP : MonoBehaviour
     private Animator anim;
     UnityEngine.AI.NavMeshAgent agent;
     
-    public int bossHealth = 20;
+    public int bossHealth = 30;
     private float shieldHeight;
 
     //gamestates correspond to behaviour methods. Only one can be active at a time.
@@ -91,7 +91,7 @@ public class WizardPoisonFollowSP : MonoBehaviour
 
     void Update()
     {
-        if (!hasDied)
+        if (!hasDied && !HeroControllerSP.isPaused)
         {
 
             cooldownTimer -= 0.03f;
@@ -308,7 +308,6 @@ public class WizardPoisonFollowSP : MonoBehaviour
     public void OnCollisionEnter(Collision other)
     {
        
-        //case when your player projectile hits the caster
         if (other.gameObject.name.Contains("Shot") && !hasDied)
         {
             
@@ -332,7 +331,7 @@ public class WizardPoisonFollowSP : MonoBehaviour
             {
                 if (other.gameObject.name.Contains("FIRE"))
                 {
-                    bossHealth -= 6;
+                    bossHealth -= 5;
                     Instantiate(BloodSpecEffect, other.transform.position, this.transform.rotation);
                 }
                 else
@@ -346,7 +345,8 @@ public class WizardPoisonFollowSP : MonoBehaviour
             {
                 if (other.gameObject.name.Contains("LIGHTNING"))
                 {
-                    bossHealth -= 2;
+                    int lightningVariance = Random.Range(1, 2);
+                    bossHealth -= lightningVariance;
                     Instantiate(BloodSpecEffect, other.transform.position, this.transform.rotation);
                 }
                 else
@@ -359,7 +359,7 @@ public class WizardPoisonFollowSP : MonoBehaviour
             //note that shield shot IS the ice special... shield normally shoots an axe shot (because reasons)
             else if (other.gameObject.name.Contains("Shield_Shot"))
             {
-                bossHealth -= 3;
+                bossHealth -= 4;
                 Instantiate(DeathSpecEffect, other.transform.position, this.transform.rotation);
             }
 

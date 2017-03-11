@@ -20,7 +20,7 @@ public class PaladinFollowSP : MonoBehaviour
     bool shouldPlayAggroEffect = false;
     Quaternion aggroRot = new Quaternion(0.0f, 180.0f, 180.0f, 0.0f);
 
-    public int bossHealth = 30;
+    public int bossHealth = 40;
     private int bossDamage = 15;
 
     public GameObject PowerUp;
@@ -86,7 +86,7 @@ public class PaladinFollowSP : MonoBehaviour
 
     void Update()
     {
-        if (!hasDied)
+        if (!hasDied && !HeroControllerSP.isPaused)
         {
             cooldownTimer -= 0.02f;
             cooldownTimerPowerup -= 0.02f;
@@ -330,7 +330,7 @@ public class PaladinFollowSP : MonoBehaviour
             {
                 if (other.gameObject.name.Contains("FIRE"))
                 {
-                    bossHealth -= 6;
+                    bossHealth -= 5;
                     Instantiate(BloodSpecEffect, other.transform.position, this.transform.rotation);
                 }
                 else
@@ -344,7 +344,8 @@ public class PaladinFollowSP : MonoBehaviour
             {
                 if (other.gameObject.name.Contains("LIGHTNING"))
                 {
-                    bossHealth -= 2;
+                    int lightningVariance = Random.Range(1, 2);
+                    bossHealth -= lightningVariance;
                     Instantiate(BloodSpecEffect, other.transform.position, this.transform.rotation);
                 }
                 else
@@ -357,7 +358,7 @@ public class PaladinFollowSP : MonoBehaviour
             //note that shield shot IS the ice special... shield normally shoots an axe shot (because reasons)
             else if (other.gameObject.name.Contains("Shield_Shot"))
             {
-                bossHealth -= 3;
+                bossHealth -= 4;
                 Instantiate(DeathSpecEffect, other.transform.position, this.transform.rotation);
             }
 

@@ -30,7 +30,7 @@ public class MeleeFollowSP : MonoBehaviour
 
     public bool isAggroed;
 
-    public int bossHealth = 2;
+    public int bossHealth = 3;
     public int vampireDamage = 15;
 
     public bool isSummoned = false;
@@ -57,7 +57,6 @@ public class MeleeFollowSP : MonoBehaviour
         {
             isAggroed = false;
         }
-
         
         shouldPlayAggroEffect = true;
     }
@@ -89,7 +88,7 @@ public class MeleeFollowSP : MonoBehaviour
             {
                 if (other.gameObject.name.Contains("FIRE"))
                 {
-                    bossHealth -= 6;
+                    bossHealth -= 5;
                     Instantiate(BloodSpecEffect, other.transform.position, this.transform.rotation);
                 }
                 else
@@ -103,7 +102,8 @@ public class MeleeFollowSP : MonoBehaviour
             {
                 if (other.gameObject.name.Contains("LIGHTNING"))
                 {
-                    bossHealth -= 2;
+                    int lightningVariance = Random.Range(1, 2);
+                    bossHealth -= lightningVariance;
                     Instantiate(BloodSpecEffect, other.transform.position, this.transform.rotation);
                 }
                 else
@@ -116,7 +116,7 @@ public class MeleeFollowSP : MonoBehaviour
             //note that shield shot IS the ice special... shield normally shoots an axe shot (because reasons)
             else if (other.gameObject.name.Contains("Shield_Shot"))
             {
-                bossHealth -= 3;
+                bossHealth -= 4;
                 Instantiate(DeathSpecEffect, other.transform.position, this.transform.rotation);
             }
             //Only spawn loot if it is a normal vampire, not a summoned one.
@@ -198,7 +198,7 @@ public class MeleeFollowSP : MonoBehaviour
 
     void Update()
     {
-        if (!hasDied)
+        if (!hasDied && !HeroControllerSP.isPaused)
         {
             distanceX = this.transform.position.x - target.transform.position.x;
             distanceZ = this.transform.position.z - target.transform.position.z;
