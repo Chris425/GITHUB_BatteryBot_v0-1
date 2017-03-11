@@ -115,19 +115,19 @@ public class SummonerBossSP : MonoBehaviour
 
     void Update()
     {
-        if (!hasDied && !HeroControllerSP.isPaused)
+        
+        cooldownTimer -= 0.03f;
+        summonCooldownTimer -= 0.03f;
+
+        distanceX = this.transform.position.x - target.transform.position.x;
+        distanceZ = this.transform.position.z - target.transform.position.z;
+        distanceY = this.transform.position.y - target.transform.position.y;
+        checkAggro();
+
+        if (isAggroed)
         {
-            cooldownTimer -= 0.03f;
-            summonCooldownTimer -= 0.03f;
-
-            distanceX = this.transform.position.x - target.transform.position.x;
-            distanceZ = this.transform.position.z - target.transform.position.z;
-            distanceY = this.transform.position.y - target.transform.position.y;
-            checkAggro();
-
-            if (isAggroed)
+            if (!HeroControllerSP.isPaused)
             {
-
                 if (bossHealth > 10 && (distanceX < -8.0 || distanceX > 8.0) && (distanceZ < -8.0 || distanceZ > 8.0) && !gameState_Fleeing && !gameState_Healing)
                 {
                     Behaviour_MovingToTarget();
@@ -153,8 +153,9 @@ public class SummonerBossSP : MonoBehaviour
                     Behaviour_Healing();
                 }
             }
-
         }
+
+        
     }
 
     /// <summary>

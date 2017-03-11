@@ -86,8 +86,6 @@ public class PaladinFollowSP : MonoBehaviour
 
     void Update()
     {
-        if (!hasDied && !HeroControllerSP.isPaused)
-        {
             cooldownTimer -= 0.02f;
             cooldownTimerPowerup -= 0.02f;
 
@@ -119,12 +117,15 @@ public class PaladinFollowSP : MonoBehaviour
             else
             {
                 checkAggro();
-                if (isAggroed)
+                if (isAggroed )
                 {
-                    moveToPlayer();
+                    if (!HeroControllerSP.isPaused)
+                    {
+                        moveToPlayer();
+                    }
                 }
             }
-        }
+        
     }
 
 

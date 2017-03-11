@@ -126,7 +126,7 @@ public class Level2BossLightningSP : MonoBehaviour
 
     void Update()
     {
-        if (!hasDied && !HeroControllerSP.isPaused)
+        if (!HeroControllerSP.isPaused)
         {
             if (isAggroed)
             {

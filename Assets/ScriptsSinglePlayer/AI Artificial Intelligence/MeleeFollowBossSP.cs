@@ -240,21 +240,22 @@ public class MeleeFollowBossSP : MonoBehaviour
     }
 
     void Update()
-    {
-        if (!hasDied && !HeroControllerSP.isPaused)
+    {        
+        distanceX = this.transform.position.x - target.transform.position.x;
+        distanceZ = this.transform.position.z - target.transform.position.z;
+        distanceY = this.transform.position.y - target.transform.position.y;
+
+
+        checkAggro();
+
+        if (isAggroed )
         {
-            distanceX = this.transform.position.x - target.transform.position.x;
-            distanceZ = this.transform.position.z - target.transform.position.z;
-            distanceY = this.transform.position.y - target.transform.position.y;
-
-
-            checkAggro();
-
-            if (isAggroed)
+            if (!HeroControllerSP.isPaused)
             {
                 moveToPlayer();
             }
         }
+        
 
     }
 

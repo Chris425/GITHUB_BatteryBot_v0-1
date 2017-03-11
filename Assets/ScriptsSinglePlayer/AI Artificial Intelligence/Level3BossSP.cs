@@ -76,7 +76,7 @@ public class Level3BossSP : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
-        if (!hasDied && !HeroControllerSP.isPaused)
+        if (!HeroControllerSP.isPaused)
         {
             transitionCDTimer -= 0.01f;
             CDTimer -= 0.01f;
