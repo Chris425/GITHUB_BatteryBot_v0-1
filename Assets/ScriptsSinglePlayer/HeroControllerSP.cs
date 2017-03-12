@@ -753,9 +753,9 @@ public class HeroControllerSP : MonoBehaviour
                 anim.SetTrigger("isWalking");
             }
         }
-
-            //CDC this will change when new weps are added
-            if (Input.GetKey("1"))
+        
+        //CDC this will change when new weps are added
+        if (Input.GetKey("1"))
             {
                 isSlot1 = true;
                 isSlot2 = false; isSlot3 = false; /*isSlot4 = false; isSlot5 = false;*/
@@ -832,7 +832,7 @@ public class HeroControllerSP : MonoBehaviour
             //SPECIAL ATTACKS - X
             if (Input.GetKey("x") && cooldownTimer < 0.01f && hasAxe && hasAxe_LIGHTNING && isSlot1)
             {
-                anim.SetTrigger("isAxeHacking");
+                anim.SetTrigger("isLightning");
                 Instantiate(AxeShot_LIGHTNING, spawnLoc.transform.position, this.transform.rotation);
                 cooldownTimer = 2.1f;
             }
@@ -937,6 +937,8 @@ public class HeroControllerSP : MonoBehaviour
             if (Input.GetKey(KeyCode.B)) { SceneManager.LoadScene("LevelBonus"); }
 
         }
+
+        
 
     }
     
