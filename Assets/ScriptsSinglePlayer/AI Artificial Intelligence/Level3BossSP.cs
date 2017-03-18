@@ -18,6 +18,7 @@ public class Level3BossSP : MonoBehaviour {
     private int bossHealth = 340;
     private int maxBossHealth = 340;
 
+    public GameObject spawnLoc;
     public GameObject levelWellSelector;
     public GameObject teleSpot1;
     public GameObject teleSpot2;
@@ -28,10 +29,12 @@ public class Level3BossSP : MonoBehaviour {
     public GameObject BiteSpecEffect2;
     public GameObject TeleportExplosion;
     public GameObject SummonedVampire;
+    public GameObject coldObj;
     public AudioClip TeleSound;
     public AudioClip OnDeathSound;
 
-    private int bossDamage = 18;
+
+    private int bossDamage = 16;
 
 
     private bool isTransition;
@@ -133,7 +136,21 @@ public class Level3BossSP : MonoBehaviour {
 
     void moveToPlayer()
     {
+        Vector3 targetPostition = new Vector3(target.transform.position.x,
+                                       target.transform.position.y,
+                                       target.transform.position.z);
+        spawnLoc.transform.LookAt(targetPostition);        
+        this.transform.LookAt(targetPostition);
+        spawnLoc.transform.LookAt(targetPostition);
 
+        int attackChance = Random.Range(1, 170);
+        if (attackChance >= 169 && CDTimer < 0.01f)
+        {
+           // anim.SetTrigger("isAttacking");
+            Instantiate(coldObj, spawnLoc.transform.position, spawnLoc.transform.rotation);
+            CDTimer = 0.3f;
+
+        }
         if ((distanceX > -2.5 && distanceX < 2.5) && (distanceZ > -2.5 && distanceZ < 2.5) && (distanceY > -3 && distanceY < 3) )
         {
             if (CDTimer < 0.01f)

@@ -35,6 +35,7 @@ public class HeroControllerSP : MonoBehaviour
     //status effects
     public static bool isPoisoned;
     private float poisonCooldownTimer;
+    private float coldCooldownTimer;
     public static int poisonTicks = 10;
 
     //inventory
@@ -88,6 +89,7 @@ public class HeroControllerSP : MonoBehaviour
 
 
     public GameObject warning;
+    public GameObject SE_coldEffect;
     public GameObject warningCritical;
 
     //gears
@@ -112,6 +114,7 @@ public class HeroControllerSP : MonoBehaviour
     private float dashCooldownTimer;
     
     bool isBoosting = false;
+    public bool isCold = false;
 
     //Battery life
     public static int battery = 100;
@@ -122,13 +125,20 @@ public class HeroControllerSP : MonoBehaviour
 
     public RawImage pauseScreen;
 
+    private GameObject bbMetalSurface;
+    private Renderer rend;
+    public Material bbGlacier;
+    public Material bbMetal;
+
+
+
+
     //UI Inventory Elements
     public List<Texture> invSlots = new List<Texture>();
     public List<RawImage> emptyInvSlots = new List<RawImage>();
 
-    
 
-    
+    private GameObject coldEffects;
 
     void Update()
     {
@@ -159,6 +169,7 @@ public class HeroControllerSP : MonoBehaviour
 
     private void checkStatusEffects()
     {
+        //Poison
         if (isPoisoned && poisonCooldownTimer <= 0.01f)
         {
             //Instatiate poison effect
@@ -173,6 +184,18 @@ public class HeroControllerSP : MonoBehaviour
             isPoisoned = false;
             poisonTicks = 10;
         }
+
+        //Cold
+        if (isCold && coldCooldownTimer <= 0.01f)
+        {
+            isCold = false;
+            Destroy(coldEffects);
+                if (rend != null)
+            {
+                rend.material = bbMetal;
+            }
+        }
+
     }
 
     private void UpdateSlider()
@@ -230,6 +253,7 @@ public class HeroControllerSP : MonoBehaviour
         
 
         isPoisoned = false;
+        isCold = false;
 
         battery = 100;
         speed = 15.0f;
@@ -259,6 +283,17 @@ public class HeroControllerSP : MonoBehaviour
         gearsValText.text = "" + Gears;
 
         batterySlider.value = 100;
+
+        //find beta_surface and assign it to our variable
+        GameObject bb = GameObject.Find("BatteryBot");
+        foreach (Transform child in bb.transform)
+        {            
+            if (child.gameObject.name.Contains("Beta_Surface"))
+            {
+                rend = child.gameObject.GetComponent<Renderer>();
+                bbMetalSurface = child.gameObject;                
+            }
+        }
 
         //GameObject myCanvas = GameObject.Find("Canvas");
         //emptyInvSlots = myCanvas.GetComponentsInChildren<RawImage>();
@@ -302,7 +337,7 @@ public class HeroControllerSP : MonoBehaviour
             {
                 battery -= 12;
             }
-            
+
             Destroy(other.gameObject);
         }
         else if (other.gameObject.name.Contains("CasterTurretShot"))
@@ -357,7 +392,7 @@ public class HeroControllerSP : MonoBehaviour
             }
             Destroy(other.gameObject);
         }
-        else if (other.gameObject.name.Contains("wizardFire") )
+        else if (other.gameObject.name.Contains("wizardFire"))
         {
             Instantiate(SE_hit, this.transform.position, this.transform.rotation);
             if (!hasArmour)
@@ -397,7 +432,7 @@ public class HeroControllerSP : MonoBehaviour
             isPoisoned = true;
             //refresh number of ticks
             poisonTicks = 5;
-            
+
         }
         else if (other.gameObject.name.Contains("GroundSlamProjectiles"))
         {
@@ -405,7 +440,7 @@ public class HeroControllerSP : MonoBehaviour
             battery -= 2;
 
         }
-       else if (other.gameObject.name.Contains("SafetyDance"))
+        else if (other.gameObject.name.Contains("SafetyDance"))
         {
             Instantiate(SE_hit, this.transform.position, this.transform.rotation);
             if (!hasArmour)
@@ -417,6 +452,41 @@ public class HeroControllerSP : MonoBehaviour
                 battery -= 15;
             }
             Destroy(other.gameObject);
+        }
+        else if (other.gameObject.name.Contains("lvl3BossSlowProj"))
+        {
+            //Only freeze the player if theyre not already frozen
+            if (!isCold)
+            {
+                isCold = true;
+                coldCooldownTimer = 7.0f;
+                Instantiate(warning, this.transform.position, this.transform.rotation);
+                coldEffects = Instantiate(SE_coldEffect, this.transform.position, this.transform.rotation);
+                coldEffects.transform.parent = this.gameObject.transform;
+            }
+            //if you are already cold, simply refresh the duration but do not remake the cold effects prefab
+            else
+            {
+                coldCooldownTimer = 7.0f;
+                Instantiate(warning, this.transform.position, this.transform.rotation);
+            }
+           
+            //deal damage
+            Instantiate(SE_hit, this.transform.position, this.transform.rotation);
+            if (!hasArmour)
+            {
+                battery -= 2;
+            }
+            else
+            {
+                battery -= 1;
+            }
+            Destroy(other.gameObject);
+            //make the player's texture change.
+            if (rend != null)
+            {
+                rend.material = bbGlacier;
+            }
         }
 
 
@@ -569,6 +639,7 @@ public class HeroControllerSP : MonoBehaviour
         cooldownTimer -= 0.03f;
         dashCooldownTimer -= 0.04f;
         poisonCooldownTimer -= 0.03f;
+        coldCooldownTimer -= 0.03f;
         interactTimer -= 0.03f;
 
 
@@ -705,12 +776,23 @@ public class HeroControllerSP : MonoBehaviour
             
         }
 
-       
 
+        //boost only
         if (isBoosting)
         {
             speed = speed += 20.0f;
             IdleGasStream.gameObject.SetActive(false);
+        }
+        //cold only
+        if (isCold)
+        {
+            speed = 1.75f;
+            //cold AND boosting
+            if (isBoosting)
+            {
+                speed = speed += 3.0f;
+                IdleGasStream.gameObject.SetActive(false);
+            }
         }
     }
 
@@ -744,11 +826,11 @@ public class HeroControllerSP : MonoBehaviour
                 anim.SetTrigger("isJumping");
             }
 
-            if (Input.GetKey("w") && speed > 7.5f)
+            if (Input.GetKey("w") && speed > 7.5f && !isCold)
             {
                 anim.SetTrigger("isRunning");
             }
-            else if (Input.GetKey("w") && speed <= 7.5f)
+            else if (Input.GetKey("w") && (speed <= 7.5f || isCold)) //when you're cold from a projectile you'll do the walk animation.
             {
                 anim.SetTrigger("isWalking");
             }
