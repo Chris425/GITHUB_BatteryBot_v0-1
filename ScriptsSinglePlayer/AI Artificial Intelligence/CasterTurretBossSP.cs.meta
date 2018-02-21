@@ -1,0 +1,43 @@
+fileFormatVersion: 2
+guid: 0c98f48b7c668ea499924d44128a2bfe
+timeCreated: 1492265147
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - target: {instanceID: 0}
+  - CasterSpecEffect: {fileID: 1000013706261646, guid: d10731a1eaea7c243ace525ca5ecc157,
+      type: 2}
+  - CasterSpawnLoc: {fileID: 1000011343529750, guid: 10f0feb41dc22dc4fbcc65716c048d33,
+      type: 2}
+  - objToSpawn: {fileID: 1000012146966126, guid: 347cf7740e837b640aa3a0a1976d0328,
+      type: 2}
+  - gunSpecEffect: {fileID: 1000012846706402, guid: 2bd76f22374a47f48b7f2c55662b2e0d,
+      type: 2}
+  - gunSpecBlueEffect: {fileID: 1665610290241830, guid: 052d77e8b0a6c6f4eb6dd69a5be5277e,
+      type: 2}
+  - BloodSpecEffect: {fileID: 1000010244885832, guid: e27cebc1d1e1c3940aa823b7c96360a3,
+      type: 2}
+  - AggroSpecEffect: {fileID: 1000012397342314, guid: 88a29fcf0b0b7204ebb75b12b49fbdd4,
+      type: 2}
+  - FlameEffect: {instanceID: 0}
+  - RedBattery: {fileID: 1000010581996754, guid: 211f197b74145464da35d287d5471ce1,
+      type: 2}
+  - GreenBattery: {fileID: 1000010629734422, guid: 62d688f5f029d454ba375eb87c5b9585,
+      type: 2}
+  - SuperBattery: {fileID: 1000012188243824, guid: 22db9e559a4eec84596cab218d4c19e4,
+      type: 2}
+  - Gear: {fileID: 1000014195789538, guid: f166779eefec9e043b0d6bfacf6d444a, type: 2}
+  - GoldenGear: {fileID: 1000010575479960, guid: 835845984decf9543af2558ccbaecc70,
+      type: 2}
+  - AxeDrop: {fileID: 1000012332413824, guid: 47eebad7d8463ac42bee55998150c0b6, type: 2}
+  - ShieldDrop: {fileID: 1000011798727990, guid: 916498d3b8fff304fbf7e50bcb47f9e9,
+      type: 2}
+  - GunDrop: {fileID: 1000010993806992, guid: 718a4c8ea578bd84bac7a8f15597bfca, type: 2}
+  - GreatswordDrop: {fileID: 1000011520497516, guid: 0a886cce69974c3469bdc789edaaf042,
+      type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

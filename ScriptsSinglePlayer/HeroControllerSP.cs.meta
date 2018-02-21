@@ -1,0 +1,68 @@
+fileFormatVersion: 2
+guid: 2d126e7284cf93d4a90b03a1711034d2
+timeCreated: 1500820770
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - normalCam: {instanceID: 0}
+  - farCam: {instanceID: 0}
+  - firstPersCam: {instanceID: 0}
+  - SE_hit: {fileID: 1000012846706402, guid: 2bd76f22374a47f48b7f2c55662b2e0d, type: 2}
+  - SE_Heal: {instanceID: 0}
+  - SE_basic_hit: {instanceID: 0}
+  - SE_hit_ice: {instanceID: 0}
+  - SE_hit_poison: {instanceID: 0}
+  - SE_GodMode: {instanceID: 0}
+  - SE_GroundHit1: {instanceID: 0}
+  - SE_GroundHit2: {instanceID: 0}
+  - SE_GroundHit3: {instanceID: 0}
+  - IdleGasStream: {instanceID: 0}
+  - WorkingGasStream: {instanceID: 0}
+  - GreatswordFire: {instanceID: 0}
+  - Helm: {instanceID: 0}
+  - Armour: {instanceID: 0}
+  - shield: {instanceID: 0}
+  - axe: {instanceID: 0}
+  - gun: {instanceID: 0}
+  - GS: {instanceID: 0}
+  - jetBooster: {instanceID: 0}
+  - JetBooster_ARCANE: {instanceID: 0}
+  - GSShot: {instanceID: 0}
+  - GSShot_FIRE: {instanceID: 0}
+  - AxeShot: {instanceID: 0}
+  - AxeShot_LIGHTNING: {instanceID: 0}
+  - ShieldShot_ICE: {instanceID: 0}
+  - BoosterSE: {instanceID: 0}
+  - HeroBeingControlled: {instanceID: 0}
+  - ExtraLight: {instanceID: 0}
+  - GreenLight: {instanceID: 0}
+  - YellowLight: {instanceID: 0}
+  - RedLight: {instanceID: 0}
+  - warning: {instanceID: 0}
+  - SE_coldEffect: {instanceID: 0}
+  - warningCritical: {instanceID: 0}
+  - gearsValText: {instanceID: 0}
+  - ammoValText: {instanceID: 0}
+  - objToSpawn: {instanceID: 0}
+  - objToSpawnBlue: {fileID: 1025112337075360, guid: bfa0aa7d38afe5e48b835d977096a8af,
+      type: 2}
+  - GunShot_MULTI: {fileID: 1000013137066546, guid: 2c70f71165fa15143895afd9c197c6e4,
+      type: 2}
+  - GunShot_POISON: {fileID: 1393298616107178, guid: 37067e5d65da4b942bed292f7a04a001,
+      type: 2}
+  - GunShot_COLD: {instanceID: 0}
+  - GunShot_FIRE: {instanceID: 0}
+  - interactShot: {instanceID: 0}
+  - spawnLoc: {instanceID: 0}
+  - batteryValText: {instanceID: 0}
+  - batterySlider: {instanceID: 0}
+  - Fill: {instanceID: 0}
+  - pauseScreen: {instanceID: 0}
+  - bbGlacier: {instanceID: 0}
+  - bbMetal: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

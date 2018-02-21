@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 7d8d676a19dbb214eb4a7624fcfe815c
+timeCreated: 1514659376
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - currentSelector: {instanceID: 0}
+  - SE_WrongSound: {fileID: 1513557276733952, guid: 44b39cf91a8070d4491abb28ca237950,
+      type: 2}
+  - SE_GearGet: {fileID: 1000012846706402, guid: 3c008743905f0a94d92a4a4477857a68,
+      type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

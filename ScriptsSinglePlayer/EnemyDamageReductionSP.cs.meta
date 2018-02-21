@@ -1,0 +1,25 @@
+fileFormatVersion: 2
+guid: 63c90238779980f4ba10d6d2e7f9dfc5
+timeCreated: 1518909915
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - gunSpecBlueEffect: {fileID: 1665610290241830, guid: 052d77e8b0a6c6f4eb6dd69a5be5277e,
+      type: 2}
+  - GunSpecEffect: {fileID: 1000012846706402, guid: 2bd76f22374a47f48b7f2c55662b2e0d,
+      type: 2}
+  - gunSpecSilverEffect: {fileID: 1505276894072356, guid: 5be09f601f04d384f8fa08f0a206d1a0,
+      type: 2}
+  - gunSpecGoldEffect: {fileID: 1075501362447266, guid: 55e1a4b8cc1da2e44ae6b58d8354254a,
+      type: 2}
+  - BloodSpecEffect: {fileID: 1000010244885832, guid: e27cebc1d1e1c3940aa823b7c96360a3,
+      type: 2}
+  - SE_Heal: {fileID: 1000012129054228, guid: 5e9e5760f2ec6d449a2662f9d296095a, type: 2}
+  - SE_Hit_Poison: {fileID: 1685136058648898, guid: 121de00900deb6a4692d7a8f3f42a552,
+      type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

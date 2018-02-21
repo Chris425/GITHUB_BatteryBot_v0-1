@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: c6d7535b1f45ef4419396949e3921e13
+timeCreated: 1500835320
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - metal: {fileID: 2100000, guid: ce7b42f9d94ea334d8a5da353ddadc64, type: 2}
+  - lightning: {instanceID: 0}
+  - gold: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

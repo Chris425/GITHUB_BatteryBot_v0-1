@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: cd57001118382f147a6fb89b3d01eaa7
+timeCreated: 1514661919
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - SE_ChargeUp: {fileID: 1000012349253258, guid: 40af6f476c67c5846a2f9fdf5eecad2d,
+      type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

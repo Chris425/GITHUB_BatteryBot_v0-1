@@ -1,0 +1,44 @@
+fileFormatVersion: 2
+guid: 3613975b3be588748a818ab468f95496
+timeCreated: 1514055907
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - pathDests: {fileID: 1424236988747346, guid: df8dfa3c667078d48aa650a28006b320,
+      type: 2}
+  - target: {instanceID: 0}
+  - glacier: {fileID: 2100000, guid: d28d827add2e3c84ab70aec79920e4ce, type: 2}
+  - SE_iceShatter: {fileID: 1000011950237730, guid: 18b2e93d099f57d49ab26a021ca639af,
+      type: 2}
+  - SE_DemonFrozen: {fileID: 1606825920738038, guid: 2374b1f55d5825e4898be27b3cff2e20,
+      type: 2}
+  - fireRangeEffect: {fileID: 1480269902527212, guid: ae176bb109f38bd46a20145d724e02c3,
+      type: 2}
+  - SE_DemonMelee1: {fileID: 1000013974356074, guid: 28239d5d87dd3524cba3ceeef022029f,
+      type: 2}
+  - SE_DemonMelee2: {fileID: 1073548687879264, guid: 870ab15f53e32d44bac461cb92248a76,
+      type: 2}
+  - GunSpecEffect: {fileID: 1000012846706402, guid: 2bd76f22374a47f48b7f2c55662b2e0d,
+      type: 2}
+  - gunSpecBlueEffect: {fileID: 1665610290241830, guid: 052d77e8b0a6c6f4eb6dd69a5be5277e,
+      type: 2}
+  - BloodSpecEffect: {fileID: 1000010244885832, guid: e27cebc1d1e1c3940aa823b7c96360a3,
+      type: 2}
+  - AggroSpecEffect: {fileID: 1000012397342314, guid: 88a29fcf0b0b7204ebb75b12b49fbdd4,
+      type: 2}
+  - SE_Hit_Poison: {fileID: 1685136058648898, guid: 121de00900deb6a4692d7a8f3f42a552,
+      type: 2}
+  - SE_Heal: {fileID: 1000012129054228, guid: 5e9e5760f2ec6d449a2662f9d296095a, type: 2}
+  - SE_Thorns: {fileID: 1928221354738736, guid: 4b8dd78b7e5e867419226099376221bd,
+      type: 2}
+  - RedBattery: {fileID: 1000010581996754, guid: 211f197b74145464da35d287d5471ce1,
+      type: 2}
+  - GreenBattery: {fileID: 1000010629734422, guid: 62d688f5f029d454ba375eb87c5b9585,
+      type: 2}
+  - Gear: {fileID: 1000014195789538, guid: f166779eefec9e043b0d6bfacf6d444a, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

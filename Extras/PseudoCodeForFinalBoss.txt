@@ -1,0 +1,254 @@
+private bool isPhase1;
+private bool isPhase2;
+private bool isPhase3;
+private bool istransition1to2;
+private bool istransition2to3;
+
+private bool hasDoneTransition1to2;
+private bool hasDoneTransition2to3;
+
+private float cooldownTimer;
+private float behaviourModeTimer;
+private float specialCooldownTimer;
+
+public GameObject spawnLoc;
+
+private int mode
+
+//various public SE_
+
+//Text to update for debugging
+private bool isDebugging
+
+//if isDebugging - have text on screen set to different timers, which mode, booleans!!
+//isDebugging = true if metal skll
+
+Start()
+{
+	//armr.setactive = false
+	//gn & shld.setactive = true
+	
+	isPhase1 = true;
+	isPhase2 = false;
+	isPhase3 = false;
+	istransition1to2 = false;
+	istransition2to3 = false;
+	behaviourModeTimer = 40.0f
+	cooldownTimer = 10.0f
+	hasDoneTransition1to2 = false;
+	hasDoneTransition2to3 = false;
+	
+	anim
+	agent
+}
+
+
+Update()
+{
+	StartCoroutine("Timers");
+	
+	StartCoroutine("PhaseBehaviour");
+
+}
+
+
+private IEnumerator Timers()
+{
+	yield return null;
+	behaviourModeTimer -= 0.01f * time.DeltaTime();
+	yield return null;
+	cooldownTimer -= 0.01f * time.DeltaTime();
+	yield return null;
+	if(behaviourModeTimer < 0.0f)
+	{
+		mode += 1
+		behaviourModeTimer =  random.Range(0.0f,30.0f) + 30.0f ;
+	}
+	yield return null;
+	
+}
+
+private IEnumerator PhaseBehaviour 
+{
+	yield return null;
+	int currMode = mode % 2
+	
+	yield return null;
+	if(isPhase1)
+	{
+		behaviourP1(currMode);
+	}
+	yield return null;
+	else if(istransition1to2)
+	{
+		transition_behaviourP1toP2();
+	}
+	yield return null;
+	else if(isPhase2)
+	{
+		behaviourP2(currMode);
+	}
+	yield return null;
+	else if(istransition2to3)
+	{
+		transition_behaviourP2toP3();
+	}
+	yield return null;
+	else if(isPhase3)
+	{
+		behaviourP3(currMode);
+	}
+	yield return null;
+}
+
+//@param mode can be 0 or 1
+public void behaviourP1(int mode)
+{
+	if(mode == 0)
+	{
+		//movement code taken care of first
+	
+		int decision = Random.Range(0,100)
+		if(cooldownTimer < 0.0f || specialCooldownTimer < 0.0f)
+		{... for each decision }
+		//speed = 75%
+		//gn&shld set active rest setactive false
+		//get array of cover
+		//move to one at random
+		//look at bb
+		//proj & sometimes multi
+		
+		
+	}
+	else 
+	{
+		//movement code taken care of first
+	
+		int decision = Random.Range(0,100)
+		if(cooldownTimer < 0.0f || specialCooldownTimer < 0.0f)
+		{... for each decision }
+		//speed = 75%
+		//normal gs set active rest setactive false
+		//run towards
+		//vmp logic
+	}
+
+}
+
+public void transition_behaviourP1toP2()
+{
+	//intantiate many SE_ batr
+	anim.setTrigger("kneel")	
+
+	if(cooldownTimer < 0.0f)
+	{
+		//remove cover, instantiate expl on ea
+		instantiate SEgdmode
+		//armr & gs flm .setactive = true
+		istransition1to2 = false
+		isPhase2 = true;
+	}
+
+}
+
+public void behaviourP2(int mode)
+{
+
+	if(mode == 0)
+	{
+		//movement code taken care of first
+		
+		if(cooldownTimer < 0.0f || specialCooldownTimer < 0.0f)
+		{... for each decision }
+		//speed = 100%
+		//ax lightn set active rest setactive false
+		//normal mele
+		//proj
+		//multi
+		//sum one
+	}
+	else 
+	{
+		//movement code taken care of first
+		
+		if(cooldownTimer < 0.0f || specialCooldownTimer < 0.0f)
+		{... for each decision }
+		//speed = 125%
+		//fast gs flm set active rest setactive false
+		//chrge
+		//3 proj flm (pala)
+	}
+	
+}
+
+public void transition_behaviourP2toP3()
+{
+	//intantiate many SE_ batr
+	anim.setTrigger("kneel")	
+	
+	
+	if(cooldownTimer < 0.0f)
+	{
+		//4 summoners set to variables. var.setFlDest(GamObj obj) -> so add this method
+		
+		istransition2to3 = false
+		isPhase3 = true;
+	}
+}
+
+
+public void behaviourP3(int mode) //extends p2
+{
+	if(mode == 0)
+	{
+		//movement code taken care of first
+		
+		if(cooldownTimer < 0.0f || specialCooldownTimer < 0.0f)
+		{... for each decision }
+		//speed = 100%
+		//ax lightn
+		//normal mele
+		//proj
+		//multi
+		//sum 3
+		//channel heal from 4 pillars
+	}
+	else 
+	{
+		//movement code taken care of first
+		
+		if(cooldownTimer < 0.0f || specialCooldownTimer < 0.0f)
+		{... for each decision }
+		//speed = 125%
+		//fast gs flm
+		//chrge
+		//3 proj flm (pala)
+		//castr flm effct
+		//mino spwn circles
+	}
+}
+
+
+
+onCollisionEnter()
+{
+	if(bossHealth < 75% && !hasDoneTransition1to2)
+	{
+		hasDoneTransition1to2 = true;
+		istransition1to2 = true;
+		isPhase1 = false;
+		cooldownTimer = 10.0f;
+	}
+	if(bossHealth < 40% && !hasDoneTransition2to3)
+	{
+		hasDoneTransition2to3 = true;
+		istransition2to3 = true;
+		isPhase2 = false;
+		cooldownTimer = 10.0f;
+	}
+	if(bossHealth < 0.1% && !hasDied)
+	{
+		//done, ending 
+	}
+
+}

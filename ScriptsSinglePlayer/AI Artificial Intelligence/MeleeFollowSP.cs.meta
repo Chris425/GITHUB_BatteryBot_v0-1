@@ -1,0 +1,42 @@
+fileFormatVersion: 2
+guid: def34e273c2b1f149a2843fe574fecf8
+timeCreated: 1517060452
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - pathDests: {instanceID: 0}
+  - target: {instanceID: 0}
+  - BiteSpecEffect1: {fileID: 1000013974356074, guid: 20d0db22bf09a984c8af57836cc5eb56,
+      type: 2}
+  - BiteSpecEffect2: {fileID: 1000013408731224, guid: 210e674f03555b941b185f3cfbd4f266,
+      type: 2}
+  - GunSpecEffect: {fileID: 1000012846706402, guid: 2bd76f22374a47f48b7f2c55662b2e0d,
+      type: 2}
+  - gunSpecBlueEffect: {instanceID: 0}
+  - BloodSpecEffect: {fileID: 1000010244885832, guid: e27cebc1d1e1c3940aa823b7c96360a3,
+      type: 2}
+  - AggroSpecEffect: {fileID: 1000012397342314, guid: 88a29fcf0b0b7204ebb75b12b49fbdd4,
+      type: 2}
+  - SE_Hit_Poison: {fileID: 1685136058648898, guid: 121de00900deb6a4692d7a8f3f42a552,
+      type: 2}
+  - SE_Heal: {fileID: 1000012129054228, guid: 5e9e5760f2ec6d449a2662f9d296095a, type: 2}
+  - SE_Thorns: {fileID: 1928221354738736, guid: 4b8dd78b7e5e867419226099376221bd,
+      type: 2}
+  - SE_VampDeath1: {fileID: 1384427380940590, guid: db2878d2618caf745b590e010d1e700b,
+      type: 2}
+  - SE_VampDeath2: {fileID: 1682605739902854, guid: 60d545baeb5dd9c4e80c2ab8cc7d7b60,
+      type: 2}
+  - SE_VampDeath3: {fileID: 1110130066292468, guid: df0eb5cd0ee604248a24dd29a8843848,
+      type: 2}
+  - RedBattery: {fileID: 1000010581996754, guid: 211f197b74145464da35d287d5471ce1,
+      type: 2}
+  - GreenBattery: {fileID: 1000010629734422, guid: 62d688f5f029d454ba375eb87c5b9585,
+      type: 2}
+  - Gear: {fileID: 1000014195789538, guid: f166779eefec9e043b0d6bfacf6d444a, type: 2}
+  - GunDrop: {fileID: 1000010993806992, guid: 718a4c8ea578bd84bac7a8f15597bfca, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

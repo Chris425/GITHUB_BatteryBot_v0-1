@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: ebecedc55b180204ebce78c48d9e474a
+timeCreated: 1507555520
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - SE_Thorns: {fileID: 1928221354738736, guid: 4b8dd78b7e5e867419226099376221bd,
+      type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
