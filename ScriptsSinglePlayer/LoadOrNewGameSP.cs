@@ -20,6 +20,9 @@ public class LoadOrNewGameSP : MonoBehaviour
     public AudioClip boop;
     public Text statusText;
     public GameObject SE_ErrorSound;
+    Color purpleColour;
+
+    private bool hasShownWarning = false;
 
     private AudioSource source;
 
@@ -27,8 +30,8 @@ public class LoadOrNewGameSP : MonoBehaviour
 
     void Awake()
     {
-
-       
+        purpleColour = new Color32(0xB1, 0xAB, 0xFF, 0xFF); 
+        hasShownWarning = false;
         source = GetComponent<AudioSource>();
     }
 
@@ -122,23 +125,33 @@ public class LoadOrNewGameSP : MonoBehaviour
     }
     public void button_New()
     {
-        //make new save - should all be empty. So clear GameManager specific variables first (these aren't cleared on gameover).
-        GAMEMANAGERSP.hasFinishedLevelOne = false;
-        GAMEMANAGERSP.hasFinishedLevelTwo = false;
-        GAMEMANAGERSP.hasFinishedLevelThree = false;
-        GAMEMANAGERSP.hasFinishedLevelFour = false;
-        GAMEMANAGERSP.hasFinishedLevelBonus = false;
-        GAMEMANAGERSP.numScore = 0;
-        GAMEMANAGERSP.numQualitySetting = QualitySettings.GetQualityLevel();
-        //now wipe gamestate like a normal gameover would.
-        GAMEMANAGERSP.wipeGameState();
-        //New game should also wipe skulls and bazooka though
-        GAMEMANAGERSP.hasBazooka = false;
-        GAMEMANAGERSP.hasSkull_GOLD = false;
-        GAMEMANAGERSP.hasSkull_SILVER = false;
-        GAMEMANAGERSP.hasSkull_BRONZE = false;
-        GAMEMANAGERSP.saveGameDataToFILE();
-        SceneManager.LoadScene("ExplorationOverworld");
+        if (hasShownWarning)
+        {
+            //make new save - should all be empty. So clear GameManager specific variables first (these aren't cleared on gameover).
+            GAMEMANAGERSP.hasFinishedLevelOne = false;
+            GAMEMANAGERSP.hasFinishedLevelTwo = false;
+            GAMEMANAGERSP.hasFinishedLevelThree = false;
+            GAMEMANAGERSP.hasFinishedLevelFour = false;
+            GAMEMANAGERSP.hasFinishedLevelBonus = false;
+            GAMEMANAGERSP.numScore = 0;
+            GAMEMANAGERSP.numQualitySetting = QualitySettings.GetQualityLevel();
+            //now wipe gamestate like a normal gameover would.
+            GAMEMANAGERSP.wipeGameState();
+            //New game should also wipe skulls and bazooka though
+            GAMEMANAGERSP.hasBazooka = false;
+            GAMEMANAGERSP.hasSkull_GOLD = false;
+            GAMEMANAGERSP.hasSkull_SILVER = false;
+            GAMEMANAGERSP.hasSkull_BRONZE = false;
+            GAMEMANAGERSP.saveGameDataToFILE();
+            SceneManager.LoadScene("ExplorationOverworld");
+        }
+        else
+        {
+            hasShownWarning = true;
+            statusText.text = "WARNING: THIS WILL OVERWRITE ANY DATA THAT CURRENTLY EXISTS.";
+            Instantiate(SE_ErrorSound, this.transform.position, this.transform.rotation);
+            statusText.color = Color.red;
+        }
     }
     public void button_Back()
     {
@@ -150,39 +163,67 @@ public class LoadOrNewGameSP : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetKeyDown(KeyCode.Return) || Input.GetButtonDown("Submit"))
         {
-            //LOAD GAME
-            if (isSelector1)
-            {
-                button_Load();                
-            }
-            //NEW GAME
-            else if (isSelector2)
-            {
-                button_New();
-            }
-            //Back to intro
-            else if (isSelector3)
-            {
-                button_Back();
-            }
+
+                //LOAD GAME
+                if (isSelector1)
+                {
+                    button_Load();
+                }
+                //NEW GAME
+                else if (isSelector2)
+                {
+                    if (hasShownWarning)
+                    {
+                        button_New();
+                    }
+                    else
+                    {
+                        hasShownWarning = true;
+                        statusText.text = "WARNING: THIS WILL OVERWRITE ANY DATA THAT CURRENTLY EXISTS.";
+                        Instantiate(SE_ErrorSound, this.transform.position, this.transform.rotation);
+                        statusText.color = Color.red;
+                    }
+                }
+                //Back to intro
+                else if (isSelector3)
+                {
+                    button_Back();
+                }
+            
+
+
 
         }
         else if (Input.GetKeyDown(KeyCode.Escape))
         {
-            String currScene = SceneManager.GetActiveScene().name;
-            if (currScene.Equals("GameoverSP"))
+            if (hasShownWarning)
             {
-                SceneManager.LoadScene("Intro");
+                hasShownWarning = false;
+                statusText.text = "Load from an existing file or start a new game.";
+                statusText.color = purpleColour;
             }
             else
             {
-                Application.Quit();
+                String currScene = SceneManager.GetActiveScene().name;
+                if (currScene.Equals("GameoverSP"))
+                {
+                    SceneManager.LoadScene("Intro");
+                }
+                else
+                {
+                    Application.Quit();
+                }
             }
+
 
         }
         //change selectors
         else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
         {
+            hasShownWarning = false;
+            statusText.text = "Load from an existing file or start a new game.";
+            statusText.color = purpleColour;
+
             source.PlayOneShot(boop, 0.7f);
             if (selectorChoice > 0)
             {
@@ -192,6 +233,10 @@ public class LoadOrNewGameSP : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
         {
+            hasShownWarning = false;
+            statusText.text = "Load from an existing file or start a new game.";
+            statusText.color = purpleColour;
+
             selectorChoice += 1;
             source.PlayOneShot(boop, 0.7f);
         }
