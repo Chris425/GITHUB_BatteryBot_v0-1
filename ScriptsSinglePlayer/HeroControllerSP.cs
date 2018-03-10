@@ -1450,7 +1450,7 @@ public class HeroControllerSP : MonoBehaviour
             }
 
             //blue shot
-            if (Input.GetKey(KeyCode.LeftShift) && Ammo > 3 && cooldownTimer < 0.01f && hasGun && isSlot2 && (hasGun_MULTI || hasGun_COLD || hasGun_POISON || hasGun_FIRE))
+            if (Input.GetButton("Fire2") && Ammo > 3 && cooldownTimer < 0.01f && hasGun && isSlot2 && (hasGun_MULTI || hasGun_COLD || hasGun_POISON || hasGun_FIRE))
             {
                 if (!GAMEMANAGERSP.hasSilver && !GAMEMANAGERSP.hasBazooka)
                 {
@@ -1482,19 +1482,19 @@ public class HeroControllerSP : MonoBehaviour
             yield return null;
 
             //SPECIAL ATTACKS - X
-            if (Input.GetKey("x") && cooldownTimer < 0.01f && hasAxe && hasAxe_LIGHTNING && isSlot1)
+            if (Input.GetButton("Fire3") && cooldownTimer < 0.01f && hasAxe && hasAxe_LIGHTNING && isSlot1)
             {
                 anim.SetTrigger("isLightning");
                 Instantiate(AxeShot_LIGHTNING, spawnLoc.transform.position, this.transform.rotation);
                 cooldownTimer = 1.5f;
             }
-            else if (Input.GetKey("x") && cooldownTimer < 0.01f && hasGS && hasGS_FIRE && isSlot3)
+            else if (Input.GetButton("Fire3") && cooldownTimer < 0.01f && hasGS && hasGS_FIRE && isSlot3)
             {
                 anim.SetTrigger("isSlashing");
                 Instantiate(GSShot_FIRE, spawnLoc.transform.position, this.transform.rotation);
                 cooldownTimer = 1.8f;
             }
-            else if (Input.GetKey("x") && cooldownTimer < 0.01f && hasGun && isSlot2)
+            else if (Input.GetButton("Fire3") && cooldownTimer < 0.01f && hasGun && isSlot2)
             {
                 if (hasGun_MULTI)
                 {
@@ -1526,14 +1526,14 @@ public class HeroControllerSP : MonoBehaviour
             }
 
             //note that offhands will use C to differentiate
-            if (Input.GetKey("c") && cooldownTimer < 0.01f && hasShield && hasShield_ICE && isSlot4)
+            if (Input.GetButton("Fire4") && cooldownTimer < 0.01f && hasShield && hasShield_ICE && isSlot4)
             {
                 anim.SetTrigger("isShieldBashing");
                 Instantiate(ShieldShot_ICE, spawnLoc.transform.position, this.transform.rotation);
                 cooldownTimer = 6.5f;
             }
 
-            if (Input.GetKey("c") && cooldownTimer < 0.01f && hasJetBooster && hasJetBooster_ARCANE && isSlot5)
+            if (Input.GetButton("Fire4") && cooldownTimer < 0.01f && hasJetBooster && hasJetBooster_ARCANE && isSlot5)
             {
                 anim.SetTrigger("isShieldBashing");
                 Instantiate(JetBooster_ARCANE, spawnLoc.transform.position, this.transform.rotation);
@@ -1541,7 +1541,7 @@ public class HeroControllerSP : MonoBehaviour
             }
 
             //heal ability
-            if (Input.GetKeyDown("h") && cooldownTimer < 0.01f && Ammo >= 100 && battery < 100)
+            if (Input.GetButton("Heal") && cooldownTimer < 0.01f && Ammo >= 50)
             {
                 anim.SetTrigger("isHealing");
                 Ammo -= 50;
@@ -1554,21 +1554,21 @@ public class HeroControllerSP : MonoBehaviour
 
             yield return null;
             //interact button
-            if (Input.GetKey("f") && interactTimer < 0.01f)
+            if (Input.GetButton("Interact") && interactTimer < 0.01f)
             {
                 anim.SetTrigger("isPunching");
                 
                 Instantiate(interactShot, spawnLoc.transform.position, this.transform.rotation);
                 interactTimer = 0.5f;
             }
-            if (Input.GetKey("v") && cooldownTimer < 0.01f && hasShield && isSlot4)
+            if (Input.GetButton("Fire5") && cooldownTimer < 0.01f && hasShield && isSlot4)
             {
                 anim.SetTrigger("isShieldBashing");
                 //shield bash = same damage as an axe!
                 Instantiate(AxeShot, spawnLoc.transform.position, this.transform.rotation);
                 cooldownTimer = 1.0f;
             }
-            if (Input.GetKey("v") && dashCooldownTimer < 0.01f && hasJetBooster && isSlot5)
+            if (Input.GetButton("Fire5") && dashCooldownTimer < 0.01f && hasJetBooster && isSlot5)
             {
                 anim.SetTrigger("isShieldBashing");
                 Instantiate(GSShot, spawnLoc.transform.position, this.transform.rotation); //does damage as you move forward with booster
@@ -1658,7 +1658,7 @@ public class HeroControllerSP : MonoBehaviour
         }
         else if (isDead)
         {
-            if (Input.GetKey(KeyCode.R))
+            if (Input.GetKey(KeyCode.R) || Input.GetButton("Submit"))
             {
                 respawnText.text = "";
                 isDead = false;
