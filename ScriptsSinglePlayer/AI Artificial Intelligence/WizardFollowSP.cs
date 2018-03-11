@@ -15,7 +15,7 @@ public class WizardFollowSP : MonoBehaviour
     public bool gameState_MovingToTarget;
     public bool gameState_InRangeAttacking;
     public bool gameState_FindCover;
-    private float waitTime = 1.5f;
+    private float waitTime = 1.0f;
 
     public bool isDroppingSkull = false;
     public GameObject blueSkull;
@@ -31,9 +31,9 @@ public class WizardFollowSP : MonoBehaviour
     public float distanceX;
     public float distanceZ;
     public float distanceY;
-    private float cooldown = 5.5f;
+    private float cooldown = 4.5f;
     private float IceBlastCooldown = 7.5f; // longer cooldowns, ice wizard is meant to be less dangerous but more tanky.
-    private float shieldCooldown = 10.0f;
+    private float shieldCooldown = 6.0f;
 
     private float cooldownTimer;
     private float IceBlastCooldownTimer;

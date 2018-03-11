@@ -27,8 +27,8 @@ public class WizardFireFollowSP : MonoBehaviour
     public float distanceY;
     private float cooldown = 3.5f;
     private float FireBlastCooldown = 5.0f; // different from attack cd
-    private float FireProjCooldown = 8.0f;
-    private float shieldCooldown = 8.0f;
+    private float FireProjCooldown = 6.0f;
+    private float shieldCooldown = 7.0f;
 
     private float cooldownTimer;
     private float IceBlastCooldownTimer;

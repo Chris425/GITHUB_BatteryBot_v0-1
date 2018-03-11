@@ -27,9 +27,9 @@ public class WizardPoisonFollowSP : MonoBehaviour
     public float distanceX;
     public float distanceZ;
     public float distanceY;
-    private float cooldown = 5.5f;
-    private float PoisonWellCooldown = 7.0f; // poison wizard is balanced offense and defense
-    private float shieldCooldown = 9.0f;
+    private float cooldown = 4.5f;
+    private float PoisonWellCooldown = 5.0f; // poison wizard is balanced offense and defense
+    private float shieldCooldown = 7.0f;
 
     private float cooldownTimer;
     private float IceBlastCooldownTimer;
