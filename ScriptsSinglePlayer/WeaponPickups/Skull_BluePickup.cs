@@ -39,6 +39,8 @@ public class Skull_BluePickup : MonoBehaviour
         {
             HeroControllerSP.hasSkull_BLUE = true;
             GAMEMANAGERSP.numScore += 10;
+            HeroController.hasSkull_BLUE = true;
+            GAMEMANAGERSP.numArenaScore += 10;
             Instantiate(SE_Gear, this.transform.position, this.transform.rotation);
             Destroy(this.gameObject);
         }

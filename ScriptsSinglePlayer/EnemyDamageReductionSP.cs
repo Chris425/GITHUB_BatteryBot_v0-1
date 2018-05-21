@@ -6,6 +6,9 @@ using UnityEngine;
 /*
 *Purpose of this class is to be a generic solution that applies to all enemies. Now we only update it here, in one class.
 * Further, enemies no longer need Special Effect game objects because GAMEMANAGER will have this script to do it.
+*
+*
+* Also being used for arena - may be refactored in future build...
 */
 
 public class EnemyDamageReductionSP : MonoBehaviour{
@@ -55,12 +58,12 @@ public class EnemyDamageReductionSP : MonoBehaviour{
     {
         elementTypes.Add("NORMAL"); elementTypes.Add("FIRE");
         elementTypes.Add("POISON"); elementTypes.Add("ICE");
-        elementTypes.Add("ETHEREAL");
+        elementTypes.Add("LIGHTNING"); elementTypes.Add("ETHEREAL");
     }
 
 
     /*
-    @param string elementType can be NORMAL, FIRE, POISON, ICE, ETHEREAL (summoned). This is used to determine who is weak to what
+    @param string elementType can be NORMAL, FIRE, POISON, ICE, LIGHTNING, ETHEREAL (summoned). This is used to determine who is weak to what
     @param int armour is >= 0. Damage - armour = damageTaken, although this can never be negative or 0. Always 1.
     returns an int showing how much damage will be dealt to an enemy. If negative - enemy is healed.
 */

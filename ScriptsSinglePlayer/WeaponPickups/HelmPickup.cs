@@ -35,6 +35,10 @@ public class HelmPickup : MonoBehaviour {
         {            
             HeroControllerSP.hasHelm = true;
             GAMEMANAGERSP.numScore += 47;
+
+            HeroController.hasHelm = true;
+            GAMEMANAGERSP.numArenaScore += 47;
+
             Instantiate(SE_Gear, this.transform.position, this.transform.rotation);
             Destroy(this.gameObject);
         }

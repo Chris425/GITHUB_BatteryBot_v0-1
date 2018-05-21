@@ -38,6 +38,9 @@ public class Shield_IcePickUp : MonoBehaviour
         {
             HeroControllerSP.hasShield_ICE = true;
             GAMEMANAGERSP.numScore += 22;
+
+            HeroController.hasShield_ICE = true;
+            GAMEMANAGERSP.numArenaScore += 22;
             Instantiate(SE_Gear, this.transform.position, this.transform.rotation);
             Destroy(this.gameObject);
         }

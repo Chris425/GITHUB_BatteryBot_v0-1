@@ -37,7 +37,9 @@ public class Skull_PurplePickup : MonoBehaviour
         if (other.gameObject.name.Contains("InteractShot"))
         {
             HeroControllerSP.hasSkull_PURPLE = true;
+            HeroController.hasSkull_PURPLE = true;
             GAMEMANAGERSP.numScore += 10;
+            GAMEMANAGERSP.numArenaScore += 10;
             Instantiate(SE_Gear, this.transform.position, this.transform.rotation);
             Destroy(this.gameObject);
         }

@@ -1,0 +1,105 @@
+fileFormatVersion: 2
+guid: 2b3fcc8b4e0ff954c872a40b5d0e5040
+timeCreated: 1521982383
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - normalCam: {instanceID: 0}
+  - farCam: {instanceID: 0}
+  - firstPersCam: {instanceID: 0}
+  - SE_hit: {fileID: 1000011975863224, guid: f4e0a9d3c920d044ca5a52cda29b8f3e, type: 2}
+  - SE_Heal: {fileID: 1000012129054228, guid: 5e9e5760f2ec6d449a2662f9d296095a, type: 2}
+  - SE_basic_hit: {fileID: 1913030064381924, guid: bcf67dc9ff80dc649b30f929fe649bd6,
+      type: 2}
+  - SE_hit_ice: {fileID: 1000011877439578, guid: 9457a02433964b64ea907dd5e2b0b35a,
+      type: 2}
+  - SE_hit_poison: {fileID: 1685136058648898, guid: 121de00900deb6a4692d7a8f3f42a552,
+      type: 2}
+  - SE_GodMode: {fileID: 1960733035784364, guid: 8d90e47edac5c4a4082a8b77d75a3540,
+      type: 2}
+  - SE_GroundHit1: {fileID: 1165208020411514, guid: d859dd0afcf4e484f99a2e76a9c2b28d,
+      type: 2}
+  - SE_GroundHit2: {fileID: 1165208020411514, guid: 309f062b68ef3f5429981186df73897a,
+      type: 2}
+  - SE_GroundHit3: {fileID: 1165208020411514, guid: 14341a6820515ba44a2974a32aa8c0b7,
+      type: 2}
+  - IdleGasStream: {instanceID: 0}
+  - WorkingGasStream: {instanceID: 0}
+  - GreatswordFire: {instanceID: 0}
+  - Helm: {instanceID: 0}
+  - Armour: {instanceID: 0}
+  - RightBoot: {instanceID: 0}
+  - LeftBoot: {instanceID: 0}
+  - RightLegArmour: {instanceID: 0}
+  - LeftLegArmour: {instanceID: 0}
+  - shield: {instanceID: 0}
+  - axe: {instanceID: 0}
+  - gun: {instanceID: 0}
+  - bazooka: {instanceID: 0}
+  - GS: {instanceID: 0}
+  - jetBooster: {instanceID: 0}
+  - JetBooster_ARCANE: {instanceID: 0}
+  - GSShot: {fileID: 1000010209746480, guid: abfafe8bf738b9a4784489307b27b82d, type: 2}
+  - GSShot_FIRE: {fileID: 1000014003822402, guid: 962f0de8044276b4ca6819d25216d703,
+      type: 2}
+  - AxeShot: {fileID: 1000012341219236, guid: c31a1e7fbf7cd924d9dfdafaccfcd51d, type: 2}
+  - AxeShot_LIGHTNING: {fileID: 1000012517827728, guid: 7521408bda7925f4287285764badf3fb,
+      type: 2}
+  - ShieldShot_ICE: {fileID: 1000013179323020, guid: d15e90f26e219d44a9be3f5c25801bcc,
+      type: 2}
+  - BoosterSE: {fileID: 1000012349253258, guid: 40af6f476c67c5846a2f9fdf5eecad2d,
+      type: 2}
+  - HeroBeingControlled: {instanceID: 0}
+  - ExtraLight: {instanceID: 0}
+  - GreenLight: {instanceID: 0}
+  - YellowLight: {instanceID: 0}
+  - RedLight: {instanceID: 0}
+  - warning: {fileID: 1000011576935376, guid: ef7c2e14c73cdd0488bac43b61745e56, type: 2}
+  - SE_coldEffect: {fileID: 1230767047398290, guid: b8bef0257d671b84ca181ed3213849a8,
+      type: 2}
+  - warningCritical: {fileID: 1000012809433810, guid: 2264d1609c37efa43977e02d2e47f849,
+      type: 2}
+  - SE_DoubleJump: {fileID: 1494019478241444, guid: b301d9732693cda41b5f5c8c7662124f,
+      type: 2}
+  - SE_PlayerLeap: {fileID: 1494019478241444, guid: b0c950bb3a32d4f4d9d36fb2c5b57a85,
+      type: 2}
+  - gearsValText: {instanceID: 0}
+  - respawnText: {instanceID: 0}
+  - livesValText: {instanceID: 0}
+  - scoreValText: {instanceID: 0}
+  - qualValText: {instanceID: 0}
+  - ammoValText: {instanceID: 0}
+  - objToSpawn: {fileID: 1000012335429680, guid: a04260aebe6c31347af5f47ce2690189,
+      type: 2}
+  - objToSpawnSilver: {fileID: 1193391892107862, guid: 15f63ceb92de5d24eaf7500ce06b1ee0,
+      type: 2}
+  - objToSpawnGold: {fileID: 1177283520120740, guid: 9f53ad6c3f6ea9c4c833291d0e2ebb12,
+      type: 2}
+  - objToSpawnBlue: {fileID: 1025112337075360, guid: bfa0aa7d38afe5e48b835d977096a8af,
+      type: 2}
+  - objToSpawnBlueGold: {fileID: 1338389970928914, guid: 380d8d261952adf448ebe2809171fd31,
+      type: 2}
+  - GunShot_MULTI: {fileID: 1000013137066546, guid: 2c70f71165fa15143895afd9c197c6e4,
+      type: 2}
+  - GunShot_POISON: {fileID: 1393298616107178, guid: 37067e5d65da4b942bed292f7a04a001,
+      type: 2}
+  - GunShot_COLD: {fileID: 1000012343846252, guid: 3c3998d22b73e50459e0038647f2b71a,
+      type: 2}
+  - GunShot_FIRE: {fileID: 1535932556768344, guid: 02cb3b4ae6920724aa57cbef2750702b,
+      type: 2}
+  - interactShot: {fileID: 1000012335429680, guid: 0b5dca29270db114bb1c05fc383072a5,
+      type: 2}
+  - spawnLoc: {instanceID: 0}
+  - batteryValText: {instanceID: 0}
+  - batterySlider: {instanceID: 0}
+  - Fill: {instanceID: 0}
+  - pauseScreen: {instanceID: 0}
+  - masterVolume: {instanceID: 0}
+  - bbGlacier: {fileID: 2100000, guid: d28d827add2e3c84ab70aec79920e4ce, type: 2}
+  - bbMetal: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

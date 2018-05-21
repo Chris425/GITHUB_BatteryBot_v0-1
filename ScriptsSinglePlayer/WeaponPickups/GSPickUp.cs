@@ -31,22 +31,22 @@ public class GSPickUp : MonoBehaviour
 
     }
 
-    // Not used
-    public void dequipWeapon()
-    {
-        if (HeroControllerSP.hasGun)
-        {
-            Instantiate(gun, this.transform.position, this.transform.rotation);
-        }
-        else if (HeroControllerSP.hasAxe)
-        {
-            Instantiate(axe, this.transform.position, this.transform.rotation);
-        }
-        else if (HeroControllerSP.hasGS)
-        {
-            Instantiate(GS, this.transform.position, this.transform.rotation);
-        }
-    }
+    //// Not used
+    //public void dequipWeapon()
+    //{
+    //    if (HeroControllerSP.hasGun)
+    //    {
+    //        Instantiate(gun, this.transform.position, this.transform.rotation);
+    //    }
+    //    else if (HeroControllerSP.hasAxe)
+    //    {
+    //        Instantiate(axe, this.transform.position, this.transform.rotation);
+    //    }
+    //    else if (HeroControllerSP.hasGS)
+    //    {
+    //        Instantiate(GS, this.transform.position, this.transform.rotation);
+    //    }
+    //}
 
     public void OnCollisionEnter(Collision other)
     {
@@ -57,9 +57,14 @@ public class GSPickUp : MonoBehaviour
             //Assumption - greatsword is 2h but will not conflict with shield; it's more of a buckler?
             //dequipWeapon();  
             GAMEMANAGERSP.numScore += 8;
+            GAMEMANAGERSP.numArenaScore += 8;
             HeroControllerSP.hasGS = true;
             HeroControllerSP.isSlot3 = true;
-            HeroControllerSP.isSlot1 = false; HeroControllerSP.isSlot2 = false; 
+            HeroControllerSP.isSlot1 = false; HeroControllerSP.isSlot2 = false;
+
+            HeroController.hasGS = true;
+            HeroController.isSlot3 = true;
+            HeroController.isSlot1 = false; HeroController.isSlot2 = false;
             Destroy(this.gameObject);
         }
     }

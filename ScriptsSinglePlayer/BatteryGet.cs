@@ -43,18 +43,22 @@ public class BatteryGet : MonoBehaviour {
             case 1:
                 Instantiate(BatterySpecEffect1, this.transform.position, this.transform.rotation);
                 HeroControllerSP.battery += 9;
+                HeroController.battery += 12;
                 break;
             case 2:
                 Instantiate(BatterySpecEffect2, this.transform.position, this.transform.rotation);
                 HeroControllerSP.battery += 12;
+                HeroController.battery += 16;
                 break;
             case 3:
                 Instantiate(BatterySpecEffect3, this.transform.position, this.transform.rotation);
                 HeroControllerSP.battery += 5;
+                HeroController.battery += 9;
                 break;
         }
 
         GAMEMANAGERSP.numScore += 1;
+        GAMEMANAGERSP.numArenaScore += 1;
         //then self destruct
         Destroy(this.gameObject);
     }
@@ -71,20 +75,27 @@ public class BatteryGet : MonoBehaviour {
                 Instantiate(BatterySpecEffect1, this.transform.position, this.transform.rotation);
                 HeroControllerSP.Ammo += 20;
                 HeroControllerSP.battery += 1;
+                HeroController.Ammo += 20;
+                HeroController.battery += 3;
                 break;
             case 2:
                 Instantiate(BatterySpecEffect2, this.transform.position, this.transform.rotation);
                 HeroControllerSP.Ammo += 20;
                 HeroControllerSP.battery += 5;
+                HeroController.Ammo += 20;
+                HeroController.battery += 8;
                 break;
             case 3:
                 Instantiate(BatterySpecEffect3, this.transform.position, this.transform.rotation);
                 HeroControllerSP.Ammo += 20;
                 HeroControllerSP.battery += 2;
+                HeroController.Ammo += 20;
+                HeroController.battery += 5;
                 break;
         }
 
         GAMEMANAGERSP.numScore += 1;
+        GAMEMANAGERSP.numArenaScore += 1;
         //then self destruct
         Destroy(this.gameObject);
     }
@@ -101,12 +112,16 @@ public class BatteryGet : MonoBehaviour {
         Instantiate(BatterySpecEffect3, this.transform.position, this.transform.rotation);
         HeroControllerSP.Ammo += 50;
         HeroControllerSP.battery += 50;
+        HeroController.Ammo += 50;
+        HeroController.battery += 75;
 
         GAMEMANAGERSP.numScore += 5;
+        GAMEMANAGERSP.numArenaScore += 5;
         //then self destruct
         Destroy(this.gameObject);
     }
 
+    //Doesn't exist in arena mode!
     public void ConsumeGearUpBattery()
     {
         //Gear up battery makes you combat ready
@@ -123,6 +138,7 @@ public class BatteryGet : MonoBehaviour {
         HeroControllerSP.hasJetBooster = true;
         HeroControllerSP.isSlot2 = true;
         HeroControllerSP.isSlot4 = true;
+
 
         //if player health is greater than 100 don't reduce it; only bring them up to 100 if they're lower.
         if (HeroControllerSP.battery < 100)

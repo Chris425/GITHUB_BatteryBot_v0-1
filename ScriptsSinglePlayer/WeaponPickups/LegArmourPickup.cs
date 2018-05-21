@@ -37,6 +37,10 @@ public class LegArmourPickup : MonoBehaviour
         {
             HeroControllerSP.hasLegs = true;
             GAMEMANAGERSP.numScore += 45;
+
+            HeroController.hasLegs = true;
+            GAMEMANAGERSP.numArenaScore += 45;
+
             Instantiate(SE_Gear, this.transform.position, this.transform.rotation);
             Destroy(this.gameObject);
         }

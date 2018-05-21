@@ -38,6 +38,10 @@ public class JetBooster_ArcanePickUp : MonoBehaviour
         {
             GAMEMANAGERSP.numScore += 33;
             HeroControllerSP.hasJetBooster_ARCANE = true;
+
+            GAMEMANAGERSP.numArenaScore += 33;
+            HeroController.hasJetBooster_ARCANE = true;
+
             Instantiate(SE_Gear, this.transform.position, this.transform.rotation);
             Destroy(this.gameObject);
         }

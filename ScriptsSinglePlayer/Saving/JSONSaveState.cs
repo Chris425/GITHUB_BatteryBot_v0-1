@@ -51,6 +51,7 @@ public class JSONSaveState {
     public  int numGears;
     public  int numBattery;
     public  int numScore;
+    public int numArenaHighScore;
     public int numQualitySetting;
     //armour
     public  bool hasHelm;

@@ -61,7 +61,13 @@ public class GunPickUp : MonoBehaviour
             HeroControllerSP.isSlot2 = true;
             HeroControllerSP.isSlot1 = false; HeroControllerSP.isSlot3 = false;
 
+            GAMEMANAGERSP.numArenaScore += 2;
+            HeroController.hasGun = true;
+            HeroController.isSlot2 = true;
+            HeroController.isSlot1 = false; HeroController.isSlot3 = false;
+
             HeroControllerSP.Ammo += 20;
+            HeroController.Ammo += 20;
             Destroy(this.gameObject);
         }
     }

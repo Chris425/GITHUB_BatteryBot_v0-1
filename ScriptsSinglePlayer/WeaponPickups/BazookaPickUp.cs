@@ -34,10 +34,15 @@ public class BazookaPickUp : MonoBehaviour
         if (other.gameObject.name.Contains("InteractShot"))
         {
             GAMEMANAGERSP.numScore += 100;
+            GAMEMANAGERSP.numArenaScore += 100;
             GAMEMANAGERSP.hasBazooka = true;
             HeroControllerSP.hasBazooka = true;
             HeroControllerSP.isSlot2 = true;
-            HeroControllerSP.isSlot1 = false; HeroControllerSP.isSlot3 = false; 
+            HeroControllerSP.isSlot1 = false; HeroControllerSP.isSlot3 = false;
+            
+            HeroController.hasBazooka = true;
+            HeroController.isSlot2 = true;
+            HeroController.isSlot1 = false; HeroController.isSlot3 = false;
             Destroy(this.gameObject);
         }
     }

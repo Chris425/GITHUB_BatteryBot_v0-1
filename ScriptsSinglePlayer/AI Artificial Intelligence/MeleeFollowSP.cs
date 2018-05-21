@@ -266,10 +266,9 @@ public class MeleeFollowSP : MonoBehaviour
         {
 
 
-            //if (!isSummoned)
-            //{
+
             StartCoroutine("checkAggro");
-            //}
+
 
 
             if (isAggroed)
@@ -340,27 +339,31 @@ public class MeleeFollowSP : MonoBehaviour
         distanceZ = this.transform.position.z - target.transform.position.z;
         distanceY = this.transform.position.y - target.transform.position.y; //Only check y if we have to - optimization
         yield return new WaitForSeconds(waitTime);
-        if ((distanceX > -10 && distanceX < 10) && (distanceZ > -10 && distanceZ < 10) )
+
+        if (!isSummoned)
         {
-            if (distanceY > -3.0f && distanceY < 3.0f)
+            if ((distanceX > -10 && distanceX < 10) && (distanceZ > -10 && distanceZ < 10))
             {
-                isAggroed = true;
-                anim.SetBool("IsAggroed", true);
-                if (shouldPlayAggroEffect)
+                if (distanceY > -3.0f && distanceY < 3.0f)
                 {
-                    Instantiate(AggroSpecEffect, this.transform.position, aggroRot);
-                    shouldPlayAggroEffect = false;
+                    isAggroed = true;
+                    anim.SetBool("IsAggroed", true);
+                    if (shouldPlayAggroEffect)
+                    {
+                        Instantiate(AggroSpecEffect, this.transform.position, aggroRot);
+                        shouldPlayAggroEffect = false;
+                    }
                 }
             }
-        }
-        //if you have aggroed, then ran away, and you're too far he gives up
-        else if ((distanceX < -45 || distanceX > 45) || (distanceZ < -45 || distanceZ > 45) || (distanceY < -10 || distanceY > 10) && !isSummoned)
-        {
-            isAggroed = false;
-            anim.SetBool("IsAggroed", false);
-            if (agent.isActiveAndEnabled)
+            //if you have aggroed, then ran away, and you're too far he gives up
+            else if ((distanceX < -45 || distanceX > 45) || (distanceZ < -45 || distanceZ > 45) || (distanceY < -10 || distanceY > 10))
             {
-                shouldPlayAggroEffect = true;
+                isAggroed = false;
+                anim.SetBool("IsAggroed", false);
+                if (agent.isActiveAndEnabled)
+                {
+                    shouldPlayAggroEffect = true;
+                }
             }
         }
         yield return new WaitForSeconds(waitTime);
@@ -403,6 +406,11 @@ public class MeleeFollowSP : MonoBehaviour
                         break;
                     case 2:
                         Instantiate(BiteSpecEffect2, this.transform.position, this.transform.rotation);
+                        if (isPoisonType)
+                        {
+                            HeroController.isPoisoned = true;
+                            HeroController.poisonTicks = 3;
+                        }
                         break;
                 }
             }

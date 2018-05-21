@@ -28,6 +28,10 @@ public class LifePickup : MonoBehaviour
             //Increase Hero's gear count. Sort of a currency.        
             HeroControllerSP.Lives += lifeWorth;
             GAMEMANAGERSP.numScore += 100;
+
+            HeroController.Lives += lifeWorth;
+            GAMEMANAGERSP.numArenaScore += 100;
+
             Instantiate(SE_Gear, this.transform.position, this.transform.rotation);
             Destroy(this.gameObject);
         }

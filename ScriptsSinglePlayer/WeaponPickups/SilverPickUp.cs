@@ -37,7 +37,15 @@ public class SilverPickUp : MonoBehaviour
             GAMEMANAGERSP.hasSilver = true;
             HeroControllerSP.hasSilver = true;
             HeroControllerSP.isSlot2 = true;
-            HeroControllerSP.isSlot1 = false; HeroControllerSP.isSlot3 = false;
+            HeroControllerSP.isSlot1 = false;
+            HeroControllerSP.isSlot3 = false;
+
+            GAMEMANAGERSP.numArenaScore += 75;
+            HeroController.hasSilver = true;
+            HeroController.isSlot2 = true;
+            HeroController.isSlot1 = false;
+            HeroController.isSlot3 = false;
+
             Destroy(this.gameObject);
         }
     }

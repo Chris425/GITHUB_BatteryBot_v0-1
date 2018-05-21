@@ -42,6 +42,7 @@ public class Gun_UpgradePickUp : MonoBehaviour
         if (other.gameObject.name.Contains("InteractShot"))
         {
             GAMEMANAGERSP.numScore += 25;
+            GAMEMANAGERSP.numArenaScore += 25;
             //You can only have one at a time since I only have one UI slot for gun upgrades... ;)
             if (isMulti)
             {
@@ -49,6 +50,12 @@ public class Gun_UpgradePickUp : MonoBehaviour
                 HeroControllerSP.hasGun_POISON = false;
                 HeroControllerSP.hasGun_COLD = false;
                 HeroControllerSP.hasGun_FIRE = false;
+
+                HeroController.hasGun_MULTI = true;
+                HeroController.hasGun_POISON = false;
+                HeroController.hasGun_COLD = false;
+                HeroController.hasGun_FIRE = false;
+
                 Instantiate(SE_Gear, this.transform.position, this.transform.rotation);
                 Destroy(this.gameObject);
             }
@@ -58,6 +65,11 @@ public class Gun_UpgradePickUp : MonoBehaviour
                 HeroControllerSP.hasGun_POISON = true;
                 HeroControllerSP.hasGun_COLD = false;
                 HeroControllerSP.hasGun_FIRE = false;
+
+                HeroController.hasGun_MULTI = false;
+                HeroController.hasGun_POISON = true;
+                HeroController.hasGun_COLD = false;
+                HeroController.hasGun_FIRE = false;
                 Instantiate(SE_Gear, this.transform.position, this.transform.rotation);
                 Destroy(this.gameObject);
             }
@@ -67,6 +79,11 @@ public class Gun_UpgradePickUp : MonoBehaviour
                 HeroControllerSP.hasGun_POISON = false;
                 HeroControllerSP.hasGun_COLD = true;
                 HeroControllerSP.hasGun_FIRE = false;
+
+                HeroController.hasGun_MULTI = false;
+                HeroController.hasGun_POISON = false;
+                HeroController.hasGun_COLD = true;
+                HeroController.hasGun_FIRE = false;
                 Instantiate(SE_Gear, this.transform.position, this.transform.rotation);
                 Destroy(this.gameObject);
             }
@@ -76,6 +93,11 @@ public class Gun_UpgradePickUp : MonoBehaviour
                 HeroControllerSP.hasGun_POISON = false;
                 HeroControllerSP.hasGun_COLD = false;
                 HeroControllerSP.hasGun_FIRE = true;
+
+                HeroController.hasGun_MULTI = false;
+                HeroController.hasGun_POISON = false;
+                HeroController.hasGun_COLD = false;
+                HeroController.hasGun_FIRE = true;
                 Instantiate(SE_Gear, this.transform.position, this.transform.rotation);
                 Destroy(this.gameObject);
             }

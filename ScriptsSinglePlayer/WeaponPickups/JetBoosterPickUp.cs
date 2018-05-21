@@ -29,15 +29,15 @@ public class JetBoosterPickUp : MonoBehaviour
         }
 
     }
+    //deprecated
+    //public void dequipLeftHanded()
+    //{
+    //    if (HeroControllerSP.hasJetBooster)
+    //    {
+    //        Instantiate(jetBooster, this.transform.position, this.transform.rotation);
+    //    }
 
-    public void dequipLeftHanded()
-    {
-        if (HeroControllerSP.hasJetBooster)
-        {
-            Instantiate(jetBooster, this.transform.position, this.transform.rotation);
-        }
-
-    }
+    //}
 
     public void OnCollisionEnter(Collision other)
     {
@@ -50,6 +50,12 @@ public class JetBoosterPickUp : MonoBehaviour
             HeroControllerSP.hasJetBooster = true;
             HeroControllerSP.isSlot5 = true;
             HeroControllerSP.isSlot4 = false;
+            
+            GAMEMANAGERSP.numArenaScore += 9;
+            HeroController.hasJetBooster = true;
+            HeroController.isSlot5 = true;
+            HeroController.isSlot4 = false;
+
             Destroy(this.gameObject);
         }
     }

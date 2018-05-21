@@ -36,6 +36,8 @@ public class ArmourPickUp : MonoBehaviour
         {
             GAMEMANAGERSP.numScore += 64;
             HeroControllerSP.hasArmour = true;
+            GAMEMANAGERSP.numArenaScore += 64;
+            HeroController.hasArmour = true;
             Instantiate(SE_Gear, this.transform.position, this.transform.rotation);
             Destroy(this.gameObject);
         }

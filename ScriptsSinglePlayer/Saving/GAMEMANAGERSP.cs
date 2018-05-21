@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -14,7 +15,8 @@ public class GAMEMANAGERSP : MonoBehaviour {
     //local in editor
     //private static string path = "Assets/SaveFile/SaveFile001.txt";
     private static string path = Application.persistentDataPath + "/SaveFile001.txt";
-    
+    public static string arenaPath = Application.persistentDataPath + "/SaveFileArena001.txt";
+
     public static int numLivesRemaining = 5;
 
     public static bool hasFinishedLevelOne = false;
@@ -66,6 +68,9 @@ public class GAMEMANAGERSP : MonoBehaviour {
     public static bool hasBroBot = false;
     //Game Manager Score
     public static int numScore = 0;
+        //saved in separate method to separate file
+        public static int numArenaScore; 
+        public static int numArenaHighScore;
     //Quality Settings
     public static int numQualitySetting;
     //Bazooka and metal skulls
@@ -90,6 +95,20 @@ public class GAMEMANAGERSP : MonoBehaviour {
     }
 
 
+    public string ArenaPath
+    {
+        get
+        {
+            return arenaPath;
+        }
+
+        set
+        {
+            arenaPath = value;
+        }
+    }
+
+
     //skulls not used since then they would persist
     //handle that in individual savepoints
 
@@ -98,7 +117,7 @@ public class GAMEMANAGERSP : MonoBehaviour {
         shouldMakeMusicBot = true;
 
         //this is a persistent game object!
-        Object.DontDestroyOnLoad(this);
+        UnityEngine.Object.DontDestroyOnLoad(this);
 
         audSrc = GetComponent<AudioSource>();
 
@@ -309,6 +328,47 @@ public class GAMEMANAGERSP : MonoBehaviour {
 
 
     }
+
+
+    //simply store an int for current arena max score!
+    public static void saveArenaScoreToFILE()
+    {
+        //see if score in file is larger or smaller than you current score.
+        StreamReader reader = new StreamReader(arenaPath);
+        try
+        {
+            int currHighScore = Int32.Parse(reader.ReadLine());
+            reader.Close();
+            if (currHighScore < numArenaScore)
+            {
+                //your score is higher, overwrite!
+                StreamWriter writer = new StreamWriter(arenaPath, false);
+                try
+                {
+                    writer.WriteLine(numArenaScore);
+                    writer.Close();
+                    Debug.Log("[INFO] Saved arena score to separate file successfully.");
+                }
+                catch (System.Exception ex)
+                {
+                    Debug.Log(ex.ToString());
+                    Debug.Log("[ERROR] Failed to save arena score to separate file!");
+                    writer.Close();
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.Log(ex.ToString());
+            Debug.Log("Failed to find current arena high score when saving...");
+        }
+
+        
+
+
+
+    }
+
 
     //to be loaded from a future screen
     public static void loadGameDataFromFILE()

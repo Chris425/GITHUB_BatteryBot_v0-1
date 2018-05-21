@@ -38,6 +38,8 @@ public class Axe_LightningPickUp : MonoBehaviour
         {
             GAMEMANAGERSP.numScore += 29;
             HeroControllerSP.hasAxe_LIGHTNING = true;
+            GAMEMANAGERSP.numArenaScore += 29;
+            HeroController.hasAxe_LIGHTNING = true;
             Instantiate(SE_Gear, this.transform.position, this.transform.rotation);
             Destroy(this.gameObject);
         }

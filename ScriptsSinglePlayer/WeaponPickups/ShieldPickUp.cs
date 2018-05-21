@@ -30,14 +30,15 @@ public class ShieldPickUp : MonoBehaviour
 
     }
 
-    public void dequipLeftHanded()
-    {
-        if (HeroControllerSP.hasShield)
-        {
-            Instantiate(shield, this.transform.position, this.transform.rotation);
-        }
+    //deprecated
+    //public void dequipLeftHanded()
+    //{
+    //    if (HeroControllerSP.hasShield)
+    //    {
+    //        Instantiate(shield, this.transform.position, this.transform.rotation);
+    //    }
         
-    }
+    //}
 
     public void OnCollisionEnter(Collision other)
     {
@@ -50,6 +51,11 @@ public class ShieldPickUp : MonoBehaviour
             HeroControllerSP.hasShield = true;
             HeroControllerSP.isSlot4 = true;
             HeroControllerSP.isSlot5 = false;
+
+            GAMEMANAGERSP.numArenaScore += 5;
+            HeroController.hasShield = true;
+            HeroController.isSlot4 = true;
+            HeroController.isSlot5 = false;
             Destroy(this.gameObject);
         }
     }

@@ -28,10 +28,9 @@ public class ControlsSP : MonoBehaviour {
         //case when your player projectile hits the elevator controller
         //But will only do stuff if you are not currently moving
 
-        if (other.gameObject.name.Contains("PlayerShot"))
+        if (other.gameObject.name.Contains("InteractShot") || other.gameObject.name.Contains("PlayerShot"))
         {
             source.PlayOneShot(switchHit, 1.0f);
-            Debug.Log(this.gameObject.name + "was hit by" + other.gameObject.name);
             if (isAtBottom)
             {
                 isMovingUp = true;
