@@ -84,7 +84,7 @@ public class GAMEMANAGER_ARENA : MonoBehaviour {
 
     private void Start()
     {
-
+        
         orange = new Color(0.9f,0.5f,0.1f,1.0f);
         deepOrange = new Color(0.7f, 0.2f, 0.1f, 1.0f);
 
@@ -131,8 +131,7 @@ public class GAMEMANAGER_ARENA : MonoBehaviour {
     {
         int determineWhichEnemy = Random.Range(0, 8);
         if (era == 1)
-        {
-            
+        {            
             switch (determineWhichEnemy)
             {
                 case 0:
@@ -294,8 +293,7 @@ public class GAMEMANAGER_ARENA : MonoBehaviour {
             isMajorBossSlotOpen = false;
             
             demonScript.bossHealthSlider.gameObject.SetActive(true);
-
-            Instantiate(enemyEffect, enemySpawnLoc.transform.position, enemySpawnLoc.transform.rotation);
+            
             Instantiate(SE_Warhorn2, enemySpawnLoc.transform.position, enemySpawnLoc.transform.rotation);
         }
     }
@@ -314,8 +312,7 @@ public class GAMEMANAGER_ARENA : MonoBehaviour {
             minosScript1.isAggroed = true;
 
             minosScript1.bossHealthSlider.gameObject.SetActive(true);
-
-            Instantiate(enemyEffect, enemySpawnLoc.transform.position, enemySpawnLoc.transform.rotation);
+            
             Instantiate(SE_Warhorn, enemySpawnLoc.transform.position, enemySpawnLoc.transform.rotation);
         }
         else if (isBossSlot2Open)
@@ -328,8 +325,7 @@ public class GAMEMANAGER_ARENA : MonoBehaviour {
             isBossSlot2Open = false;
             minosScript2.isAggroed = true;
             minosScript2.bossHealthSlider.gameObject.SetActive(true);
-
-            Instantiate(enemyEffect, enemySpawnLoc.transform.position, enemySpawnLoc.transform.rotation);
+            
             Instantiate(SE_Warhorn, enemySpawnLoc.transform.position, enemySpawnLoc.transform.rotation);
         }
         else if (isBossSlot3Open)
@@ -342,8 +338,7 @@ public class GAMEMANAGER_ARENA : MonoBehaviour {
             isBossSlot3Open = false;
             minosScript3.isAggroed = true;
             minosScript3.bossHealthSlider.gameObject.SetActive(true);
-
-            Instantiate(enemyEffect, enemySpawnLoc.transform.position, enemySpawnLoc.transform.rotation);
+            
             Instantiate(SE_Warhorn, enemySpawnLoc.transform.position, enemySpawnLoc.transform.rotation);
         }
         else if (isBossSlot4Open)
@@ -357,8 +352,7 @@ public class GAMEMANAGER_ARENA : MonoBehaviour {
             isBossSlot4Open = false;
             minosScript4.isAggroed = true;
             minosScript4.bossHealthSlider.gameObject.SetActive(true);
-
-            Instantiate(enemyEffect, enemySpawnLoc.transform.position, enemySpawnLoc.transform.rotation);
+            
             Instantiate(SE_Warhorn, enemySpawnLoc.transform.position, enemySpawnLoc.transform.rotation);
         }
 

@@ -228,6 +228,8 @@ public class HeroController : MonoBehaviour
         pauseScreen.enabled = false;
         
         GAMEMANAGERSP.saveArenaScoreToFILE();
+
+        resetToFactoryBatteryBot();
         SceneManager.LoadScene("Intro");
     }
     public void pauseScreen_MasterVolumeSlider()
@@ -1785,6 +1787,54 @@ public class HeroController : MonoBehaviour
         HeroController.isSlot3 = false;
         HeroController.isSlot5 = false;
         
+        StartCoroutine("UpdateSlider");
+        batteryEffects();
+        StartCoroutine("checkEquipment");
+    }
+
+
+    private void resetToFactoryBatteryBot()
+    {
+
+        Lives = 0;
+        isPoisoned = false;
+        isCold = false;
+
+
+        battery = 100;
+        Ammo = 100;
+        Gears = 100;
+        hasBoots = false;
+        LeftBoot.SetActive(false); RightBoot.SetActive(false);
+        hasLegs = false;
+        LeftLegArmour.SetActive(false); RightLegArmour.SetActive(false);
+        hasHelm = false;
+        Helm.SetActive(false);
+        hasArmour = false;
+        Armour.SetActive(false);
+        hasShield = false;
+        hasAxe = false;
+        hasGun = false;
+        hasBazooka = false;
+        hasBazooka = false;
+        hasSilver = false;
+        hasSilver = false;
+        hasGS = false;
+        hasGS_FIRE = false;
+        hasAxe_LIGHTNING = false;
+        hasGun_MULTI = false;
+        hasShield_ICE = false;
+        hasJetBooster = false;
+        hasJetBooster_ARCANE = false;
+        hasSkull_GOLD = false;
+
+
+        HeroController.isSlot2 = true;
+        HeroController.isSlot4 = false;
+        HeroController.isSlot1 = false;
+        HeroController.isSlot3 = false;
+        HeroController.isSlot5 = false;
+
         StartCoroutine("UpdateSlider");
         batteryEffects();
         StartCoroutine("checkEquipment");

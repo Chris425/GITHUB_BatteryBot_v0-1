@@ -23,8 +23,8 @@ public class MinotauroArena : MonoBehaviour
     
     Quaternion aggroRot = new Quaternion(0.0f, 180.0f, 180.0f, 0.0f);
 
-    public int maxBossHealth = 200;
-    public int bossHealth = 195; //195 looks better on the slider
+    public int maxBossHealth = 150;
+    public int bossHealth = 145; //145 looks better on the slider
     private int bossDamage = 5;
     private int myArmour = 1;
     private EnemyDamageReductionSP edr;
@@ -101,7 +101,7 @@ public class MinotauroArena : MonoBehaviour
         respawnDest = GameObject.Find("EnemyRespawnIfOoR");
         
 
-        bossHealthSlider.value = 200;
+        bossHealthSlider.value = 150;
         //assumption - GameManager object exists once in a scene, and contains exactly one EnemyDamageReductionSP script.
         UnityEngine.Object[] temp = FindObjectsOfType(typeof(EnemyDamageReductionSP));
         edr = temp[0] as EnemyDamageReductionSP;

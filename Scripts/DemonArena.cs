@@ -313,8 +313,8 @@ public class DemonArena : MonoBehaviour
     void Start()
     {
         gm = (GAMEMANAGER_ARENA)GameObject.Find("GAMEMANAGER_ARENA").GetComponent("GAMEMANAGER_ARENA");
+       
 
-        bossHealthSlider.value = 500;
         //assumption - GameManager object exists once in a scene, and contains exactly one EnemyDamageReductionSP script.
         UnityEngine.Object[] temp = FindObjectsOfType(typeof(EnemyDamageReductionSP));
         edr = temp[0] as EnemyDamageReductionSP;
@@ -357,6 +357,12 @@ public class DemonArena : MonoBehaviour
         }
 
         shouldPlayAggroEffect = true;
+
+        if (bossHealthSlider == null)
+        {
+            bossHealthSlider = gm.majorBossSlider;
+        }
+        bossHealthSlider.value = 500;
 
 
     }

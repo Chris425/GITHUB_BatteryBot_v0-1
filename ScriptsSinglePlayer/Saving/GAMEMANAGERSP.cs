@@ -39,6 +39,8 @@ public class GAMEMANAGERSP : MonoBehaviour {
     public static bool hasLevelBonusSave1 = false;
     public static bool hasLevelBonusSave2 = false;
 
+    private static int tries;
+
     //Keep track of what items the hero has, so that they may be retained
     //1-5 weapons
     public static bool hasAxe = false;
@@ -313,9 +315,11 @@ public class GAMEMANAGERSP : MonoBehaviour {
         StreamWriter writer = new StreamWriter(path, false);
 
         try
-        {       
-            writer.WriteLine(jsonData);
+        {
+            System.Threading.Thread.Sleep(50);
+            writer.WriteLine(jsonData);            
             writer.Close();
+            System.Threading.Thread.Sleep(100);
             Debug.Log("[INFO] Saved to file successfully.");
         }
         catch (System.Exception ex)
@@ -339,9 +343,11 @@ public class GAMEMANAGERSP : MonoBehaviour {
         {
             int currHighScore = Int32.Parse(reader.ReadLine());
             reader.Close();
+            numArenaHighScore = currHighScore;
             if (currHighScore < numArenaScore)
             {
                 //your score is higher, overwrite!
+                numArenaHighScore = numArenaScore;
                 StreamWriter writer = new StreamWriter(arenaPath, false);
                 try
                 {
@@ -375,9 +381,9 @@ public class GAMEMANAGERSP : MonoBehaviour {
     {
         StreamReader reader = new StreamReader(path);
         try
-        {            
+        {
             string jsonStr = reader.ReadLine();
-            
+
             var jsonObj = JsonUtility.FromJson<JSONSaveState>(jsonStr);
 
             //1-5 weapons
@@ -418,9 +424,9 @@ public class GAMEMANAGERSP : MonoBehaviour {
             //bazooka and metal skulls
             if (jsonObj.hasBazooka) { hasBazooka = true; }
             if (jsonObj.hasSilver) { hasSilver = true; }
-            if (jsonObj.hasSkull_BRONZE) { hasSkull_BRONZE= true; }
-            if (jsonObj.hasSkull_SILVER) { hasSkull_SILVER= true; }
-            if (jsonObj.hasSkull_GOLD) { hasSkull_GOLD= true; }
+            if (jsonObj.hasSkull_BRONZE) { hasSkull_BRONZE = true; }
+            if (jsonObj.hasSkull_SILVER) { hasSkull_SILVER = true; }
+            if (jsonObj.hasSkull_GOLD) { hasSkull_GOLD = true; }
 
 
             reader.Close();
@@ -428,11 +434,19 @@ public class GAMEMANAGERSP : MonoBehaviour {
         }
         catch (System.Exception ex)
         {
-            Debug.Log(ex.ToString());
-            Debug.Log("[ERROR] Failed to load save from file.");
-            reader.Close();
-            throw;
+            tries += 1;
+            if (tries < 3)
+            {
+                Debug.Log(ex.ToString());
+                Debug.Log("[ERROR] Failed to load save from file.");
+                reader.Close();
+                //sleep and try again
+                System.Threading.Thread.Sleep(500);
+                loadGameDataFromFILE();
+            }
+            
         }
+
 
     }
 
