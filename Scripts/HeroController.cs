@@ -33,6 +33,8 @@ public class HeroController : MonoBehaviour
     public Camera firstPersCam;
     private int cameraCounter = 0;
 
+    public GameObject respawnLoc;
+
     public GameObject SE_hit;
     public GameObject SE_Heal;
     public GameObject SE_basic_hit;
@@ -792,31 +794,51 @@ public class HeroController : MonoBehaviour
             Instantiate(SE_GroundHit3, this.transform.position, this.transform.rotation);
             Instantiate(SE_GroundHit2, this.transform.position, this.transform.rotation);
             Instantiate(SE_GroundHit1, this.transform.position, this.transform.rotation);
-
-            respawnText.text = "Press \"R\" to respawn...";
-            isDead = true;
-            Lives -= 1;
-            battery = 100; //put this to 100 before saving it...
-            GAMEMANAGERSP.saveArenaScoreToFILE();
-            anim.SetTrigger("isDead");
-            //disable mouselook and character controller
-            GetComponent<MouseLookSP>().enabled = false;
-            controller.enabled = false;
+            
+            deathAndRebirth(true);
             currScene = SceneManager.GetActiveScene().buildIndex;
             batterySlider.value = 0;
             batteryValText.text = "ERROR";
             //put r to respawn text and then disable it when reloading scene (onawake)?
             if (Lives < 0)
             {
+                Lives = 0;
                 GAMEMANAGERSP.saveArenaScoreToFILE();
 
                 //go back to overworld on gameover instead of current scene
                 //currScene = SceneManager.GetSceneByName("ExplorationOverworld").buildIndex; 
                 currScene = 2; //HARDCODED CAUSE YOU'RE BAD CDC
 
-                SceneManager.LoadSceneAsync("GameoverSP");
+                SceneManager.LoadSceneAsync("Gameover");
             }
         }
+    }
+
+    //disable mouselook and character controller if died, else enable
+    public void deathAndRebirth(bool hasDied)
+    {
+        if (hasDied)
+        {
+            GetComponent<MouseLookSP>().enabled = false;
+            controller.enabled = false;
+            anim.SetTrigger("isDead");
+            respawnText.text = "Press \"R\" to respawn...";
+            isDead = true;
+            Lives -= 1;
+            battery = 100; //put this to 100 before saving it...
+            GAMEMANAGERSP.saveArenaScoreToFILE();
+        }
+        else
+        {
+            GetComponent<MouseLookSP>().enabled = true;
+            controller.enabled = true;
+            respawnText.text = "";
+            isDead = false;
+            anim.SetTrigger("rebirth");
+            battery = 100;
+            this.gameObject.transform.position = respawnLoc.transform.position;
+        }   
+        
     }
 
     //soooooooo since melee enemies hurt you in their script this will only happen on range projectiles, yolo. fix later? -CDC
@@ -1661,11 +1683,8 @@ public class HeroController : MonoBehaviour
         else if (isDead)
         {
             if (Input.GetKey(KeyCode.R) || Input.GetButton("Submit"))
-            {
-                respawnText.text = "";
-                isDead = false;
-                //re-enable mouseLook and CharacterController
-                SceneManager.LoadScene(currScene);
+            {                
+                deathAndRebirth(false);
             }
         }
 

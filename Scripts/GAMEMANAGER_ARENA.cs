@@ -45,9 +45,9 @@ public class GAMEMANAGER_ARENA : MonoBehaviour {
     private int bat_endgameSpawnChance = 425;
 
    //probability is inverse compared to battery
-    private int enemy_abysmalSpawnChance = 900;
-    private int enemy_lowSpawnChance = 750;
-    private int enemy_mediumSpawnChance = 600;
+    private int enemy_abysmalSpawnChance = 825;
+    private int enemy_lowSpawnChance = 710;
+    private int enemy_mediumSpawnChance = 560;
     private int enemy_highSpawnChance = 488;
     private int enemy_endgameSpawnChance = 295;
 
@@ -200,11 +200,11 @@ public class GAMEMANAGER_ARENA : MonoBehaviour {
         else if (era == 4) //bosses can spawn starting here. handled in spawnMinorBoss() method.
         {
 
-            //if (minorBossCooldown < 0.0f)
-            //{
-            //    spawnMinorBoss();
-            //    minorBossCooldown = 80.0f;
-            //}
+            if (minorBossCooldown < 0.0f)
+            {
+                spawnMinorBoss();
+                minorBossCooldown = 80.0f;
+            }
 
             switch (determineWhichEnemy)
             {
@@ -227,6 +227,9 @@ public class GAMEMANAGER_ARENA : MonoBehaviour {
                 case 5:
                     Instantiate(paladin, enemySpawnLoc.transform.position, enemySpawnLoc.transform.rotation);
                     break;
+                case 6:
+                    Instantiate(summonerArena, enemySpawnLoc.transform.position, enemySpawnLoc.transform.rotation);
+                    break;
                 default:
                     Instantiate(vampire, enemySpawnLoc.transform.position, enemySpawnLoc.transform.rotation);
                     break;
@@ -240,12 +243,12 @@ public class GAMEMANAGER_ARENA : MonoBehaviour {
             if (minorBossCooldown < 0.0f)
             {
                 spawnMinorBoss();
-                minorBossCooldown = 40.0f;
+                minorBossCooldown = 60.0f;
             }
             if (majorBossCooldown < 0.0f)
             {
                 spawnMajorBoss();
-                majorBossCooldown = 100.0f;
+                majorBossCooldown = 120.0f;
             }
 
             switch (determineWhichEnemy)

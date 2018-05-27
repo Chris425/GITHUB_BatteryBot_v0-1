@@ -75,6 +75,8 @@ public class MinotauroArena : MonoBehaviour
     public GameObject bodyArmourDrop;
     public GameObject helmArmourDrop;
 
+    public GameObject oneUpDrop;
+
 
     public GameObject BigLootDump;
 
@@ -446,7 +448,7 @@ public class MinotauroArena : MonoBehaviour
             //possibly spawn some loot!
 
 
-            int randomNum = Random.Range(1, 31);
+            int randomNum = Random.Range(1, 34);
             if (randomNum <= 3)
             {
                 int posOffset = Random.Range(1, 4);
@@ -549,7 +551,8 @@ public class MinotauroArena : MonoBehaviour
                 int rotOffset2 = Random.Range(1, 180);
                 Vector3 spawnPos = new Vector3(this.transform.position.x, this.transform.position.y + posOffset, this.transform.position.z);
                 Quaternion spawnRot = new Quaternion(this.transform.rotation.x + rotOffset1, this.transform.rotation.y + rotOffset2, this.transform.rotation.z + rotOffset1, this.transform.rotation.w + rotOffset2);
-                Instantiate(Gear, spawnPos, spawnRot);                
+                Instantiate(Gear, spawnPos, spawnRot);
+                Instantiate(oneUpDrop, spawnPos, spawnRot);
 
             }
 
@@ -590,6 +593,15 @@ public class MinotauroArena : MonoBehaviour
                 Vector3 spawnPos = new Vector3(this.transform.position.x, this.transform.position.y + posOffset, this.transform.position.z);
                 Quaternion spawnRot = new Quaternion(this.transform.rotation.x + rotOffset1, this.transform.rotation.y + rotOffset2, this.transform.rotation.z + rotOffset1, this.transform.rotation.w + rotOffset2);
                 Instantiate(bronzeSkullDrop, spawnPos, spawnRot);
+            }
+            else if (randomNum >= 31)
+            {
+                int posOffset = Random.Range(1, 3);
+                int rotOffset1 = Random.Range(1, 180);
+                int rotOffset2 = Random.Range(1, 180);
+                Vector3 spawnPos = new Vector3(this.transform.position.x, this.transform.position.y + posOffset, this.transform.position.z);
+                Quaternion spawnRot = new Quaternion(this.transform.rotation.x + rotOffset1, this.transform.rotation.y + rotOffset2, this.transform.rotation.z + rotOffset1, this.transform.rotation.w + rotOffset2);
+                Instantiate(oneUpDrop, spawnPos, spawnRot);
             }
 
             Instantiate(BigLootDump, this.transform.position, this.transform.rotation);

@@ -74,6 +74,8 @@ public class DemonArena : MonoBehaviour
     public GameObject bodyArmourDrop;
     public GameObject helmArmourDrop;
 
+    public GameObject oneUpDrop;
+
     public bool isAggroed;
 
     public int bossHealth = 500;
@@ -82,48 +84,6 @@ public class DemonArena : MonoBehaviour
 
     private bool hasDied;
 
-    void OnEnable()
-    {
-
-        currentDestChoice = 0;
-
-        hasBeenFrozen = false;
-        Player = GameObject.Find("PLAYERBASE");
-
-        hasDied = false;
-        agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
-        target = GameObject.Find("BatteryBot");
-
-        anim = this.GetComponentInChildren<Animator>();
-        anim.applyRootMotion = false;
-        anim.SetBool("isAggroed", false);
-
-        pathDestsVectors = new List<Vector3>();
-
-
-        //hardcoded path for arena only!
-        GameObject myDests = GameObject.Find("DemonPathingDestArena");
-        
-        foreach (Transform dest in myDests.transform)
-        {
-            pathDestsVectors.Add(dest.position);
-        }
-
-
-        demon = this.gameObject;
-
-        foreach (Transform child in demon.transform)
-        {
-            if (child.gameObject.name.Contains("Group3366")) //that's just what the demon skin is called
-            {
-                rend = child.gameObject.GetComponent<Renderer>();
-                //bbMetalSurface = child.gameObject;
-            }
-        }
-
-        shouldPlayAggroEffect = true;
-
-    }
 
 
     public void OnParticleCollision(GameObject particle)
@@ -235,7 +195,7 @@ public class DemonArena : MonoBehaviour
             GAMEMANAGERSP.numArenaScore += 666;
         }
         
-        int randomNum = UnityEngine.Random.Range(1, 39);
+        int randomNum = UnityEngine.Random.Range(1, 41);
         if (randomNum <= 3)
         {
             int posOffset = UnityEngine.Random.Range(-4, 4);
@@ -333,6 +293,15 @@ public class DemonArena : MonoBehaviour
             Quaternion spawnRot = new Quaternion(this.transform.rotation.x + rotOffset1, this.transform.rotation.y + rotOffset2, this.transform.rotation.z + rotOffset1, this.transform.rotation.w + rotOffset2);
             Instantiate(helmArmourDrop, spawnPos, spawnRot);
         }
+        else if(randomNum >= 39)
+        {
+            int posOffset = UnityEngine.Random.Range(-4, 4);
+            int rotOffset1 = UnityEngine.Random.Range(1, 180);
+            int rotOffset2 = UnityEngine.Random.Range(1, 180);
+            Vector3 spawnPos = new Vector3(this.transform.position.x, this.transform.position.y + posOffset, this.transform.position.z);
+            Quaternion spawnRot = new Quaternion(this.transform.rotation.x + rotOffset1, this.transform.rotation.y + rotOffset2, this.transform.rotation.z + rotOffset1, this.transform.rotation.w + rotOffset2);
+            Instantiate(oneUpDrop, spawnPos, spawnRot);            
+        }
 
 
         gm.majorBossDeath();
@@ -349,6 +318,46 @@ public class DemonArena : MonoBehaviour
         //assumption - GameManager object exists once in a scene, and contains exactly one EnemyDamageReductionSP script.
         UnityEngine.Object[] temp = FindObjectsOfType(typeof(EnemyDamageReductionSP));
         edr = temp[0] as EnemyDamageReductionSP;
+
+
+        currentDestChoice = 0;
+
+        hasBeenFrozen = false;
+        Player = GameObject.Find("PLAYERBASE");
+
+        hasDied = false;
+        agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
+        target = GameObject.Find("BatteryBot");
+
+        anim = this.GetComponentInChildren<Animator>();
+        anim.applyRootMotion = false;
+        anim.SetBool("isAggroed", false);
+
+        pathDestsVectors = new List<Vector3>();
+
+
+        //hardcoded path for arena only!
+        GameObject myDests = GameObject.Find("DemonPathingDestArena");
+
+        foreach (Transform dest in myDests.transform)
+        {
+            pathDestsVectors.Add(dest.position);
+        }
+
+
+        demon = this.gameObject;
+
+        foreach (Transform child in demon.transform)
+        {
+            if (child.gameObject.name.Contains("Group3366")) //that's just what the demon skin is called
+            {
+                rend = child.gameObject.GetComponent<Renderer>();
+                //bbMetalSurface = child.gameObject;
+            }
+        }
+
+        shouldPlayAggroEffect = true;
+
 
     }
 
