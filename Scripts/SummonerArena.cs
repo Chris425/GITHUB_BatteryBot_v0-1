@@ -92,6 +92,12 @@ public class SummonerArena : MonoBehaviour
     public GameObject shieldIce;
     public GameObject boosterArcane;
 
+    //skull drops for arena only
+    public GameObject blueSkullDrop;
+    public GameObject redSkullDrop;
+    public GameObject purpleSkullDrop;
+    public GameObject bronzeSkullDrop;
+
     public bool isAggroed;
     private bool hasDied;
 
@@ -474,6 +480,7 @@ public class SummonerArena : MonoBehaviour
                 Vector3 spawnPos = new Vector3(this.transform.position.x, this.transform.position.y + posOffset, this.transform.position.z);
                 Quaternion spawnRot = new Quaternion(this.transform.rotation.x + rotOffset1, this.transform.rotation.y + rotOffset2, this.transform.rotation.z + rotOffset1, this.transform.rotation.w + rotOffset2);
                 Instantiate(RedBattery, spawnPos, spawnRot);
+                Instantiate(blueSkullDrop, spawnPos, spawnRot);
             }
             else if (randomNum > 6 && randomNum <= 12)
             {
@@ -483,6 +490,7 @@ public class SummonerArena : MonoBehaviour
                 Vector3 spawnPos = new Vector3(this.transform.position.x, this.transform.position.y + posOffset, this.transform.position.z);
                 Quaternion spawnRot = new Quaternion(this.transform.rotation.x + rotOffset1, this.transform.rotation.y + rotOffset2, this.transform.rotation.z + rotOffset1, this.transform.rotation.w + rotOffset2);
                 Instantiate(GreenBattery, spawnPos, spawnRot);
+                Instantiate(purpleSkullDrop, spawnPos, spawnRot);
             }
             else if (randomNum == 13)
             {
@@ -492,6 +500,7 @@ public class SummonerArena : MonoBehaviour
                 Vector3 spawnPos = new Vector3(this.transform.position.x, this.transform.position.y + posOffset, this.transform.position.z);
                 Quaternion spawnRot = new Quaternion(this.transform.rotation.x + rotOffset1, this.transform.rotation.y + rotOffset2, this.transform.rotation.z + rotOffset1, this.transform.rotation.w + rotOffset2);
                 Instantiate(SuperBattery, spawnPos, spawnRot);
+                Instantiate(redSkullDrop, spawnPos, spawnRot);
             }
             else if (randomNum > 13 && randomNum <= 15)
             {
@@ -501,6 +510,7 @@ public class SummonerArena : MonoBehaviour
                 Vector3 spawnPos = new Vector3(this.transform.position.x, this.transform.position.y + posOffset, this.transform.position.z);
                 Quaternion spawnRot = new Quaternion(this.transform.rotation.x + rotOffset1, this.transform.rotation.y + rotOffset2, this.transform.rotation.z + rotOffset1, this.transform.rotation.w + rotOffset2);
                 Instantiate(AxeDrop, spawnPos, spawnRot);
+                Instantiate(redSkullDrop, spawnPos, spawnRot);
             }
             else if (randomNum > 15 && randomNum <= 17)
             {
@@ -510,6 +520,7 @@ public class SummonerArena : MonoBehaviour
                 Vector3 spawnPos = new Vector3(this.transform.position.x, this.transform.position.y + posOffset, this.transform.position.z);
                 Quaternion spawnRot = new Quaternion(this.transform.rotation.x + rotOffset1, this.transform.rotation.y + rotOffset2, this.transform.rotation.z + rotOffset1, this.transform.rotation.w + rotOffset2);
                 Instantiate(ShieldDrop, spawnPos, spawnRot);
+                Instantiate(redSkullDrop, spawnPos, spawnRot);
             }
             else if (randomNum > 17 && randomNum <= 19)
             {
@@ -519,6 +530,7 @@ public class SummonerArena : MonoBehaviour
                 Vector3 spawnPos = new Vector3(this.transform.position.x, this.transform.position.y + posOffset, this.transform.position.z);
                 Quaternion spawnRot = new Quaternion(this.transform.rotation.x + rotOffset1, this.transform.rotation.y + rotOffset2, this.transform.rotation.z + rotOffset1, this.transform.rotation.w + rotOffset2);
                 Instantiate(GunDrop, spawnPos, spawnRot);
+                Instantiate(blueSkullDrop, spawnPos, spawnRot);
             }
 
             else if (randomNum == 20)
@@ -529,6 +541,7 @@ public class SummonerArena : MonoBehaviour
                 Vector3 spawnPos = new Vector3(this.transform.position.x, this.transform.position.y + posOffset, this.transform.position.z);
                 Quaternion spawnRot = new Quaternion(this.transform.rotation.x + rotOffset1, this.transform.rotation.y + rotOffset2, this.transform.rotation.z + rotOffset1, this.transform.rotation.w + rotOffset2);
                 Instantiate(GoldenGear, spawnPos, spawnRot);
+                Instantiate(bronzeSkullDrop, spawnPos, spawnRot);
             }
 
             else if (randomNum > 20 && randomNum <= 30)
@@ -549,6 +562,7 @@ public class SummonerArena : MonoBehaviour
                 Vector3 spawnPos = new Vector3(this.transform.position.x, this.transform.position.y + posOffset, this.transform.position.z);
                 Quaternion spawnRot = new Quaternion(this.transform.rotation.x + rotOffset1, this.transform.rotation.y + rotOffset2, this.transform.rotation.z + rotOffset1, this.transform.rotation.w + rotOffset2);
                 Instantiate(BoosterDrop, spawnPos, spawnRot);
+                Instantiate(blueSkullDrop, spawnPos, spawnRot);
             }
             else if (randomNum > 34 && randomNum <= 36)
             {
@@ -585,6 +599,7 @@ public class SummonerArena : MonoBehaviour
                 Vector3 spawnPos = new Vector3(this.transform.position.x, this.transform.position.y + posOffset, this.transform.position.z);
                 Quaternion spawnRot = new Quaternion(this.transform.rotation.x + rotOffset1, this.transform.rotation.y + rotOffset2, this.transform.rotation.z + rotOffset1, this.transform.rotation.w + rotOffset2);
                 Instantiate(shieldIce, spawnPos, spawnRot);
+                Instantiate(purpleSkullDrop, spawnPos, spawnRot);
             }
             else if (randomNum > 42 && randomNum <= 44)
             {

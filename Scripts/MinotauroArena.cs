@@ -63,6 +63,19 @@ public class MinotauroArena : MonoBehaviour
     public GameObject GreatswordDrop;
     public GameObject BoosterDrop;
 
+    //skull drops for arena only
+    public GameObject blueSkullDrop;
+    public GameObject redSkullDrop;
+    public GameObject purpleSkullDrop;
+    public GameObject bronzeSkullDrop;
+
+    //armour - rare chance
+    public GameObject legArmourDrop;
+    public GameObject bootsArmourDrop;
+    public GameObject bodyArmourDrop;
+    public GameObject helmArmourDrop;
+
+
     public GameObject BigLootDump;
 
     public bool isAggroed;
@@ -433,7 +446,7 @@ public class MinotauroArena : MonoBehaviour
             //possibly spawn some loot!
 
 
-            int randomNum = Random.Range(1, 21);
+            int randomNum = Random.Range(1, 31);
             if (randomNum <= 3)
             {
                 int posOffset = Random.Range(1, 4);
@@ -442,6 +455,7 @@ public class MinotauroArena : MonoBehaviour
                 Vector3 spawnPos = new Vector3(this.transform.position.x, this.transform.position.y + posOffset, this.transform.position.z);
                 Quaternion spawnRot = new Quaternion(this.transform.rotation.x + rotOffset1, this.transform.rotation.y + rotOffset2, this.transform.rotation.z + rotOffset1, this.transform.rotation.w + rotOffset2);
                 Instantiate(RedBattery, spawnPos, spawnRot);
+                Instantiate(legArmourDrop, spawnPos, spawnRot);
 
             }
             else if (randomNum > 3 && randomNum <= 5)
@@ -452,6 +466,7 @@ public class MinotauroArena : MonoBehaviour
                 Vector3 spawnPos = new Vector3(this.transform.position.x, this.transform.position.y + posOffset, this.transform.position.z);
                 Quaternion spawnRot = new Quaternion(this.transform.rotation.x + rotOffset1, this.transform.rotation.y + rotOffset2, this.transform.rotation.z + rotOffset1, this.transform.rotation.w + rotOffset2);
                 Instantiate(GreenBattery, spawnPos, spawnRot);
+                Instantiate(bootsArmourDrop, spawnPos, spawnRot);
 
             }
             else if (randomNum == 6)
@@ -462,6 +477,7 @@ public class MinotauroArena : MonoBehaviour
                 Vector3 spawnPos = new Vector3(this.transform.position.x, this.transform.position.y + posOffset, this.transform.position.z);
                 Quaternion spawnRot = new Quaternion(this.transform.rotation.x + rotOffset1, this.transform.rotation.y + rotOffset2, this.transform.rotation.z + rotOffset1, this.transform.rotation.w + rotOffset2);
                 Instantiate(SuperBattery, spawnPos, spawnRot);
+                Instantiate(bodyArmourDrop, spawnPos, spawnRot);
 
             }
             else if (randomNum == 7)
@@ -512,6 +528,7 @@ public class MinotauroArena : MonoBehaviour
                 Vector3 spawnPos = new Vector3(this.transform.position.x, this.transform.position.y + posOffset, this.transform.position.z);
                 Quaternion spawnRot = new Quaternion(this.transform.rotation.x + rotOffset1, this.transform.rotation.y + rotOffset2, this.transform.rotation.z + rotOffset1, this.transform.rotation.w + rotOffset2);
                 Instantiate(GoldenGear, spawnPos, spawnRot);
+                Instantiate(helmArmourDrop, spawnPos, spawnRot);
 
             }
             else if (randomNum == 12)
@@ -532,13 +549,54 @@ public class MinotauroArena : MonoBehaviour
                 int rotOffset2 = Random.Range(1, 180);
                 Vector3 spawnPos = new Vector3(this.transform.position.x, this.transform.position.y + posOffset, this.transform.position.z);
                 Quaternion spawnRot = new Quaternion(this.transform.rotation.x + rotOffset1, this.transform.rotation.y + rotOffset2, this.transform.rotation.z + rotOffset1, this.transform.rotation.w + rotOffset2);
-                Instantiate(Gear, spawnPos, spawnRot);
+                Instantiate(Gear, spawnPos, spawnRot);                
 
+            }
+
+            else if (randomNum >= 17 && randomNum <= 22)
+            {
+                int posOffset = Random.Range(1, 3);
+                int rotOffset1 = Random.Range(1, 180);
+                int rotOffset2 = Random.Range(1, 180);
+                Vector3 spawnPos = new Vector3(this.transform.position.x, this.transform.position.y + posOffset, this.transform.position.z);
+                Quaternion spawnRot = new Quaternion(this.transform.rotation.x + rotOffset1, this.transform.rotation.y + rotOffset2, this.transform.rotation.z + rotOffset1, this.transform.rotation.w + rotOffset2);
+                Instantiate(blueSkullDrop, spawnPos, spawnRot);
+            }
+
+            else if (randomNum >= 23 && randomNum <= 26)
+            {
+                int posOffset = Random.Range(1, 3);
+                int rotOffset1 = Random.Range(1, 180);
+                int rotOffset2 = Random.Range(1, 180);
+                Vector3 spawnPos = new Vector3(this.transform.position.x, this.transform.position.y + posOffset, this.transform.position.z);
+                Quaternion spawnRot = new Quaternion(this.transform.rotation.x + rotOffset1, this.transform.rotation.y + rotOffset2, this.transform.rotation.z + rotOffset1, this.transform.rotation.w + rotOffset2);
+                Instantiate(purpleSkullDrop, spawnPos, spawnRot);
+            }
+
+            else if (randomNum >= 27 && randomNum <= 29)
+            {
+                int posOffset = Random.Range(1, 3);
+                int rotOffset1 = Random.Range(1, 180);
+                int rotOffset2 = Random.Range(1, 180);
+                Vector3 spawnPos = new Vector3(this.transform.position.x, this.transform.position.y + posOffset, this.transform.position.z);
+                Quaternion spawnRot = new Quaternion(this.transform.rotation.x + rotOffset1, this.transform.rotation.y + rotOffset2, this.transform.rotation.z + rotOffset1, this.transform.rotation.w + rotOffset2);
+                Instantiate(redSkullDrop, spawnPos, spawnRot);
+            }
+            else if (randomNum == 30)
+            {
+                int posOffset = Random.Range(1, 3);
+                int rotOffset1 = Random.Range(1, 180);
+                int rotOffset2 = Random.Range(1, 180);
+                Vector3 spawnPos = new Vector3(this.transform.position.x, this.transform.position.y + posOffset, this.transform.position.z);
+                Quaternion spawnRot = new Quaternion(this.transform.rotation.x + rotOffset1, this.transform.rotation.y + rotOffset2, this.transform.rotation.z + rotOffset1, this.transform.rotation.w + rotOffset2);
+                Instantiate(bronzeSkullDrop, spawnPos, spawnRot);
             }
 
             Instantiate(BigLootDump, this.transform.position, this.transform.rotation);
 
             gm.minorBossDeath(slotNum);
+
+            GAMEMANAGERSP.numArenaScore += 20;
         }
     }
 

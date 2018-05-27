@@ -15,8 +15,9 @@ public class GAMEMANAGER_ARENA : MonoBehaviour {
     public GameObject paladin;
     public GameObject minotaurArena;
     public GameObject summonerArena;
-    public GameObject finalBoss;
+    public GameObject demon;
     public GameObject specEffect;
+
 
     public GameObject enemyEffect;
     public GameObject SE_Warhorn;
@@ -24,17 +25,18 @@ public class GAMEMANAGER_ARENA : MonoBehaviour {
 
     public List<GameObject> batterySpawnLocList;
     public GameObject enemySpawnLoc;
-    //private float time;
-    //private float firstEra = 6.0f;
-    //private float secondEra = 40.0f;
-    //private float thirdEra = 120.0f;
-    //private float finalEra = 350.0f;
     private float time;
+    private float firstEra = 6.0f;
+    private float secondEra = 75.0f;
+    private float thirdEra = 245.0f;
+    private float finalEra = 525.0f;
+    //private float time;
+    //private float firstEra = 1.0f;
+    //private float secondEra = 2.0f;
+    //private float thirdEra = 3.0f;
+    //private float finalEra = 4.0f;
     private float minorBossCooldown;
-    private float firstEra = 1.0f;
-    private float secondEra = 5.0f;
-    private float thirdEra = 10.0f;
-    private float finalEra = 15.0f;
+    private float majorBossCooldown;
 
     private int bat_highSpawnChance = 18; //ex. random.range(1, 10), more likely to occur than (1,1000)
     private int bat_mediumSpawnChance = 50;
@@ -47,25 +49,31 @@ public class GAMEMANAGER_ARENA : MonoBehaviour {
     private int enemy_lowSpawnChance = 750;
     private int enemy_mediumSpawnChance = 600;
     private int enemy_highSpawnChance = 488;
-    private int enemy_endgameSpawnChance = 275;
+    private int enemy_endgameSpawnChance = 295;
 
     public List<GameObject> minorBossSliders;
-    public GameObject BossHealthBarSlotFinal;
 
     private bool isBossSlot1Open = true;
     private bool isBossSlot2Open = true;
     private bool isBossSlot3Open = true;
     private bool isBossSlot4Open = true;
 
+    private bool isMajorBossSlotOpen = true;
+
     public Slider minorBossSlider1;
     public Slider minorBossSlider2;
     public Slider minorBossSlider3;
     public Slider minorBossSlider4;
 
+    public Slider majorBossSlider;
+
     MinotauroArena minosScript1;
     MinotauroArena minosScript2;
     MinotauroArena minosScript3;
     MinotauroArena minosScript4;
+
+    DemonArena demonScript;
+    
 
     Color orange;
     Color deepOrange;
@@ -86,8 +94,9 @@ public class GAMEMANAGER_ARENA : MonoBehaviour {
         minorBossSlider3.gameObject.SetActive(false);
         minorBossSlider4.gameObject.SetActive(false);
 
-        BossHealthBarSlotFinal.SetActive(false); //only one major boss at a time.
-        
+        majorBossSlider.gameObject.SetActive(false);
+
+
         batterySpawnLocList = new List<GameObject>();
         foreach (GameObject obj in Object.FindObjectsOfType(typeof(GameObject)))
         {
@@ -191,11 +200,11 @@ public class GAMEMANAGER_ARENA : MonoBehaviour {
         else if (era == 4) //bosses can spawn starting here. handled in spawnMinorBoss() method.
         {
 
-            if (minorBossCooldown < 0.0f)
-            {
-                spawnMinorBoss();
-                minorBossCooldown = 80.0f;
-            }
+            //if (minorBossCooldown < 0.0f)
+            //{
+            //    spawnMinorBoss();
+            //    minorBossCooldown = 80.0f;
+            //}
 
             switch (determineWhichEnemy)
             {
@@ -227,12 +236,17 @@ public class GAMEMANAGER_ARENA : MonoBehaviour {
         }
         else
         {
-
+            //final era / endgame
             if (minorBossCooldown < 0.0f)
             {
                 spawnMinorBoss();
                 minorBossCooldown = 40.0f;
-            }            
+            }
+            if (majorBossCooldown < 0.0f)
+            {
+                spawnMajorBoss();
+                majorBossCooldown = 100.0f;
+            }
 
             switch (determineWhichEnemy)
             {
@@ -266,6 +280,23 @@ public class GAMEMANAGER_ARENA : MonoBehaviour {
         }
 
     }
+
+    private void spawnMajorBoss()
+    {
+        if (isMajorBossSlotOpen)
+        {
+            GameObject myDemon = Instantiate(demon, enemySpawnLoc.transform.position, enemySpawnLoc.transform.rotation);
+            demonScript = demon.GetComponent(typeof(DemonArena)) as DemonArena;
+            demonScript.bossHealthSlider = majorBossSlider;
+            isMajorBossSlotOpen = false;
+            
+            demonScript.bossHealthSlider.gameObject.SetActive(true);
+
+            Instantiate(enemyEffect, enemySpawnLoc.transform.position, enemySpawnLoc.transform.rotation);
+            Instantiate(SE_Warhorn2, enemySpawnLoc.transform.position, enemySpawnLoc.transform.rotation);
+        }
+    }
+
     private void spawnMinorBoss()
     {
         //for spawning minotaurs, up to 4. Once the slot is filled, do not spawn more into that slot.
@@ -335,6 +366,11 @@ public class GAMEMANAGER_ARENA : MonoBehaviour {
         //play special sound effect
         
     }
+    public void majorBossDeath()
+    {
+        isMajorBossSlotOpen = true;
+        majorBossSlider.gameObject.SetActive(false);
+    }
 
     public void minorBossDeath(int minorBossNum)
     {
@@ -364,13 +400,18 @@ public class GAMEMANAGER_ARENA : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        StartCoroutine("handleBatteryEnemySpawns");
+        if (!HeroController.isPaused)
+        {
+            StartCoroutine("handleBatteryEnemySpawns");
+        }
+        
     }
 
     private IEnumerator handleBatteryEnemySpawns()
     {
         time += 1.3f * Time.deltaTime;
         minorBossCooldown -= 1.3f * Time.deltaTime;
+        majorBossCooldown -= 1.3f * Time.deltaTime;
         timeText.text = time.ToString("n2");
         //first few units of time - batteries will be plentiful
         yield return null;
